@@ -2,17 +2,26 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
+        <!-- <p class="title"> Info about {{ kpi.name }} </p> -->
         <p class="title"> Info about KPI </p>
         <div class="row d-flex justify-content-center">
           <div class="col-lg-8 form mt-3">
             <div class="row">
               <div class="col-lg-6">
+                <!--<p class="form-label my-4">Name: <span class="value"> {{ kpi.name }}</span></p>
+                <p class="form-label my-4">Source: <span class="value"> {{ kpi.source }}</span></p>
+                e così via
+                -->
                 <p class="form-label my-4">Name: <span class="value"> Tarantelle</span></p>
                 <p class="form-label my-4">Source: <span class="value"> Pancarrè</span></p>
                 <p class="form-label my-4">Formula: <span class="value"> Arrosticini</span></p>
                 <p class="form-label my-4">Description: <span class="value"> Pizza fritta</span></p>
               </div>
               <div class="col-lg-6">
+                <!--<p class="form-label my-4">Name: <span class="value"> {{ kpi.name }}</span></p>
+                <p class="form-label my-4">Source: <span class="value"> {{ kpi.source }}</span></p>
+                e così via
+                -->
                 <p class="form-label my-4">Expiring in: <span class="value"> Nutella</span></p>
                 <p class="form-label my-4">Creation date: <span class="value"> Burro</span></p>
               </div>
@@ -32,8 +41,30 @@
 </template>
 
 <script>
+import axios from "axios";
+import {BASE_URL} from "@/constants/constants";
+
 export default {
-  name: "InfoKpi"
+  name: "InfoKpi",
+  data() {
+    return {
+      kpi: [],
+    }
+  },
+  mounted() {
+    this.getKPI();
+  },
+  async getKPI() {
+    await axios.get(BASE_URL + "list_kpi"/* ID DELLA KPI, {
+            headers: {Authorization: `Bearer ${token}`}
+        }*/)
+        .then(response => {
+          console.log(response);
+          this.kpi = response.data;
+        }).catch((error) => {
+          console.log(error);
+        });
+  },
 }
 </script>
 

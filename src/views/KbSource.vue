@@ -15,21 +15,30 @@
           <tbody>
           <tr>
             <td style="width: 20%">
+              <!--<p v-for="kpi in kpis" v-bind:key="kpi" class="t-text"> {{ kpi }} </p>-->
               <p class="t-text"> KPI 1 </p>
               <p class="t-text"> KPI 2 </p>
               <p class="t-text"> KPI 3 </p>
             </td>
             <td style="width: 20%">
+              <!--<p v-for="desc in descriptions" v-bind:key="desc" class="t-text"> {{ desc }} </p>-->
               <p class="t-text"> DESCRIPTION 1 </p>
               <p class="t-text"> DESCRIPTION 2 </p>
               <p class="t-text"> DESCRIPTION 3 </p>
             </td>
             <td style="width: 35%">
+              <!--<p v-for="formula in formulas" v-bind:key="formula" class="t-text"> {{ formula }} </p>-->
               <p class="t-text"> KPI 1 * KPI 2 / KPI 3</p>
               <p class="t-text"> KPI 1 * KPI 2 / KPI 3 </p>
               <p class="t-text"> KPI 1 * KPI 2 / KPI 3 </p>
             </td>
             <td style="width: 15%">
+              <!--
+              <section v-for="kpi in kpis" v-bind:key="kpi">
+              METTERE I TRE P DELLE ICONE
+              </section>
+              -->
+
               <p class="mb-3">
                 <router-link to="/info-kpi">
                   <svg xmlns="http://www.w3.org/2000/svg" class="t-icons" viewBox="0 0 512 512">
@@ -98,10 +107,35 @@
 </template>
 
 <script>
+import axios from "axios";
+import {BASE_URL} from "@/constants/constants";
+
 export default {
   name: "KbSource",
   components: {},
-  data() {},
+  data() {
+    return {
+      kpis: [],
+      descriptions: [],
+      formulas: []
+    }
+  },
+  mounted() {
+    this.getKPIs();
+  },
+  methods: {
+    async getKPIs() {
+      await axios.get(BASE_URL + "list_kpi"/*, {
+            headers: {Authorization: `Bearer ${token}`}
+        }*/)
+          .then(response => {
+            console.log(response);
+            this.kpis = response.data;
+          }).catch((error) => {
+            console.log(error);
+          });
+    },
+  }
 }
 </script>
 
