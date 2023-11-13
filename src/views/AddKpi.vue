@@ -18,11 +18,8 @@
                 <div class="col-lg-4">
                   <label for="kpi-source" class="form-label">Source</label>
                   <select v-model="source" id="kpi-source" class="form-select">
-                    <!--<option v-for="source in sources" v-bind:key="source" :value="source"> {{ source }} </option>-->
                     <option :value="null" disabled selected>Select one</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option v-for="source in sources" v-bind:key="source" :value="source"> {{ source }} </option>
                   </select>
                 </div>
                 <div class="col-lg-4">
@@ -130,7 +127,7 @@ export default {
   },
   mounted() {
     this.getKPIs();
-    this.getUnits();
+    //this.getUnits();
     this.getSources();
   },
   methods: {
@@ -187,9 +184,12 @@ export default {
       }
     },
     async getKPIs() {
-      await axios.get(BASE_URL + "list_kpi"/*, {
-            headers: {Authorization: `Bearer ${token}`}
-        }*/)
+      await axios.get(BASE_URL + "kpi", {
+        headers: {
+          withCredentials: 'true',
+          'Authorization': 'Basic ' + btoa('smartapp'+':'+'api'),
+        }
+      })
           .then(response => {
             console.log(response);
             this.kpis = response.data;
@@ -197,21 +197,27 @@ export default {
             console.log(error);
           });
     },
-    async getUnits() {
-      await axios.get(BASE_URL + "units"/*, {
-            headers: {Authorization: `Bearer ${token}`}
-        }*/)
+    /*async getUnits() {
+      await axios.get(BASE_URL + "units", {
+        headers: {
+          withCredentials: 'true',
+          'Authorization': 'Basic ' + btoa('smartapp'+':'+'api'),
+        }
+      })
           .then(response => {
             console.log(response);
             this.units = response.data;
           }).catch((error) => {
             console.log(error);
           });
-    },
+    },*/
     async getSources() {
-      await axios.get(BASE_URL + "sources"/*, {
-            headers: {Authorization: `Bearer ${token}`}
-        }*/)
+      await axios.get(BASE_URL + "sources", {
+        headers: {
+          withCredentials: 'true',
+          'Authorization': 'Basic ' + btoa('smartapp'+':'+'api'),
+        }
+      })
           .then(response => {
             console.log(response);
             this.sources = response.data;

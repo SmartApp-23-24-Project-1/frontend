@@ -127,6 +127,7 @@ CUSTOM
 .container-fluid {
   background-color: #f4f5f7;
 }
+
 h1,h2,h3,h4,h5,h6,p,label, thead, tbody, tr, td {
   color: #494949;
   font-family: "Manrope", sans-serif;

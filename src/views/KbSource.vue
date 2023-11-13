@@ -125,15 +125,14 @@ export default {
   },
   methods: {
     async getKPIs() {
-      await axios.get(BASE_URL + "list_kpi"/*, {
-            headers: {Authorization: `Bearer ${token}`}
-        }*/)
-          .then(response => {
-            console.log(response);
-            this.kpis = response.data;
-          }).catch((error) => {
-            console.log(error);
-          });
+      await axios.get(BASE_URL + "list_kpi", {
+        headers: {Authorization: `Authorization: Basic c21hcnRhcHA6YXBp`}
+      }).then(response => {
+        console.log(response);
+        this.kpis = response.data;
+      }).catch((error) => {
+        console.log(error);
+      });
     },
   }
 }
