@@ -25,13 +25,12 @@
           <button class="btn btn-primary dropdown-toggle user-switch__btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person-fill user-switch__icon" viewBox="0 0 16 16">
               <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
-            </svg>
-            Maurizio
+            </svg> 
+            {{ currentUser }}
           </button>
 
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">User 2</a></li>
-            <li><a class="dropdown-item" href="#">User 3</a></li>
+            <li v-for="(user, index) in users" :key="index"><router-link to="" class="dropdown-item" @click="switchUser($event)">{{ user }}</router-link></li>
           </ul>
         </div>
       </div>
@@ -42,7 +41,23 @@
 <script>
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: "Header"
+  name: "Header",
+  data() {
+    return {
+      currentUser: "Maurizio",
+      users: ["Maurizio", "Luigi", "Pamela"]
+    };
+  },
+  methods: {
+    switchUser(event) {
+      const linkText = event.target.textContent.trim();
+      const fakeUsers = ["Maurizio", "Luigi", "Pamela"];
+
+      this.users = fakeUsers.filter(user => user != linkText);
+
+      this.currentUser = linkText;
+    }
+  }
 }
 </script>
 
@@ -54,13 +69,18 @@ export default {
   display: inline-block;
 
   /* non mi veniva un modo migliore per allineare un svg */
-  transform: translate(-3px, -1.5px);
+  transform: translate(-3px, -1.5px); 
+}
+
+.user-switch .dropdown {
+  margin-left: 40px;
 }
 
 .user-switch__btn {
   background-color: #1F3BB3;
   vertical-align: middle;
   display: inline-block;
+  min-width: 120px;
 }
 
 .user-switch__btn::after {
