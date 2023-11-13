@@ -23,7 +23,7 @@ const routes = [
         component: ModifyKpi,
     },
     {
-        path: '/info-kpi',
+        path: '/kpi/:kpi_id',
         name: 'InfoKpi',
         component: InfoKpi,
     },

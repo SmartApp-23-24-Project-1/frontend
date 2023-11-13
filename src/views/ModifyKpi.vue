@@ -7,9 +7,9 @@
           <div class="row d-flex justify-content-center">
             <div class="col-lg-8 form mt-3">
               <label for="kpi-name" class="form-label">Name</label>
-              <input type="text" required v-model="kpiname" class="form-control mb-4" id="kpi-name" placeholder="oldvalue">
+              <input type="text"  v-model="kpiname" class="form-control mb-4" id="kpi-name" placeholder="oldvalue">
               <label for="kpi-description" class="form-label">Description</label>
-              <input type="text" required v-model="kpidescription" class="form-control mb-4" id="kpi-description"
+              <input type="text"  v-model="kpidescription" class="form-control mb-4" id="kpi-description"
                      placeholder="oldvalue">
               <label for="kpi-formula" class="form-label">Formula</label>
               <p class="mb-5"> You can't change the formula for this version: delete this KPI and create a new one.</p>
