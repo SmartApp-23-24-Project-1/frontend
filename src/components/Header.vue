@@ -9,10 +9,10 @@
       </div>
 
       <div class="col-lg-8">
-        <div class="navbar-menu-wrapper">
+        <div class="navbar-menu-wrapper wider">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <h1 class="navbar-nav nav-item welcome-text" v-if="this.$route.name === 'Home'">
+              <h1 class="navbar-nav nav-item welcome-text smaller" v-if="this.$route.name === 'Home'">
                 Welcome, this is your performance summary today.
               </h1>
             </li>
@@ -45,7 +45,7 @@ export default {
   data() {
     return {
       currentUser: "Maurizio",
-      users: ["Maurizio", "Luigi", "Pamela"]
+      users: ["Luigi", "Pamela"]
     };
   },
   methods: {
@@ -89,5 +89,13 @@ export default {
 
 .dropdown-menu {
   min-width: 140px;
+}
+
+.smaller {
+  font-size: 22px !important;
+}
+
+.wider {
+  width: calc(100% - 120px);
 }
 </style>
