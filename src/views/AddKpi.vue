@@ -65,7 +65,7 @@
                   <div class="input-group my-4">
                     <select v-model="kpi1" class="form-select">
                       <option :value="null" disabled selected>KPI1</option>
-                      <option v-for="kpi in kpis" v-bind:key="kpi" :value="kpi"> {{ kpi.name }}</option>
+                      <option v-for="kpi in kpis" v-bind:key="kpi" :value="kpi.value"> {{ kpi.name }}</option>
                     </select>
                     <select v-model="operation" class="form-select">
                       <option :value="null" disabled selected>OP</option>
@@ -77,11 +77,11 @@
                     </select>
                     <select v-model="kpi2" class="form-select">
                       <option :value="null" disabled selected>KPI2</option>
-                      <option v-for="kpi in kpis" v-bind:key="kpi" :value="kpi"> {{ kpi.name }}</option>
+                      <option v-for="kpi in kpis" v-bind:key="kpi" :value="kpi.value"> {{ kpi.name }}</option>
                     </select>
                     <select v-model="kpi3" class="form-select" v-if="type2 === 'on'">
                       <option :value="null" disabled selected>KPI3</option>
-                      <option v-for="kpi in kpis" v-bind:key="kpi" :value="kpi"> {{ kpi.name }}</option>
+                      <option v-for="kpi in kpis" v-bind:key="kpi" :value="kpi.value"> {{ kpi.name }}</option>
                     </select>
                   </div>
                 </div>
@@ -137,23 +137,23 @@ export default {
         window.scrollTo(0, 0);
         this.errors.push('These fields are mandatory to fill.');
       }
-      if (this.type1 && (!this.kpi1 || !this.operation || !this.kpi2)) {
+      /*if (this.type1 && (!this.kpi1 || !this.operation || !this.kpi2)) {
         window.scrollTo(0, 0);
         this.errors.push('The formula is mandatory to fill.');
       }
       if (this.type2 && (!this.kpi1 || !this.operation || !this.kpi2 || !this.kpi3)) {
         window.scrollTo(0, 0);
         this.errors.push('The formula is mandatory to fill.');
-      }
+      }*/
       if (this.errors.length === 0) {
         this.addKPI();
       }
     },
     async addKPI() {
-      await axios.post("/add_kpi", {
+      await axios.post(BASE_URL + "add_kpi", {
             "name": this.kpiname,
             "description": this.kpidescription,
-            "formula": this.kpi3 ? this.kpi1 + this.operation + this.kpi2 : this.kpi1 + this.operation + this.kpi2 / this.kpi3,
+            "formula": "kpi1 + kpi2",
             "unit": this.unit,
             "source": this.source,
             "expiring_in": this.expiring,
@@ -165,7 +165,7 @@ export default {
             }
           }).then(() => {
         Swal.fire({
-          title: "",
+          title: "KPI added successfully",
           icon: 'success',
           confirmButtonText: 'Ok',
           confirmButtonColor: '#1d41b2',
