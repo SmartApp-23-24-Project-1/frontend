@@ -28378,11 +28378,9 @@ table.dataTable tbody td.select-checkbox:after {
 }
 
 .swal2-modal .swal2-title {
-  font-size: 25px;
-  line-height: 1;
+  font-size: 23px;
   font-weight: 600;
   color: #1F1F1F;
-  font-weight: initial;
   margin-bottom: 0;
 }
 
@@ -29417,11 +29415,8 @@ div.tagsinput span.tag a {
   -moz-transition: width 0.25s ease;
   -ms-transition: width 0.25s ease;
   color: #6C7383;
-  padding-left: 3.5rem;
-  padding-right: 2.187rem;
-  padding-top: 30px;
-  padding-bottom: 25px;
-  width: calc(100% - 220px);
+  padding: 30px 65px;
+  width: 100%;
   height: 97px;
 }
 

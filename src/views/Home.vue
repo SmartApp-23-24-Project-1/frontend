@@ -7,17 +7,16 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="home-tab">
-
                   <div class="tab-content tab-content-basic">
                     <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
                       <div class="row">
                         <div class="col-sm-12">
                           <div class="statistics-details d-flex align-items-center justify-content-between">
-                            <div>
-                              <p class="statistics-title">KPI1</p>
-                              <h3 class="rate-percentage">32.53%</h3>
+                            <div v-for="kpi in kpis" v-bind:key="kpi">
+                              <p class="statistics-title text-uppercase">{{ kpi.name }}</p>
+                              <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
                             </div>
-                            <div>
+                            <!--<div>
                               <p class="statistics-title">KPI2</p>
                               <h3 class="rate-percentage">7,682</h3>
                             </div>
@@ -36,7 +35,7 @@
                             <div class="d-none d-md-block">
                               <p class="statistics-title">KPI6</p>
                               <h3 class="rate-percentage">2m:35s</h3>
-                            </div>
+                            </div>-->
                           </div>
                         </div>
                       </div>
@@ -54,7 +53,7 @@
                                   </div>
                                   <div class="d-sm-flex align-items-center mt-1 justify-content-between">
                                     <div class="d-sm-flex align-items-center mt-4 justify-content-between">
-                                      <h2 class="me-2 fw-bold">€36,251.00</h2><h4 class="me-2">EUR</h4> <!--<h4 class="text-success">(+1.37%)</h4>--></div>
+                                      <h2 class="me-2 fw-bold">99,999.00</h2><h4 class="me-2">EUR</h4> <!--<h4 class="text-success">(+1.37%)</h4>--></div>
                                     <div class="me-3"><div id="marketing-overview-legend"></div></div>
                                   </div>
                                   <div>
@@ -102,13 +101,20 @@
 
 <script>
 import Chart from 'chart.js/auto'
+import axios from "axios";
+import {BASE_URL} from "@/constants/constants";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Home",
+  data() {
+    return {
+      kpis: [],
+    }
+  },
   components: {},
-
   mounted() {
+    this.getKPIs();
     const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November'];
     const data_1 = {
       labels: labels,
@@ -159,6 +165,20 @@ export default {
 
     new Chart(ctx_2, config_2);
 
+  },
+  methods: {
+    async getKPIs() {
+      await axios.get(BASE_URL + "kpis", {
+        headers: {
+          withCredentials: 'true',
+          'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
+        }
+      }).then(response => {
+        this.kpis = response.data.data;
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
   }
 }
 

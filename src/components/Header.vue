@@ -7,30 +7,29 @@
           <img src="/images/logo.png" alt="logo"/>
         </router-link>
       </div>
-
       <div class="col-lg-8">
-        <div class="navbar-menu-wrapper wider">
+        <div class="navbar-menu-wrapper">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <h1 class="navbar-nav nav-item welcome-text smaller" v-if="this.$route.name === 'Home'">
+              <h1 class="navbar-nav nav-item welcome-text" v-if="this.$route.name === 'Home'">
                 Welcome, this is your performance summary today.
               </h1>
             </li>
           </ul>
         </div>
       </div>
-
       <div class="col-lg-2 user-switch">
-        <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle user-switch__btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person-fill user-switch__icon" viewBox="0 0 16 16">
+        <div class="dropdown d-flex justify-content-end">
+          <button class="primary-btn dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+            <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-person-fill user-switch__icon" viewBox="0 0 16 16">
               <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
             </svg> 
             {{ currentUser }}
           </button>
-
           <ul class="dropdown-menu">
-            <li v-for="(user, index) in users" :key="index"><router-link to="" class="dropdown-item" @click="switchUser($event)">{{ user }}</router-link></li>
+            <li v-for="(user, index) in users" :key="index">
+              <router-link to="" class="dropdown-item" @click="switchUser($event)">{{ user }}</router-link>
+            </li>
           </ul>
         </div>
       </div>
@@ -45,13 +44,13 @@ export default {
   data() {
     return {
       currentUser: "Maurizio",
-      users: ["Luigi", "Pamela"]
+      users: ["KPI Maintainer2", "KPI Maintainer3"]
     };
   },
   methods: {
     switchUser(event) {
       const linkText = event.target.textContent.trim();
-      const fakeUsers = ["Maurizio", "Luigi", "Pamela"];
+      const fakeUsers = ["Maurizio", "KPI Maintainer2", "KPI Maintainer3"];
 
       this.users = fakeUsers.filter(user => user != linkText);
 
@@ -67,35 +66,12 @@ export default {
   width: 25px;
   vertical-align: middle;
   display: inline-block;
-
   /* non mi veniva un modo migliore per allineare un svg */
   transform: translate(-3px, -1.5px); 
 }
 
-.user-switch .dropdown {
-  margin-left: 40px;
-}
-
-.user-switch__btn {
-  background-color: #1F3BB3;
-  vertical-align: middle;
-  display: inline-block;
-  min-width: 120px;
-}
-
-.user-switch__btn::after {
+.dropdown .dropdown-toggle::after {
   display: none;
 }
 
-.dropdown-menu {
-  min-width: 140px;
-}
-
-.smaller {
-  font-size: 22px !important;
-}
-
-.wider {
-  width: calc(100% - 120px);
-}
 </style>

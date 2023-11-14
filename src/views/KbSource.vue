@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container px-2">
     <div class="row">
       <div class="col-lg-12">
         <p class="title"> Source </p>

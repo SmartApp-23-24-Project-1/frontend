@@ -28,11 +28,8 @@
                 <div class="col-lg-4">
                   <label for="kpi-unit" class="form-label">Unit</label>
                   <select v-model="unit" id="kpi-unit" class="form-select">
-                    <!--<option v-for="unit in units" v-bind:key="unit" :value="unit"> {{ unit }} </option>-->
                     <option :value="null" disabled selected>Select one</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option v-for="unit in units" v-bind:key="unit" :value="unit"> {{ unit }}</option>
                   </select>
                 </div>
                 <div class="col-lg-4">
@@ -130,7 +127,7 @@ export default {
   },
   mounted() {
     this.getKPIs();
-    //this.getUnits();
+    this.getUnits();
     this.getSources();
   },
   methods: {
@@ -154,25 +151,12 @@ export default {
     },
     async addKPI() {
       await axios.post("/add_kpi", {
-            /*
-           {
-      "name": "string", x
-      "description": "string", x
-      "formula": "string",
-      "value": 0,
-      "unit": "string",
-      "source": "string",
-      "expiring_in": 0
-    }
-             */
             "name": this.kpiname,
             "description": this.kpidescription,
-            "formula": this.kpi1 + this.operation + this.kpi2 / this.kpi3,
-            //"value": this.kpidescription,
+            "formula": this.kpi3 ? this.kpi1 + this.operation + this.kpi2 : this.kpi1 + this.operation + this.kpi2 / this.kpi3,
             "unit": this.unit,
             "source": this.source,
             "expiring_in": this.expiring,
-            //"total": this.totalPrice,
           },
           {
             headers: {
@@ -223,20 +207,19 @@ export default {
         console.log(error);
       });
     },
-    /*async getUnits() {
+    async getUnits() {
       await axios.get(BASE_URL + "units", {
         headers: {
           withCredentials: 'true',
-          'Authorization': 'Basic ' + btoa('smartapp'+':'+'api'),
+          'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
         }
-      })
-          .then(response => {
-            console.log(response);
-            this.units = response.data;
-          }).catch((error) => {
-            console.log(error);
-          });
-    },*/
+      }).then(response => {
+        console.log(response);
+        this.units = response.data["units available for the KPIs"];
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
     async getSources() {
       await axios.get(BASE_URL + "sources", {
         headers: {
