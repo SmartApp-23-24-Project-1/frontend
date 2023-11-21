@@ -45,45 +45,12 @@
               </div>
               <label for="kpi-formula" class="form-label">Formula</label>
               <div class="row mb-4">
-                <div class="col-lg-6">
-                  <label for="kpi-type-formula" class="form-label">Choose a type of formula</label>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" id="type1" :checked="type1" v-model="type1"
-                           v-on:click="selectType()">
-                    <label class="form-check-label" for="type1"> KPI1 OP KPI2 </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" id="type2" :checked="type2" v-model="type2"
-                           v-on:click="selectType()">
-                    <label class="form-check-label" for="type2"> (KPI1 OP KPI2) / KPI3 </label>
-                  </div>
-                  <p class="notes"> where OP is an operation between +, -, *, /, %</p>
+                <div class="col-lg-10">
+                  <math-field class="w-100" @focusin="focusIn" @focusout="focusOut" v-model="formula"></math-field>
+                  <!-- nuovo problema: non funge il v-model -->
                 </div>
-                <div class="col-lg-6">
-                  <label class="form-label">Complete the formula</label>
-                  <!--if type1 is selected -->
-                  <div class="input-group my-4">
-                    <select v-model="kpi1" class="form-select">
-                      <option :value="null" disabled selected>KPI1</option>
-                      <option v-for="kpi in kpis" v-bind:key="kpi" :value="kpi.value"> {{ kpi.name }}</option>
-                    </select>
-                    <select v-model="operation" class="form-select">
-                      <option :value="null" disabled selected>OP</option>
-                      <option v-bind:key="'+'" :value="'+'">+</option>
-                      <option v-bind:key="'-'" :value="'-'">-</option>
-                      <option v-bind:key="'*'" :value="'*'">*</option>
-                      <option v-bind:key="'/'" :value="'/'">/</option>
-                      <option v-bind:key="'%'" :value="'%'">%</option>
-                    </select>
-                    <select v-model="kpi2" class="form-select">
-                      <option :value="null" disabled selected>KPI2</option>
-                      <option v-for="kpi in kpis" v-bind:key="kpi" :value="kpi.value"> {{ kpi.name }}</option>
-                    </select>
-                    <select v-model="kpi3" class="form-select" v-if="type2 === 'on'">
-                      <option :value="null" disabled selected>KPI3</option>
-                      <option v-for="kpi in kpis" v-bind:key="kpi" :value="kpi.value"> {{ kpi.name }}</option>
-                    </select>
-                  </div>
+                <div class="col-lg-2">
+                  <button class="btn btn-primary py-2 px-4" @click.prevent="resetFormula">CLEAR</button>
                 </div>
               </div>
               <div class="d-flex justify-content-center mt-3">
@@ -117,7 +84,7 @@ export default {
       expiring: null,
       type1: "on",
       type2: null,
-      formula: null,
+      formula: "",
       kpi1: null,
       kpi2: null,
       kpi3: null,
@@ -234,7 +201,15 @@ export default {
             console.log(error);
           });
     },
-
+    resetFormula() {
+      console.log(this.formula);
+    },
+    focusIn() {
+      mathVirtualKeyboard.show()
+    },
+    focusOut() {
+      mathVirtualKeyboard.hide()
+    },
   }
 }
 </script>

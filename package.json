@@ -13,6 +13,7 @@
     "chart.js": "^4.4.0",
     "core-js": "^3.8.3",
     "cors": "^2.8.5",
+    "mathlive": "^0.97.0",
     "pip": "^0.0.1",
     "sweetalert2": "^11.9.0",
     "vue": "^3.2.13",
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
@@ -40,7 +42,16 @@
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {
+      "no-unused-vars": "off",
+      "no-useless-escape": "off",
+      "no-empty": "off",
+      "no-case-declarations": "off",
+      "no-undef": "off",
+      "no-prototype-builtins": "off",
+      "getter-return": "off",
+      "no-redeclare": "off"
+    }
   },
   "browserslist": [
     "> 1%",
