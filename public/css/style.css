@@ -156,6 +156,20 @@ h1,h2,h3,h4,h5,h6,p,label, thead, tbody, tr, td {
   margin-bottom: 0;
 }
 
+.secondary-btn {
+  background-color: #494949;
+  border: none;
+  color: #fff;
+  padding: 10px 15px;
+  font-weight: 500;
+  border-radius: 11px;
+}
+
+.secondary-btn:hover {
+  background-color: #3a3a3a;
+  transition: 0.4s;
+}
+
 .primary-btn {
   background-color: #1a3eb0;
   border: none;

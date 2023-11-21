@@ -18,23 +18,23 @@
               <input type="text" v-model="kpidescription" class="form-control mb-4" id="kpi-description"
                 placeholder="Put a short description for your KPI">
               <div class="row my-4">
-                <div class="col-lg-4">
+                <!--<div class="col-lg-4">
                   <label for="kpi-source" class="form-label">Source</label>
                   <select v-model="source" id="kpi-source" class="form-select">
                     <option :value="null" disabled selected>Select one</option>
                     <option v-for="source in sources" v-bind:key="source" :value="source"> {{ source }}</option>
                   </select>
-                </div>
-                <div class="col-lg-4">
+                </div>-->
+                <div class="col-lg-6">
                   <label for="kpi-unit" class="form-label">Unit</label>
                   <select v-model="unit" id="kpi-unit" class="form-select">
                     <option :value="null" disabled selected>Select one</option>
                     <option v-for="unit in units" v-bind:key="unit" :value="unit"> {{ unit }}</option>
                   </select>
                 </div>
-                <div class="col-lg-4">
-                  <label for="kpi-source" class="form-label">Expiring in</label>
-                  <select v-model="expiring" id="kpi-source" class="form-select">
+                <div class="col-lg-6">
+                  <label for="kpi-source" class="form-label">Frequency</label>
+                  <select v-model="frequency" id="kpi-source" class="form-select">
                     <option value="null" disabled selected>Select one</option>
                     <option value="1 Day">1 Day</option>
                     <option value="1 Week">1 Week</option>
@@ -43,15 +43,15 @@
                   </select>
                 </div>
               </div>
-              <label for="kpi-formula" class="form-label">Formula</label>
               <div class="row mb-4">
-                <div class="col-lg-10">
-                  <math-field id="inputFormula" class="w-100 form-control init" 
+                <label for="kpi-formula" class="form-label">Formula</label>
+                <div class="col-lg-11">
+                  <!-- TODO: RIMETTERE FOCUS -->
+                  <math-field id="inputFormula" class="w-100 form-control init"
                     v-model="formula" @input="prova"></math-field>
-                  <!-- nuovo problema: non funge il v-model -->
                 </div>
-                <div class="col-lg-2">
-                  <button class="btn btn-primary py-2 px-4" @click.prevent="resetFormula">CLEAR</button>
+                <div class="col-lg-1 px-0 my-auto">
+                  <button class="icon-undo" @click.prevent="resetFormula"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2L98.6 96.6c87.6-86.5 228.7-86.2 315.8 1c87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8H48.5z"/></svg></button>
                 </div>
               </div>
               <div class="d-flex justify-content-center mt-3">
@@ -80,9 +80,8 @@ export default {
       sources: [],
       kpiname: null,
       kpidescription: null,
-      source: null,
       unit: null,
-      expiring: null,
+      frequency: null,
       /* type1: "on",
       type2: null, */
       formula: "",
@@ -153,9 +152,9 @@ export default {
   methods: {
     checkForm() {
       this.errors = [];
-      if (!this.kpiname || !this.kpidescription) {
+      if (!this.kpiname || !this.kpidescription || !this.unit || !this.frequency || !this.formula) {
         window.scrollTo(0, 0);
-        this.errors.push('These fields are mandatory to fill.');
+        this.errors.push('Fields are mandatory to fill.');
       }
       /*if (this.type1 && (!this.kpi1 || !this.operation || !this.kpi2)) {
         window.scrollTo(0, 0);
@@ -176,7 +175,7 @@ export default {
         "formula": this.formula,
         "unit": this.unit,
         "source": this.source,
-        "expiring_in": this.expiring,
+        "frequency": this.frequency,
       },
         {
           headers: {
@@ -294,5 +293,17 @@ export default {
 .init {
   height: initial;
   font-size: 24px;
+}
+
+.icon-undo {
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: none
+}
+
+.icon-undo svg {
+  width: 70%;
+  fill: #484848;
 }
 </style>
