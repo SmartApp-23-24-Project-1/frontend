@@ -13,10 +13,10 @@
             <div class="col-lg-8 form mt-3">
               <label for="kpi-name" class="form-label">Name</label>
               <input type="text" v-model="kpiname" class="form-control mb-4" id="kpi-name"
-                     placeholder="Put a non-existent name for your KPI">
+                placeholder="Put a non-existent name for your KPI">
               <label for="kpi-description" class="form-label">Description</label>
               <input type="text" v-model="kpidescription" class="form-control mb-4" id="kpi-description"
-                     placeholder="Put a short description for your KPI">
+                placeholder="Put a short description for your KPI">
               <div class="row my-4">
                 <div class="col-lg-4">
                   <label for="kpi-source" class="form-label">Source</label>
@@ -46,7 +46,8 @@
               <label for="kpi-formula" class="form-label">Formula</label>
               <div class="row mb-4">
                 <div class="col-lg-10">
-                  <math-field class="w-100" @focusin="focusIn" @focusout="focusOut" v-model="formula"></math-field>
+                  <math-field id="inputFormula" class="w-100 form-control init" 
+                    v-model="formula" @input="prova"></math-field>
                   <!-- nuovo problema: non funge il v-model -->
                 </div>
                 <div class="col-lg-2">
@@ -66,7 +67,7 @@
 
 <script>
 import axios from "axios";
-import {BASE_URL} from "@/constants/constants";
+import { BASE_URL } from "@/constants/constants";
 import router from "@/router";
 import Swal from "sweetalert2";
 
@@ -82,25 +83,77 @@ export default {
       source: null,
       unit: null,
       expiring: null,
-      type1: "on",
-      type2: null,
+      /* type1: "on",
+      type2: null, */
       formula: "",
-      kpi1: null,
-      kpi2: null,
-      kpi3: null,
-      operation: null,
       errors: [],
     }
   },
   mounted() {
-    this.getKPIs();
     this.getUnits();
     this.getSources();
+    this.getKPIs().then((kpis) => {
+      let y = kpis.map(x => x.name.toUpperCase());
+      let arr = [];
+
+      arr.push(y);
+
+      mathVirtualKeyboard.layouts = [
+        {
+          label: 'Basic',
+          rows: [
+            [
+              '[7]',
+              '[8]',
+              '[9]',
+              '[+]',
+              "[separator-5]",
+              "\\sqrt[#0]{#1}",
+              "avg(#0)",
+            ],
+            [
+              '[4]',
+              '[5]',
+              '[6]',
+              '[-]',
+              "[separator-5]",
+              "max(#0)",
+              "count(#0)",
+            ],
+            [
+              '[1]',
+              '[2]',
+              '[3]',
+              '*',
+              "[separator-5]",
+              "(",
+              "{#0}^{#1}",
+            ],
+            [
+              { label: '[0]', width: 2 },
+              ",",
+              '/',
+              "[separator-5]",
+              ")",
+              "min(#0)",
+            ],
+          ],
+        },
+        {
+          label: "KPIs",
+          rows: arr
+        }
+      ];
+
+      mathVirtualKeyboard.layouts[1].rows = arr;
+    });
+
+    
   },
   methods: {
     checkForm() {
       this.errors = [];
-      if (!this.kpiname || !this.kpidescription || (!this.type1 && !this.type2)) {
+      if (!this.kpiname || !this.kpidescription) {
         window.scrollTo(0, 0);
         this.errors.push('These fields are mandatory to fill.');
       }
@@ -118,35 +171,35 @@ export default {
     },
     async addKPI() {
       await axios.post(BASE_URL + "add_kpi", {
-            "name": this.kpiname,
-            "description": this.kpidescription,
-            "formula": "kpi1 + kpi2",
-            "unit": this.unit,
-            "source": this.source,
-            "expiring_in": this.expiring,
-          },
-          {
-            headers: {
-              withCredentials: 'true',
-              'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
-            }
-          }).then(() => {
-        Swal.fire({
-          title: "KPI added successfully",
-          icon: 'success',
-          confirmButtonText: 'Ok',
-          confirmButtonColor: '#1d41b2',
+        "name": this.kpiname,
+        "description": this.kpidescription,
+        "formula": this.formula,
+        "unit": this.unit,
+        "source": this.source,
+        "expiring_in": this.expiring,
+      },
+        {
+          headers: {
+            withCredentials: 'true',
+            'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
+          }
+        }).then(() => {
+          Swal.fire({
+            title: "KPI added successfully",
+            icon: 'success',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#1d41b2',
+          });
+          router.push('/');
+        }).catch(() => {
+          Swal.fire({
+            title: "Something went wrong. Check data or try later.",
+            icon: 'error',
+            confirmButtonText: 'Ok',
+            confirmButtonColor: '#1d41b2',
+          });
+          router.push('/add-a-kpi');
         });
-        router.push('/');
-      }).catch(() => {
-        Swal.fire({
-          title: "Something went wrong. Check data or try later.",
-          icon: 'error',
-          confirmButtonText: 'Ok',
-          confirmButtonColor: '#1d41b2',
-        });
-        router.push('/add-a-kpi');
-      });
     },
     selectType() {
       if (!this.type1) {
@@ -162,17 +215,26 @@ export default {
       }
     },
     async getKPIs() {
-      await axios.get(BASE_URL + "kpis", {
+      let response = await axios.get(BASE_URL + "kpis", {
         headers: {
           withCredentials: 'true',
           'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
         }
-      }).then(response => {
-        console.log(response);
+      })/* .then(response => {
+        mathVirtualKeyboard.layouts[2] = {
+          label: "KPIs",
+          rows: response.data.data.map(x => x.name)
+        };
         this.kpis = response.data.data;
       }).catch((error) => {
         console.log(error);
-      });
+      }); */
+
+      this.kpis = response.data.data;
+
+      console.log(response.data);
+      
+      return response.data.data;
     },
     async getUnits() {
       await axios.get(BASE_URL + "units", {
@@ -194,28 +256,27 @@ export default {
           'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
         }
       })
-          .then(response => {
-            console.log(response);
-            this.sources = response.data;
-          }).catch((error) => {
-            console.log(error);
-          });
+        .then(response => {
+          console.log(response);
+          this.sources = response.data;
+        }).catch((error) => {
+          console.log(error);
+        });
     },
     resetFormula() {
       console.log(this.formula);
+      let x = document.getElementById("inputFormula");
+      x.value = "";
     },
-    focusIn() {
-      mathVirtualKeyboard.show()
-    },
-    focusOut() {
-      mathVirtualKeyboard.hide()
-    },
+    prova() {
+      let x = document.getElementById("inputFormula");
+      this.formula = x.value;
+    }
   }
 }
 </script>
 
 <style scoped>
-
 .form-check-label {
   font-size: 15px;
   font-style: italic;
@@ -228,5 +289,10 @@ export default {
 
 .form-select {
   color: #6c757d;
+}
+
+.init {
+  height: initial;
+  font-size: 24px;
 }
 </style>
