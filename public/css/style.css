@@ -147,6 +147,7 @@ h1,h2,h3,h4,h5,h6,p,label, thead, tbody, tr, td {
 .form {
   background-color: white;
   border-radius: 20px;
+  margin-bottom: 100px;
   padding: 40px 70px !important;
 }
 

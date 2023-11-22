@@ -13,18 +13,17 @@
             <div class="col-lg-8 form mt-3">
               <label for="kpi-name" class="form-label">Name</label>
               <input type="text" v-model="kpiname" class="form-control mb-4" id="kpi-name"
-                placeholder="Put a non-existent name for your KPI">
+                placeholder="Put a name for your KPI">
               <label for="kpi-description" class="form-label">Description</label>
               <input type="text" v-model="kpidescription" class="form-control mb-4" id="kpi-description"
                 placeholder="Put a short description for your KPI">
+              <label for="taxonomy" class="form-label">Taxonomy</label>
+              <input type="text" v-model="taxonomy" class="form-control mb-4" id="taxonomy"
+                     placeholder="Put taxonomy for your KPI">
+              <label for="taxonomy" class="form-label">Range</label>
+              <input type="text" v-model="range" class="form-control mb-4" id="taxonomy"
+                     placeholder="Describe the ranges in which your KPI value could be">
               <div class="row my-4">
-                <!--<div class="col-lg-4">
-                  <label for="kpi-source" class="form-label">Source</label>
-                  <select v-model="source" id="kpi-source" class="form-select">
-                    <option :value="null" disabled selected>Select one</option>
-                    <option v-for="source in sources" v-bind:key="source" :value="source"> {{ source }}</option>
-                  </select>
-                </div>-->
                 <div class="col-lg-6">
                   <label for="kpi-unit" class="form-label">Unit</label>
                   <select v-model="unit" id="kpi-unit" class="form-select">
@@ -33,8 +32,8 @@
                   </select>
                 </div>
                 <div class="col-lg-6">
-                  <label for="kpi-source" class="form-label">Frequency</label>
-                  <select v-model="frequency" id="kpi-source" class="form-select">
+                  <label for="kpi-frequency" class="form-label">Frequency</label>
+                  <select v-model="frequency" id="kpi-frequency" class="form-select">
                     <option value="null" disabled selected>Select one</option>
                     <option value="1 Day">1 Day</option>
                     <option value="1 Week">1 Week</option>
@@ -77,20 +76,23 @@ export default {
     return {
       kpis: [],
       units: [],
-      sources: [],
+      rd: [],
       kpiname: null,
       kpidescription: null,
+      taxonomy: null,
+      range: null,
       unit: null,
       frequency: null,
+      formula: "",
+      kpis_formula: [],
+      rd_formula: [],
       /* type1: "on",
       type2: null, */
-      formula: "",
       errors: [],
     }
   },
   mounted() {
     this.getUnits();
-    this.getSources();
     this.getKPIs().then((kpis) => {
       let y = kpis.map(x => x.name.toUpperCase());
       let arr = [];
@@ -146,24 +148,15 @@ export default {
 
       mathVirtualKeyboard.layouts[1].rows = arr;
     });
-
-    
   },
   methods: {
     checkForm() {
       this.errors = [];
-      if (!this.kpiname || !this.kpidescription || !this.unit || !this.frequency || !this.formula) {
+      if (!this.kpiname || !this.kpidescription || !this.unit || !this.frequency || !this.formula
+      || !this.taxonomy) {
         window.scrollTo(0, 0);
         this.errors.push('Fields are mandatory to fill.');
       }
-      /*if (this.type1 && (!this.kpi1 || !this.operation || !this.kpi2)) {
-        window.scrollTo(0, 0);
-        this.errors.push('The formula is mandatory to fill.');
-      }
-      if (this.type2 && (!this.kpi1 || !this.operation || !this.kpi2 || !this.kpi3)) {
-        window.scrollTo(0, 0);
-        this.errors.push('The formula is mandatory to fill.');
-      }*/
       if (this.errors.length === 0) {
         this.addKPI();
       }
@@ -172,10 +165,13 @@ export default {
       await axios.post(BASE_URL + "add_kpi", {
         "name": this.kpiname,
         "description": this.kpidescription,
-        "formula": this.formula,
+        "taxonomy": this.taxonomy,
+        "range": this.range,
         "unit": this.unit,
-        "source": this.source,
         "frequency": this.frequency,
+        "formula": this.formula,
+        "kpis": this.kpis_formula,
+        "rawdata": this.rd
       },
         {
           headers: {
@@ -230,9 +226,6 @@ export default {
       }); */
 
       this.kpis = response.data.data;
-
-      console.log(response.data);
-      
       return response.data.data;
     },
     async getUnits() {
@@ -242,28 +235,11 @@ export default {
           'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
         }
       }).then(response => {
-        console.log(response);
         this.units = response.data["units available for the KPIs"];
-      }).catch((error) => {
-        console.log(error);
+      }).catch(() => {
       });
     },
-    async getSources() {
-      await axios.get(BASE_URL + "sources", {
-        headers: {
-          withCredentials: 'true',
-          'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
-        }
-      })
-        .then(response => {
-          console.log(response);
-          this.sources = response.data;
-        }).catch((error) => {
-          console.log(error);
-        });
-    },
     resetFormula() {
-      console.log(this.formula);
       let x = document.getElementById("inputFormula");
       x.value = "";
     },

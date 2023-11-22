@@ -64,8 +64,6 @@ export default {
   data() {
     return {
       kpis: [],
-      descriptions: [],
-      formulas: []
     }
   },
   mounted() {
