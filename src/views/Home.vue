@@ -40,11 +40,30 @@
                         </div>
                       </div>
                       <div class="row">
+
+                        <!--GRAPHS-->
+                        <div class="col-lg-12 d-flex flex-column">
+                          <div class="card card-rounded">
+                            <div class="card-body">
+                              <div class="d-sm-flex justify-content-between align-items-start">
+                                <div>
+                                  <h4 class="card-title card-title-dash">KPIs usage</h4>
+                                  <p class="card-subtitle card-subtitle-dash">Here a bar graph about the usage of the {{ usage_entries }} most called KPI</p>
+                                </div>
+                              </div>
+                              <div>
+                                <canvas id="KPI_usage"></canvas>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!--
                         <div class="col-lg-8 d-flex flex-column">
                           <div class="row flex-grow">
                             <div class="col-12 grid-margin stretch-card">
                               <div class="card card-rounded">
                                 <div class="card-body">
+
                                   <div class="d-sm-flex justify-content-between align-items-start">
                                     <div>
                                       <h4 class="card-title card-title-dash">Lorem ipsum</h4>
@@ -53,12 +72,14 @@
                                   </div>
                                   <div class="d-sm-flex align-items-center mt-1 justify-content-between">
                                     <div class="d-sm-flex align-items-center mt-4 justify-content-between">
-                                      <h2 class="me-2 fw-bold">99,999.00</h2><h4 class="me-2">EUR</h4> <!--<h4 class="text-success">(+1.37%)</h4>--></div>
+                                      <h2 class="me-2 fw-bold">99,999.00</h2><h4 class="me-2">EUR</h4> &lt;!&ndash;<h4 class="text-success">(+1.37%)</h4>&ndash;&gt;</div>
                                     <div class="me-3"><div id="marketing-overview-legend"></div></div>
                                   </div>
+
                                   <div>
                                     <canvas id="KPI1"></canvas>
                                   </div>
+
                                 </div>
                               </div>
                             </div>
@@ -85,6 +106,7 @@
                             </div>
                           </div>
                         </div>
+                        -->
                       </div>
                     </div>
                   </div>
@@ -100,7 +122,7 @@
 
 
 <script>
-import Chart from 'chart.js/auto'
+import Chart from 'chart.js/auto';
 import axios from "axios";
 import {BASE_URL} from "@/constants/constants";
 
@@ -110,11 +132,68 @@ export default {
   data() {
     return {
       kpis: [],
+      usage_entries: 10,
     }
   },
   components: {},
-  mounted() {
-    this.getKPIs();
+  async mounted() {
+    await this.getKPIs();
+    // adapt the usage entries to the number of the kpis, if there are not enough kpis
+    this.usage_entries = Math.min(this.usage_entries,this.kpis.length)
+
+    // GRAPHS
+
+    /* ###################### KPI USAGE GRAPH #######################*/
+    let kpi_usage_dict = {};
+    for (let i of this.kpis) {
+      kpi_usage_dict[i["name"]] = i["counter"]; //+ Math.floor(Math.random()*10)
+    }
+
+    // Sorting the kpis wrt the number of calls
+    let sorted_kpi_usage_array = Object.entries(kpi_usage_dict);
+    sorted_kpi_usage_array.sort((a,b)=>b[1]-a[1]);
+
+    // Keeping only the first 'usage_entries' kpis with the most number of calls
+    kpi_usage_dict = Object.fromEntries(sorted_kpi_usage_array.slice(0,this.usage_entries));
+
+    // Building the KPI_Usage graph
+    const usage_graph_ctx = document.getElementById('KPI_usage');
+
+    const usage_graph_data = {
+      labels: Object.keys(kpi_usage_dict),
+      datasets: [{
+        label: 'Number of calls',
+        data: Object.values(kpi_usage_dict),
+        borderWidth: 1
+      }]
+    };
+
+    const usage_graph_config = {
+      type: 'bar',
+      data: usage_graph_data,
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            title: {
+              display: true,
+              text: '# of calls'
+            },
+            min: 0,
+            ticks: {
+              stepSize: 1
+            }
+          }
+        }
+      }
+    };
+
+    new Chart(usage_graph_ctx, usage_graph_config);
+
+    /* ###################### KPI USAGE GRAPH #######################*/
+
+
+    /*
     const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November'];
     const data_1 = {
       labels: labels,
@@ -164,6 +243,7 @@ export default {
     const ctx_2 = document.getElementById('KPI2');
 
     new Chart(ctx_2, config_2);
+    */
 
   },
   methods: {
