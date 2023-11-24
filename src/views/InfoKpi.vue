@@ -8,18 +8,13 @@
           <div class="col-lg-8 form mt-3">
             <div class="row">
               <div class="col-lg-6">
-                <!--
-                  CREATIONDATE
-                DESCRIZIONE TASSONOMIA RANGE FORMULA
-                -->
                 <p class="form-label my-4">Name: <span class="value"> {{ kpi.name }}</span></p>
                 <p class="form-label my-4">Frequency: <span class="value"> {{ kpi.frequency }}</span></p>
                 <p class="form-label my-4">Counter: <span class="value"> {{ kpi.counter }}</span></p>
-                <!--<p class="form-label my-4">Description: <span class="value"> {{ kpi.description }}</span></p>-->
               </div>
               <div class="col-lg-6">
                 <p class="form-label my-4">Value: <span class="value"> {{ kpi.value }} {{ kpi.unit }} </span></p>
-                <p class="form-label my-4">Last Update: <span class="value"> {{ kpi.last_update }}</span></p>
+                <p class="form-label my-4">Last Update: <span class="value"> {{ format(kpi.last_update) }}</span></p>
                 <p class="form-label my-4">Creation date: <span class="value"> {{ format(kpi.creation_date) }}</span></p>
               </div>
               <div class="col-lg-12 pt-0">

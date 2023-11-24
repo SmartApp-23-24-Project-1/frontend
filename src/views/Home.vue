@@ -40,7 +40,6 @@
                         </div>
                       </div>
                       <div class="row">
-
                         <!--GRAPHS-->
                         <div class="col-lg-12 d-flex flex-column">
                           <div class="card card-rounded">
@@ -48,7 +47,8 @@
                               <div class="d-sm-flex justify-content-between align-items-start">
                                 <div>
                                   <h4 class="card-title card-title-dash">KPIs usage</h4>
-                                  <p class="card-subtitle card-subtitle-dash">Here a bar graph about the usage of the {{ usage_entries }} most called KPI</p>
+                                  <p class="card-subtitle card-subtitle-dash">A bar graph about the usage of the
+                                    {{ usage_entries }} most called KPI is shown here.</p>
                                 </div>
                               </div>
                               <div>
@@ -108,6 +108,25 @@
                         </div>
                         -->
                       </div>
+                      <!-- TABELLA "NOTIFICHE" -->
+                      <div class="row my-5">
+                        <div class="col-lg-12">
+                          <div class="card card-rounded">
+                            <div class="card-body">
+                              <h4 class="card-title card-title-dash">Updates</h4>
+                              <p class="card-subtitle card-subtitle-dash">Missing KPI calculation will be reported here if present.</p>
+                              <template v-for="kpi in kpis" v-bind:key="kpi.name">
+                                <p v-if="kpi.counter >= 1 && lastUpdate(kpi.last_update, kpi.frequency) === 0">
+                                  {{kpi.name}} last calculation exceeds its calculation frequency.
+                                </p>
+                                <!--<p v-else-if="kpi.counter >= 1 && lastUpdate(kpi.last_update, kpi.frequency) === 1">
+                                  TARANTELLE
+                                </p>-->
+                              </template>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -138,8 +157,9 @@ export default {
   components: {},
   async mounted() {
     await this.getKPIs();
+
     // adapt the usage entries to the number of the kpis, if there are not enough kpis
-    this.usage_entries = Math.min(this.usage_entries,this.kpis.length)
+    this.usage_entries = Math.min(this.usage_entries, this.kpis.length)
 
     // GRAPHS
 
@@ -151,10 +171,10 @@ export default {
 
     // Sorting the kpis wrt the number of calls
     let sorted_kpi_usage_array = Object.entries(kpi_usage_dict);
-    sorted_kpi_usage_array.sort((a,b)=>b[1]-a[1]);
+    sorted_kpi_usage_array.sort((a, b) => b[1] - a[1]);
 
     // Keeping only the first 'usage_entries' kpis with the most number of calls
-    kpi_usage_dict = Object.fromEntries(sorted_kpi_usage_array.slice(0,this.usage_entries));
+    kpi_usage_dict = Object.fromEntries(sorted_kpi_usage_array.slice(0, this.usage_entries));
 
     // Building the KPI_Usage graph
     const usage_graph_ctx = document.getElementById('KPI_usage');
@@ -259,6 +279,66 @@ export default {
         console.log(error);
       });
     },
+    lastUpdate(last_update, frequency) {
+      let today = new Date();
+      let dd = String(today.getDate()).padStart(2, '0');
+      let mm = String(today.getMonth() + 1).padStart(2, '0');
+      let yyyy = today.getFullYear();
+      today = dd + '-' + mm + '-' + yyyy;
+      let lastup = this.format(last_update);
+      let lastupDate = new Date(lastup);
+      let todayDate = new Date(today);
+      let frequence;
+      if (frequency === 'daily') {
+        frequence = 86400000;
+        if (todayDate.getTime() - lastupDate.getTime() > frequence ) {
+          console.log('fr sup');
+          return 0;
+        } else {
+          console.log('fr not sup');
+          return 1;
+        }
+      } else if (frequency === 'monthly') {
+        let months;
+        months = (todayDate.getFullYear() - lastupDate.getFullYear()) * 12;
+        months -= lastupDate.getMonth();
+        months += todayDate.getMonth();
+        if (frequence > 0) {
+          console.log('fr sup');
+          return 0;
+        } else {
+          console.log('fr not sup');
+          return 1;
+        }
+      } else if (frequency === 'weekly') {
+        let diffInMs = todayDate - lastupDate;
+        frequence = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+        if (frequence > 7) {
+          console.log('fr sup');
+          return 0;
+        } else {
+          console.log('fr not sup');
+          return 1;
+        }
+      }
+
+
+      if (todayDate.getTime() - lastupDate.getTime() > frequence ) {
+        console.log('lastup and today are equal');
+      } else {
+        console.log('lastup is greater than today');
+      }
+
+
+
+    },
+    format(value) {
+      let date = new Date(value);
+      let day = date.getDate();
+      let month = date.getMonth();
+      let year = date.getFullYear();
+      return day + '-' + month + '-' + year;
+    }
   }
 }
 
