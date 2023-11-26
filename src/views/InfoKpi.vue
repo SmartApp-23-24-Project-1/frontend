@@ -8,19 +8,19 @@
           <div class="col-lg-8 form mt-3">
             <div class="row">
               <div class="col-lg-6">
-                <p class="form-label my-4">Name: <span class="value"> {{ kpi.name }}</span></p>
-                <p class="form-label my-4">Frequency: <span class="value"> {{ kpi.frequency }}</span></p>
-                <p class="form-label my-4">Counter: <span class="value"> {{ kpi.counter }}</span></p>
+                <p class="form-label my-4">Name: <span class="value"> {{ kpi.name == null ? "not defined" : kpi.name}}</span></p>
+                <p class="form-label my-4">Frequency: <span class="value"> {{ kpi.frequency == null ? "not defined" : kpi.frequency}}</span></p>
+                <p class="form-label my-4">Counter: <span class="value"> {{ kpi.counter == null ? "not defined" : kpi.counter}}</span></p>
               </div>
               <div class="col-lg-6">
-                <p class="form-label my-4">Value: <span class="value"> {{ kpi.value }} {{ kpi.unit }} </span></p>
+                <p class="form-label my-4">Value: <span class="value"> {{ kpi.value == null ? "not defined" : kpi.value }} {{ kpi.unit == null ? "not defined" : kpi.unit}} </span></p>
                 <p class="form-label my-4">Last Update: <span class="value"> {{ format(kpi.last_update) }}</span></p>
                 <p class="form-label my-4">Creation date: <span class="value"> {{ format(kpi.creation_date) }}</span></p>
               </div>
               <div class="col-lg-12 pt-0">
-                <p class="form-label mb-4">Description: <span class="value"> {{ kpi.description }}</span></p>
-                <p class="form-label my-4">Taxonomy: <span class="value"> {{ kpi.taxonomy }}</span></p>
-                <p class="form-label my-4">Range: <span class="value"> {{ kpi.range }}</span></p>
+                <p class="form-label mb-4">Description: <span class="value"> {{ kpi.description == null ? "not defined" : kpi.description }}</span></p>
+                <p class="form-label my-4">Taxonomy: <span class="value"> {{ kpi.taxonomy == null ? "not defined" : kpi.taxonomy }}</span></p>
+                <p class="form-label my-4">Range: <span class="value"> {{ kpi.range == null ? "not defined" : kpi.range}}</span></p>
               </div>
             </div>
             <div class="text-end">
@@ -69,6 +69,8 @@ export default {
       });
     },
     format(value) {
+      if (isNaN(value)) return "not defined"
+
       let date = new Date(value);
       let day = date.getDate();
       let month = date.getMonth();
