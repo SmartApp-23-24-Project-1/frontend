@@ -47,7 +47,7 @@
                 <div class="col-lg-11">
                   <!-- TODO: RIMETTERE FOCUS -->
                   <math-field id="inputFormula" class="w-100 form-control init" v-model="formula"
-                    @input="prova"></math-field>
+                    @input="onInput"></math-field>
                 </div>
                 <div class="col-lg-1 px-0 my-auto">
                   <button class="icon-undo" @click.prevent="resetFormula"><svg xmlns="http://www.w3.org/2000/svg"
@@ -92,9 +92,9 @@ export default {
       formula: "",
       kpis_formula: [],
       rd_formula: [],
+      errors: []
       /* type1: "on",
       type2: null, */
-      errors: [],
     }
   },
   mounted() {
@@ -117,20 +117,17 @@ export default {
     })
   },
   methods: {
-    /* TEST() {
-      robe da inviare al backend
-      
-      const rawDataToSend = this.rd.map(x => x);
-      const kpisToSend = this.kpis.map(x => {
-        return {
-          [x.name]: x.formula
-        }
-      });
-    }, */
     checkForm() {
       this.errors = [];
-      if (!this.kpiname || !this.kpidescription || !this.unit || !this.frequency || !this.formula
-        || !this.taxonomy) {
+      let fieldsToCheck = [
+        this.kpiname,
+        this.kpidescription,
+        this.frequency,
+        this.formula,
+        this.unit
+      ];
+
+      if (fieldsToCheck.some(v => !v)) {
         window.scrollTo(0, 0);
         this.errors.push('Fields are mandatory to fill.');
       }
@@ -139,16 +136,18 @@ export default {
       }
     },
     async addKPI() {
+      this.kpis_formula = this.formula.match(/KPI\w+/g);
+
       await axios.post(BASE_URL + "add_kpi", {
         "name": this.kpiname,
         "description": this.kpidescription,
         "taxonomy": this.taxonomy,
-        "range": this.range,
+        "kpi_range": this.range,
         "unit": this.unit,
         "frequency": this.frequency,
         "formula": this.formula,
         "kpis": this.kpis_formula,
-        "rawdata": this.rd
+        "raw_data": this.rd
       },
         {
           headers: {
@@ -203,15 +202,7 @@ export default {
           withCredentials: 'true',
           'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
         }
-      })/* .then(response => {
-        mathVirtualKeyboard.layouts[2] = {
-          label: "KPIs",
-          rows: response.data.data.map(x => x.name)
-        };
-        this.kpis = response.data.data;
-      }).catch((error) => {
-        console.log(error);
-      }); */
+      });
 
       this.kpis = response.data.data;
       return this.kpis;
@@ -231,7 +222,7 @@ export default {
       let x = document.getElementById("inputFormula");
       x.value = "";
     },
-    prova() {
+    onInput() {
       let x = document.getElementById("inputFormula");
       this.formula = x.value;
     }

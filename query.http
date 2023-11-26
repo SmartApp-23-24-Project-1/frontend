@@ -1,3 +1,8 @@
+GET http://localhost:8000/kpis
+Authorization: Basic c21hcnRhcHA6YXBp
+
+###
+
 GET http://localhost:8000/raw_data
 Authorization: Basic c21hcnRhcHA6YXBp
 
@@ -12,17 +17,19 @@ POST http://localhost:8000/add_kpi
 Authorization: Basic c21hcnRhcHA6YXBp
 
 {
-  "name": "nome kpi",
-  "description": "desc kpi",
-  "taxonomy": "taxonom kpi",
-  "kpi_range": "1-10",
-  "formula": "3 + 4 * KPI2",
+  "name": "kpi bella",
+  "description": "una kpi bellissima",
+  "taxonomy": "non so cosa sia ancora",
+  "kpi_range": "1-17",
+  "formula": "3 + 4",
   "kpis": [
-    "string"
+    "KPI1",
+    "KPI2"
   ],
   "raw_data": [
-    "string"
+    "rawdata2",
+    "rawdata3"
   ],
-  "unit": "string",
-  "frequency": "string"
+  "unit": "ms/s",
+  "frequency": "1 hour"
 }
