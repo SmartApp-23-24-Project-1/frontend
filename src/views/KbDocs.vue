@@ -38,32 +38,44 @@
             <tr>
               <th scope="col">Attribute</th>
               <th scope="col">Meaning</th>
+              <th scope="col">Example</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Name</td>
               <td>the visible name of the KPI</td>
+              <td>Inventory costs</td>
             </tr>
             <tr>
               <td>Description</td>
               <td>a brief description of the KPI</td>
+              <td>The total amount of all expenses related to storing unsold goods</td>
             </tr>
             <tr>
               <td>Unit</td>
-              <td>the unit of measure of the KPI (e.g. the uptime of a server could be measured in days or hours)</td>
+              <td>the unit of measure of the KPI</td>
+              <td>the uptime of a server could be measured in days or hours</td>
             </tr>
             <tr>
               <td>Frequency</td>
-              <td>refresh time of the KPI (e.g. 1 hour = it updates every hour)</td>
+              <td>refresh time of the KPI</td>
+              <td>let's suppose 1 hour, that means it updates every hour</td>
             </tr>
             <tr>
               <td>Formula</td>
               <td>the mathematical formula used to compute the KPI</td>
+              <td>3 + 4 * KPI2</td>
             </tr>
             <tr>
-              <td>Source</td>
-              <td>source</td>
+              <td>Taxonomy</td>
+              <td>The name of the taxonomy which the KPI belongs to</td>
+              <td>Operations</td>
+            </tr>
+            <tr>
+              <td>Range</td>
+              <td>The range in which it is contained the KPI value</td>
+              <td>1-10</td>
             </tr>
           </tbody>
         </table>

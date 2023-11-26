@@ -19,10 +19,10 @@
                 placeholder="Put a short description for your KPI">
               <label for="taxonomy" class="form-label">Taxonomy</label>
               <input type="text" v-model="taxonomy" class="form-control mb-4" id="taxonomy"
-                     placeholder="Put taxonomy for your KPI">
+                placeholder="Put taxonomy for your KPI">
               <label for="taxonomy" class="form-label">Range</label>
               <input type="text" v-model="range" class="form-control mb-4" id="taxonomy"
-                     placeholder="Describe the ranges in which your KPI value could be">
+                placeholder="Describe the ranges in which your KPI value could be">
               <div class="row my-4">
                 <div class="col-lg-6">
                   <label for="kpi-unit" class="form-label">Unit</label>
@@ -46,11 +46,15 @@
                 <label for="kpi-formula" class="form-label">Formula</label>
                 <div class="col-lg-11">
                   <!-- TODO: RIMETTERE FOCUS -->
-                  <math-field id="inputFormula" class="w-100 form-control init"
-                    v-model="formula" @input="prova"></math-field>
+                  <math-field id="inputFormula" class="w-100 form-control init" v-model="formula"
+                    @input="prova"></math-field>
                 </div>
                 <div class="col-lg-1 px-0 my-auto">
-                  <button class="icon-undo" @click.prevent="resetFormula"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2L98.6 96.6c87.6-86.5 228.7-86.2 315.8 1c87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8H48.5z"/></svg></button>
+                  <button class="icon-undo" @click.prevent="resetFormula"><svg xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                      <path
+                        d="M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2L98.6 96.6c87.6-86.5 228.7-86.2 315.8 1c87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8H48.5z" />
+                    </svg></button>
                 </div>
               </div>
               <div class="d-flex justify-content-center mt-3">
@@ -69,6 +73,8 @@ import axios from "axios";
 import { BASE_URL } from "@/constants/constants";
 import router from "@/router";
 import Swal from "sweetalert2";
+import baseKeyboard from './baseKeyboard.json';
+import { MathfieldElement } from 'mathlive';
 
 export default {
   name: "AddKpi",
@@ -92,68 +98,39 @@ export default {
     }
   },
   mounted() {
-    this.getUnits();
-    this.getKPIs().then((kpis) => {
-      let y = kpis.map(x => x.name.toUpperCase());
-      let arr = [];
+    // this.getUnits();
+    this.getKPIs().then(kpis => { // brutto, ma l'async sul mounted non va
+      this.getRawData().then(rawData => {
+        const emptyRows = [["[separator]"], ["[separator]"], ["[separator]"]];
 
-      arr.push(y);
+        let kpisKeyboard = [kpis.map(x => x.name.toUpperCase()), ...emptyRows];
+        let rawDataKeyboard = [rawData.map(x => {
+          return { label: x.replace("_", ""), class: "small" };
+        }), ...emptyRows]; // il replace serve a evitare errori di escape  
 
-      mathVirtualKeyboard.layouts = [
-        {
-          label: 'Basic',
-          rows: [
-            [
-              '[7]',
-              '[8]',
-              '[9]',
-              '[+]',
-              "[separator-5]",
-              "\\sqrt[#0]{#1}",
-              "avg(#0)",
-            ],
-            [
-              '[4]',
-              '[5]',
-              '[6]',
-              '[-]',
-              "[separator-5]",
-              "max(#0)",
-              "count(#0)",
-            ],
-            [
-              '[1]',
-              '[2]',
-              '[3]',
-              '*',
-              "[separator-5]",
-              "(",
-              "{#0}^{#1}",
-            ],
-            [
-              { label: '[0]', width: 2 },
-              ",",
-              '/',
-              "[separator-5]",
-              ")",
-              "min(#0)",
-            ],
-          ],
-        },
-        {
-          label: "KPIs",
-          rows: arr
-        }
-      ];
+        let fullLayout = baseKeyboard["mathKeyboard"];
+        fullLayout[1].rows = kpisKeyboard;
+        fullLayout[2].rows = rawDataKeyboard;
 
-      mathVirtualKeyboard.layouts[1].rows = arr;
-    });
+        mathVirtualKeyboard.layouts = fullLayout;
+      })
+    })
   },
   methods: {
+    /* TEST() {
+      robe da inviare al backend
+      
+      const rawDataToSend = this.rd.map(x => x);
+      const kpisToSend = this.kpis.map(x => {
+        return {
+          [x.name]: x.formula
+        }
+      });
+    }, */
     checkForm() {
       this.errors = [];
       if (!this.kpiname || !this.kpidescription || !this.unit || !this.frequency || !this.formula
-      || !this.taxonomy) {
+        || !this.taxonomy) {
         window.scrollTo(0, 0);
         this.errors.push('Fields are mandatory to fill.');
       }
@@ -209,6 +186,17 @@ export default {
         document.getElementById("type2").checked = 'on';
       }
     },
+    async getRawData() {
+      let response = await axios.get(BASE_URL + "raw_data", {
+        headers: {
+          withCredentials: 'true',
+          'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
+        }
+      });
+
+      this.rd = response.data["raw data available"];
+      return this.rd;
+    },
     async getKPIs() {
       let response = await axios.get(BASE_URL + "kpis", {
         headers: {
@@ -226,7 +214,7 @@ export default {
       }); */
 
       this.kpis = response.data.data;
-      return response.data.data;
+      return this.kpis;
     },
     async getUnits() {
       await axios.get(BASE_URL + "units", {
