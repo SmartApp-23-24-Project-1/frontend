@@ -18,6 +18,7 @@ import Header from './components/Header.vue'
 import Sidebar from './components/Sidebar.vue'
 import Spinner from './components/Spinner.vue'
 
+
 export default {
   name: 'App',
   components: {

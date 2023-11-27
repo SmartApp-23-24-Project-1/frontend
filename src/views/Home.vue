@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid content-wrapper">
     <div class="row mb-5">
-      <div class="col-lg-6">
+      <div class="col-lg-6 my-auto">
         <div class="card card-rounded">
           <div class="card-body">
             <div v-for="kpi in kpis" v-bind:key="kpi">
@@ -29,19 +29,19 @@
       </div>
       <div class="col-lg-6 my-auto">
         <div v-for="kpi in kpis" v-bind:key="kpi">
-          <div class="card card-rounded my-4" v-if="kpi.name === 'energy_consumption'">
+          <div class="card card-rounded mb-3" v-if="kpi.name === 'energy_consumption'">
             <div class="card-body">
               <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
               <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
             </div>
           </div>
-        </div>
-        <div class="card card-rounded my-4" v-if="kpi.name === 'production_volume'">
-          <div class="card-body">
-            <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
-            <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
+          <div class="card card-rounded mb-3" v-if="kpi.name === 'production_volume'">
+            <div class="card-body">
+              <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
+              <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
+            </div>
           </div>
-          <div class="card card-rounded my-4" v-if="kpi.name === 'downtime_rate'">
+          <div class="card card-rounded mb-3" v-if="kpi.name === 'downtime_rate'">
             <div class="card-body">
               <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
               <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
@@ -154,7 +154,7 @@ export default {
   data() {
     return {
       kpis: [],
-      usage_entries: 10,
+      usage_entries: 10
     }
   },
   components: {},

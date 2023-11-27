@@ -6,7 +6,9 @@
     "start": "vue-cli-service serve --host localhost",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "medical": "vue-cli-service serve --mode medical",
+    "industrial": "vue-cli-service serve --mode industrial"
   },
   "dependencies": {
     "axios": "^1.5.1",
@@ -14,9 +16,9 @@
     "chart.js": "^4.4.0",
     "core-js": "^3.8.3",
     "cors": "^2.8.5",
-    "mathlive": "^0.97.0",
+    "mathlive": "^0.97.2",
     "pip": "^0.0.1",
-    "sweetalert2": "^11.9.0",
+    "sweetalert2": "^11.10.0",
     "vue": "^3.2.13",
     "vue-router": "^4.2.5",
     "vuex": "^4.0.2"
