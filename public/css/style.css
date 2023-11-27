@@ -20766,7 +20766,7 @@ code {
   margin-bottom: 48px;
 }
 
-.home-tab .statistics-details .statistics-title {
+.statistics-title {
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
@@ -20781,17 +20781,14 @@ code {
   }
 }
 
-.home-tab .statistics-details .rate-percentage {
-  font-style: normal;
-  font-weight: bold;
-  font-size: 26px;
-  line-height: 36px;
-  color: #000000;
+.rate-percentage {
+  font-size: 21px;
+  color: #7e7e7e;
   margin-bottom: 0;
 }
 
 @media (max-width: 991px) {
-  .home-tab .statistics-details .rate-percentage {
+  .rate-percentage {
     font-size: 18px;
   }
 }
@@ -22829,7 +22826,7 @@ code {
   padding-top: 1rem;
 }
 
-.card .card-title {
+ .card-title {
   color: #010101;
   margin-bottom: 1.2rem;
   text-transform: capitalize;
@@ -22837,7 +22834,7 @@ code {
   font-weight: 600;
 }
 
-.card .card-title.card-title-dash {
+ .card-title.card-title-dash {
   font-style: normal;
   font-weight: 800;
   font-size: 16px;
@@ -28929,7 +28926,7 @@ div.tagsinput span.tag a {
 
 .content-wrapper {
   background: #F4F5F7;
-  padding: 1.5rem 2.187rem 1.5rem 3.5rem;
+  padding: 50px 65px;
   width: 100%;
   -webkit-flex-grow: 1;
   flex-grow: 1;

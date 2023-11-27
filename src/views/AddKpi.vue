@@ -172,7 +172,7 @@ export default {
           router.push('/add-a-kpi');
         });
     },
-    selectType() {
+    /*selectType() {
       if (!this.type1) {
         this.type1 = 'on';
         document.getElementById("type1").checked = 'on';
@@ -184,7 +184,7 @@ export default {
         this.type2 = 'on';
         document.getElementById("type2").checked = 'on';
       }
-    },
+    },*/
     async getRawData() {
       let response = await axios.get(BASE_URL + "raw_data", {
         headers: {

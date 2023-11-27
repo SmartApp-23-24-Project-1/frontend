@@ -1,137 +1,140 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid content-wrapper">
+    <div class="row mb-5">
+      <div class="col-lg-6">
+        <div class="card card-rounded">
+          <div class="card-body">
+            <div v-for="kpi in kpis" v-bind:key="kpi">
+              <div class="my-3" v-if="kpi.name === 'oee'">
+                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
+                <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
+              </div>
+            </div>
+            <div v-for="kpi in kpis" v-bind:key="kpi">
+              <div class="my-3" v-if="kpi.name === 'pe'">
+                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
+                <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
+              </div>
+              <div class="my-3" v-if="kpi.name === 'aq'">
+                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
+                <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
+              </div>
+              <div class="my-3" v-if="kpi.name === 'av'">
+                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
+                <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 my-auto">
+        <div v-for="kpi in kpis" v-bind:key="kpi">
+          <div class="card card-rounded my-4" v-if="kpi.name === 'energy_consumption'">
+            <div class="card-body">
+              <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
+              <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card card-rounded my-4" v-if="kpi.name === 'production_volume'">
+          <div class="card-body">
+            <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
+            <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
+          </div>
+          <div class="card card-rounded my-4" v-if="kpi.name === 'downtime_rate'">
+            <div class="card-body">
+              <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
+              <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row">
-      <div class="col-lg-12 p-0">
-        <div class="main-panel">
-          <div class="content-wrapper">
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="home-tab">
-                  <div class="tab-content tab-content-basic">
-                    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
-                      <div class="row">
-                        <div class="col-sm-12">
-                          <div class="statistics-details d-flex align-items-center justify-content-between">
-                            <div v-for="kpi in kpis" v-bind:key="kpi">
-                              <p class="statistics-title text-uppercase">{{ kpi.name }}</p>
-                              <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
-                            </div>
-                            <!--<div>
-                              <p class="statistics-title">KPI2</p>
-                              <h3 class="rate-percentage">7,682</h3>
-                            </div>
-                            <div>
-                              <p class="statistics-title">KPI3</p>
-                              <h3 class="rate-percentage">68.8</h3>
-                            </div>
-                            <div class="d-none d-md-block">
-                              <p class="statistics-title">KPI4</p>
-                              <h3 class="rate-percentage">2m:35s</h3>
-                            </div>
-                            <div class="d-none d-md-block">
-                              <p class="statistics-title">KPI5</p>
-                              <h3 class="rate-percentage">68.8</h3>
-                            </div>
-                            <div class="d-none d-md-block">
-                              <p class="statistics-title">KPI6</p>
-                              <h3 class="rate-percentage">2m:35s</h3>
-                            </div>-->
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <!--GRAPHS-->
-                        <div class="col-lg-12 d-flex flex-column">
-                          <div class="card card-rounded">
-                            <div class="card-body">
-                              <div class="d-sm-flex justify-content-between align-items-start">
-                                <div>
-                                  <h4 class="card-title card-title-dash">KPIs usage</h4>
-                                  <p class="card-subtitle card-subtitle-dash">A bar graph about the usage of the
-                                    {{ usage_entries }} most called KPI is shown here.</p>
-                                </div>
-                              </div>
-                              <div>
-                                <canvas id="KPI_usage"></canvas>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!--
-                        <div class="col-lg-8 d-flex flex-column">
-                          <div class="row flex-grow">
-                            <div class="col-12 grid-margin stretch-card">
-                              <div class="card card-rounded">
-                                <div class="card-body">
+      <!--GRAPHS-->
+      <div class="col-lg-12 d-flex flex-column">
+        <div class="card card-rounded">
+          <div class="card-body">
+            <div class="d-sm-flex justify-content-between align-items-start">
+              <div>
+                <h4 class="card-title card-title-dash">KPIs usage</h4>
+                <p class="card-subtitle card-subtitle-dash">A bar graph about the usage of the
+                  {{ usage_entries }} most called KPI is shown here.</p>
+              </div>
+            </div>
+            <div>
+              <canvas id="KPI_usage"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--
+      <div class="col-lg-8 d-flex flex-column">
+        <div class="row flex-grow">
+          <div class="col-12 grid-margin stretch-card">
+            <div class="card card-rounded">
+              <div class="card-body">
 
-                                  <div class="d-sm-flex justify-content-between align-items-start">
-                                    <div>
-                                      <h4 class="card-title card-title-dash">Lorem ipsum</h4>
-                                      <p class="card-subtitle card-subtitle-dash">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
-                                    </div>
-                                  </div>
-                                  <div class="d-sm-flex align-items-center mt-1 justify-content-between">
-                                    <div class="d-sm-flex align-items-center mt-4 justify-content-between">
-                                      <h2 class="me-2 fw-bold">99,999.00</h2><h4 class="me-2">EUR</h4> &lt;!&ndash;<h4 class="text-success">(+1.37%)</h4>&ndash;&gt;</div>
-                                    <div class="me-3"><div id="marketing-overview-legend"></div></div>
-                                  </div>
+                <div class="d-sm-flex justify-content-between align-items-start">
+                  <div>
+                    <h4 class="card-title card-title-dash">Lorem ipsum</h4>
+                    <p class="card-subtitle card-subtitle-dash">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                  </div>
+                </div>
+                <div class="d-sm-flex align-items-center mt-1 justify-content-between">
+                  <div class="d-sm-flex align-items-center mt-4 justify-content-between">
+                    <h2 class="me-2 fw-bold">99,999.00</h2><h4 class="me-2">EUR</h4> &lt;!&ndash;<h4 class="text-success">(+1.37%)</h4>&ndash;&gt;</div>
+                  <div class="me-3"><div id="marketing-overview-legend"></div></div>
+                </div>
 
-                                  <div>
-                                    <canvas id="KPI1"></canvas>
-                                  </div>
+                <div>
+                  <canvas id="KPI1"></canvas>
+                </div>
 
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row flex-grow">
-                          </div>
-                        </div>
-                        <div class="col-lg-4 d-flex flex-column">
-                          <div class="row flex-grow">
-                            <div class="col-12 grid-margin stretch-card">
-                              <div class="card card-rounded">
-                                <div class="card-body">
-                                  <div class="row">
-                                    <div class="col-lg-12">
-                                      <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h4 class="card-title card-title-dash">Type By Amount</h4>
-                                      </div>
-                                      <canvas class="my-auto" id="KPI2" height="200"></canvas>
-                                      <div id="doughnut-chart-legend" class="mt-5 text-center"></div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        -->
-                      </div>
-                      <!-- TABELLA "NOTIFICHE" -->
-                      <div class="row my-5">
-                        <div class="col-lg-12">
-                          <div class="card card-rounded">
-                            <div class="card-body">
-                              <h4 class="card-title card-title-dash">Updates</h4>
-                              <p class="card-subtitle card-subtitle-dash">Missing KPI calculation will be reported here if present.</p>
-                              <template v-for="kpi in kpis" v-bind:key="kpi.name">
-                                <p v-if="kpi.counter >= 1 && lastUpdate(kpi.last_update, kpi.frequency) === 0">
-                                  {{kpi.name}} last calculation exceeds its calculation frequency.
-                                </p>
-                                <!--<p v-else-if="kpi.counter >= 1 && lastUpdate(kpi.last_update, kpi.frequency) === 1">
-                                  TARANTELLE
-                                </p>-->
-                              </template>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row flex-grow">
+        </div>
+      </div>
+      <div class="col-lg-4 d-flex flex-column">
+        <div class="row flex-grow">
+          <div class="col-12 grid-margin stretch-card">
+            <div class="card card-rounded">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                      <h4 class="card-title card-title-dash">Type By Amount</h4>
                     </div>
+                    <canvas class="my-auto" id="KPI2" height="200"></canvas>
+                    <div id="doughnut-chart-legend" class="mt-5 text-center"></div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      -->
+    </div>
+    <!-- TABELLA "NOTIFICHE" -->
+    <div class="row my-5">
+      <div class="col-lg-12">
+        <div class="card card-rounded">
+          <div class="card-body">
+            <h4 class="card-title card-title-dash">Updates</h4>
+            <p class="card-subtitle card-subtitle-dash">Missing KPI calculation will be reported here if
+              present.</p>
+            <template v-for="kpi in kpis" v-bind:key="kpi.name">
+              <p v-if="kpi.counter >= 1 && lastUpdate(kpi.last_update, kpi.frequency) === 0">
+                {{ kpi.name }} last calculation exceeds its calculation frequency.
+              </p>
+              <!--<p v-else-if="kpi.counter >= 1 && lastUpdate(kpi.last_update, kpi.frequency) === 1">
+                TARANTELLE
+              </p>-->
+            </template>
           </div>
         </div>
       </div>
@@ -268,6 +271,7 @@ export default {
   },
   methods: {
     async getKPIs() {
+      this.$store.commit("showSpinner");
       await axios.get(BASE_URL + "kpis", {
         headers: {
           withCredentials: 'true',
@@ -275,6 +279,10 @@ export default {
         }
       }).then(response => {
         this.kpis = response.data.data;
+        while (this.kpis.length === 0) {
+          this.$store.commit("showSpinner");
+        }
+        this.$store.commit("hideSpinner");
       }).catch((error) => {
         console.log(error);
       });
@@ -291,7 +299,7 @@ export default {
       let frequence;
       if (frequency === 'daily') {
         frequence = 86400000;
-        if (todayDate.getTime() - lastupDate.getTime() > frequence ) {
+        if (todayDate.getTime() - lastupDate.getTime() > frequence) {
           console.log('fr sup');
           return 0;
         } else {
@@ -323,12 +331,11 @@ export default {
       }
 
 
-      if (todayDate.getTime() - lastupDate.getTime() > frequence ) {
+      if (todayDate.getTime() - lastupDate.getTime() > frequence) {
         console.log('lastup and today are equal');
       } else {
         console.log('lastup is greater than today');
       }
-
 
 
     },
@@ -346,5 +353,11 @@ export default {
 </script>
 
 <style scoped>
-
+.card-title-kpi {
+  font-size: 21px;
+  color: #010101;
+  text-transform: capitalize;
+  font-weight: 600;
+  margin: 0;
+}
 </style>

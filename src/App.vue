@@ -1,5 +1,6 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid p-0">
+    <Spinner/>
     <Header/>
     <div class="row">
       <div class="col-lg-2">
@@ -15,11 +16,12 @@
 <script>
 import Header from './components/Header.vue'
 import Sidebar from './components/Sidebar.vue'
+import Spinner from './components/Spinner.vue'
 
 export default {
   name: 'App',
   components: {
-    Header, Sidebar
+    Header, Sidebar, Spinner
   }
 }
 </script>
