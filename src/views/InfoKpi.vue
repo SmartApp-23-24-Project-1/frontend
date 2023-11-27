@@ -52,7 +52,7 @@ export default {
   },
   mounted() {
     this.kpi_id = this.$route.params.kpi_id;
-    this.getKPI();
+    this.getKPI()
   },
   methods: {
     async getKPI() {

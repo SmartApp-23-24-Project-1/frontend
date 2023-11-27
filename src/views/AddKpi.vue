@@ -193,7 +193,7 @@ export default {
         }
       });
 
-      this.rd = response.data["raw data available"];
+      this.rd = response.data["raw_data"];
       return this.rd;
     },
     async getKPIs() {
