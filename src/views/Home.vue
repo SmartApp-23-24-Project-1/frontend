@@ -1,6 +1,18 @@
 <template>
   <div class="container-fluid content-wrapper">
-    <div class="row mb-5" v-if="!this.medical">
+    <div class="row mb-3">
+      <div class="col-lg-3 p-0 mx-3 my-2" v-for="kpi in this.kpis" v-bind:key="kpi.name">
+        <div class="card d-flex justify-content-between card-rounded" style="width: 300px">
+          <div class="card-body">
+            <div class="my-3">
+              <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.description }} </p>
+              <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<div class="row mb-5" v-if="!this.medical">
       <div class="col-lg-6 my-auto">
         <div class="card card-rounded">
           <div class="card-body">
@@ -103,7 +115,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
     <div class="row">
       <!--GRAPHS-->
       <div class="col-lg-12 d-flex flex-column">
@@ -214,6 +226,7 @@ export default {
   },
   components: {},
   async mounted() {
+
     await this.getKPIs();
 
     // adapt the usage entries to the number of the kpis, if there are not enough kpis
@@ -337,8 +350,7 @@ export default {
         for (let i = 0; i < this.kpis.length; i++) {
           if (this.kpis[i].name === 'oee') {
             this.medical = false;
-          }
-          else {
+          } else {
             this.medical = true;
           }
         }

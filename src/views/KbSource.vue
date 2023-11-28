@@ -71,6 +71,7 @@ export default {
   },
   methods: {
     async getKPIs() {
+      this.$store.commit("showSpinner");
       await axios.get(BASE_URL + "kpis", {
         headers: {
           withCredentials: 'true',
@@ -78,6 +79,7 @@ export default {
         }
       }).then(response => {
         this.kpis = response.data.data;
+        this.$store.commit("hideSpinner");
       }).catch((error) => {
         console.log(error);
       });

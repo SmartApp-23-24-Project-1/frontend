@@ -172,7 +172,7 @@ export default {
             confirmButtonText: 'Ok',
             confirmButtonColor: '#1d41b2',
           });
-          router.push('/');
+          router.push('/source');
         }).catch(() => {
           Swal.fire({
             title: "Something went wrong. Check data or try later.",

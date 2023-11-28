@@ -22819,7 +22819,7 @@ code {
 }
 
 .card .card-body {
-  padding: 1.5rem 1.5rem;
+  padding: 20px;
 }
 
 .card .card-body + .card-body {
@@ -28926,7 +28926,7 @@ div.tagsinput span.tag a {
 
 .content-wrapper {
   background: #F4F5F7;
-  padding: 50px 65px;
+  padding: 30px 65px;
   width: 100%;
   -webkit-flex-grow: 1;
   flex-grow: 1;
