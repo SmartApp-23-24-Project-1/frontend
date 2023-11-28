@@ -33,3 +33,15 @@ Authorization: Basic c21hcnRhcHA6YXBp
   "unit": "ms/s",
   "frequency": "1 hour"
 }
+
+{
+  "name":"nome",
+  "description":"descrizione",
+  "taxonomy":"gsdgsdg",
+  "kpi_range":"1-10",
+  "formula":"9+3",
+  "kpis":null,
+  "raw_data":["raw_data1","raw_data2","raw_data3","raw_data4","raw_data5"],
+  "unit":"m/s",
+  "frequency":"1 Day"
+}

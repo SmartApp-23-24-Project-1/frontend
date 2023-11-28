@@ -81,7 +81,10 @@ export default {
   data() {
     return {
       kpis: [],
-      units: [],
+      units: [
+        "m/s",
+        "h"
+      ],
       rd: [],
       kpiname: null,
       kpidescription: null,
@@ -103,7 +106,13 @@ export default {
       this.getRawData().then(rawData => {
         const emptyRows = [["[separator]"], ["[separator]"], ["[separator]"]];
 
-        let kpisKeyboard = [kpis.map(x => x.name.toUpperCase()), ...emptyRows];
+        let kpisKeyboard = [kpis.map(x => {
+          return {
+            label: x.name.replace("_", ""),
+            latex: x.name.replace("_", ""),
+            class: "small"
+          };
+        }), ...emptyRows];
         let rawDataKeyboard = [rawData.map(x => {
           return { label: x.replace("_", ""), class: "small" };
         }), ...emptyRows]; // il replace serve a evitare errori di escape  
@@ -136,7 +145,7 @@ export default {
       }
     },
     async addKPI() {
-      this.kpis_formula = this.formula.match(/KPI\w+/g);
+      this.kpis_formula = []; //tmp
 
       await axios.post(BASE_URL + "add_kpi", {
         "name": this.kpiname,
