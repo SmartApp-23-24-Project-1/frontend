@@ -83,7 +83,9 @@ export default {
       kpis: [],
       units: [
         "m/s",
-        "h"
+        "h",
+        "kwh/unit",
+        "%",
       ],
       rd: [],
       kpiname: null,

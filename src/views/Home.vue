@@ -1,26 +1,30 @@
 <template>
   <div class="container-fluid content-wrapper">
-    <div class="row mb-5">
+    <div class="row mb-5" v-if="!this.medical">
       <div class="col-lg-6 my-auto">
         <div class="card card-rounded">
           <div class="card-body">
             <div v-for="kpi in kpis" v-bind:key="kpi">
               <div class="my-3" v-if="kpi.name === 'oee'">
-                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
+                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }} <span class="text-kpi"> (Overall Equipment Effectiveness) </span>
+                </p>
                 <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
               </div>
             </div>
             <div v-for="kpi in kpis" v-bind:key="kpi">
               <div class="my-3" v-if="kpi.name === 'pe'">
-                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
+                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }} <span class="text-kpi"> (Performance) </span>
+                </p>
                 <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
               </div>
               <div class="my-3" v-if="kpi.name === 'aq'">
-                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
+                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }} <span class="text-kpi"> (Quality) </span>
+                </p>
                 <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
               </div>
               <div class="my-3" v-if="kpi.name === 'av'">
-                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
+                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }} <span class="text-kpi"> (Availability) </span>
+                </p>
                 <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
               </div>
             </div>
@@ -45,6 +49,56 @@
             <div class="card-body">
               <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
               <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-4" v-if="this.medical">
+      <div class="col-lg-3">
+        <div class="card card-rounded">
+          <div class="card-body">
+            <div v-for="kpi in kpis" v-bind:key="kpi">
+              <div class="my-3" v-if="kpi.name === 'asimmetry_index_hour'">
+                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.description }} </p>
+                <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="card card-rounded">
+          <div class="card-body">
+            <div v-for="kpi in kpis" v-bind:key="kpi">
+              <div class="my-3" v-if="kpi.name === 'difference_index_hour'">
+                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.description }} </p>
+                <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="card card-rounded">
+          <div class="card-body">
+            <div v-for="kpi in kpis" v-bind:key="kpi">
+              <div class="my-3" v-if="kpi.name === 'asimmetry_index_daily'">
+                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.description }} </p>
+                <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="card card-rounded">
+          <div class="card-body">
+            <div v-for="kpi in kpis" v-bind:key="kpi">
+              <div class="my-3" v-if="kpi.name === 'difference_index_daily'">
+                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.description }} </p>
+                <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
+              </div>
             </div>
           </div>
         </div>
@@ -154,6 +208,7 @@ export default {
   data() {
     return {
       kpis: [],
+      medical: false,
       usage_entries: 10
     }
   },
@@ -279,6 +334,14 @@ export default {
         }
       }).then(response => {
         this.kpis = response.data.data;
+        for (let i = 0; i < this.kpis.length; i++) {
+          if (this.kpis[i].name === 'oee') {
+            this.medical = false;
+          }
+          else {
+            this.medical = true;
+          }
+        }
         while (this.kpis.length === 0) {
           this.$store.commit("showSpinner");
         }
@@ -330,13 +393,11 @@ export default {
         }
       }
 
-
       if (todayDate.getTime() - lastupDate.getTime() > frequence) {
         console.log('lastup and today are equal');
       } else {
         console.log('lastup is greater than today');
       }
-
 
     },
     format(value) {
@@ -359,5 +420,13 @@ export default {
   text-transform: capitalize;
   font-weight: 600;
   margin: 0;
+}
+
+.text-kpi {
+  font-size: 15px;
+  color: #010101;
+  font-weight: 550;
+  margin: 0;
+  text-transform: capitalize;
 }
 </style>
