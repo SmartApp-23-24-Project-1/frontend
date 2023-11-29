@@ -9347,41 +9347,8 @@ progress {
 .container-xl,
 .container-xxl {
   width: 100%;
-  padding-right: var(--bs-gutter-x, 0.75rem);
-  padding-left: var(--bs-gutter-x, 0.75rem);
-  margin-right: auto;
-  margin-left: auto;
 }
 
-@media (min-width: 576px) {
-  .container, .container-sm {
-    max-width: 540px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container, .container-sm, .container-md {
-    max-width: 720px;
-  }
-}
-
-@media (min-width: 992px) {
-  .container, .container-sm, .container-md, .container-lg {
-    max-width: 960px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .container, .container-sm, .container-md, .container-lg, .container-xl {
-    max-width: 1140px;
-  }
-}
-
-@media (min-width: 1400px) {
-  .container, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
-    max-width: 1320px;
-  }
-}
 
 .row {
   --bs-gutter-x: 30px;
@@ -28926,17 +28893,10 @@ div.tagsinput span.tag a {
 
 .content-wrapper {
   background: #F4F5F7;
-  padding: 30px 65px;
+  margin: 30px 65px;
   width: 100%;
-  -webkit-flex-grow: 1;
-  flex-grow: 1;
 }
 
-@media (max-width: 767px) {
-  .content-wrapper {
-    padding: 0 1.5rem 1.5rem 1.5rem;
-  }
-}
 
 /* Sidebar */
 .sidebar {

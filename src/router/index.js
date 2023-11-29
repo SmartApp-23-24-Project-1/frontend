@@ -5,6 +5,7 @@ import AddKpi from "@/views/AddKpi";
 import ModifyKpi from "@/views/ModifyKpi";
 import KbDocs from "@/views/KbDocs";
 import InfoKpi from "@/views/InfoKpi";
+import Analytics from "@/views/Analytics";
 
 const routes = [
     {
@@ -26,6 +27,11 @@ const routes = [
         path: '/kpi/:kpi_id',
         name: 'InfoKpi',
         component: InfoKpi,
+    },
+    {
+        path: '/analytics',
+        name: 'Analytics',
+        component: Analytics
     },
     {
         path: '/documentation',

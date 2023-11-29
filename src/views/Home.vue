@@ -1,8 +1,17 @@
 <template>
   <div class="container-fluid content-wrapper">
-    <div class="row mb-3">
+    <div class="row">
+      <div class="col-lg-4 p-0 mx-3">
+        <select class="form-select w-50">
+          <option selected>Group by?</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-lg-3 p-0 mx-3 my-2" v-for="kpi in this.kpis" v-bind:key="kpi.name">
-        <div class="card d-flex justify-content-between card-rounded" style="width: 300px">
+        <div class="card card-rounded" style="width: 300px">
           <div class="card-body">
             <div class="my-3">
               <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.description }} </p>
@@ -12,205 +21,31 @@
         </div>
       </div>
     </div>
-    <!--<div class="row mb-5" v-if="!this.medical">
-      <div class="col-lg-6 my-auto">
-        <div class="card card-rounded">
-          <div class="card-body">
-            <div v-for="kpi in kpis" v-bind:key="kpi">
-              <div class="my-3" v-if="kpi.name === 'oee'">
-                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }} <span class="text-kpi"> (Overall Equipment Effectiveness) </span>
-                </p>
-                <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
-              </div>
-            </div>
-            <div v-for="kpi in kpis" v-bind:key="kpi">
-              <div class="my-3" v-if="kpi.name === 'pe'">
-                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }} <span class="text-kpi"> (Performance) </span>
-                </p>
-                <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
-              </div>
-              <div class="my-3" v-if="kpi.name === 'aq'">
-                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }} <span class="text-kpi"> (Quality) </span>
-                </p>
-                <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
-              </div>
-              <div class="my-3" v-if="kpi.name === 'av'">
-                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }} <span class="text-kpi"> (Availability) </span>
-                </p>
-                <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6 my-auto">
-        <div v-for="kpi in kpis" v-bind:key="kpi">
-          <div class="card card-rounded mb-3" v-if="kpi.name === 'energy_consumption'">
-            <div class="card-body">
-              <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
-              <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
-            </div>
-          </div>
-          <div class="card card-rounded mb-3" v-if="kpi.name === 'production_volume'">
-            <div class="card-body">
-              <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
-              <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
-            </div>
-          </div>
-          <div class="card card-rounded mb-3" v-if="kpi.name === 'downtime_rate'">
-            <div class="card-body">
-              <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.name }}</p>
-              <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row mb-4" v-if="this.medical">
-      <div class="col-lg-3">
-        <div class="card card-rounded">
-          <div class="card-body">
-            <div v-for="kpi in kpis" v-bind:key="kpi">
-              <div class="my-3" v-if="kpi.name === 'asimmetry_index_hour'">
-                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.description }} </p>
-                <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <div class="card card-rounded">
-          <div class="card-body">
-            <div v-for="kpi in kpis" v-bind:key="kpi">
-              <div class="my-3" v-if="kpi.name === 'difference_index_hour'">
-                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.description }} </p>
-                <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <div class="card card-rounded">
-          <div class="card-body">
-            <div v-for="kpi in kpis" v-bind:key="kpi">
-              <div class="my-3" v-if="kpi.name === 'asimmetry_index_daily'">
-                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.description }} </p>
-                <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <div class="card card-rounded">
-          <div class="card-body">
-            <div v-for="kpi in kpis" v-bind:key="kpi">
-              <div class="my-3" v-if="kpi.name === 'difference_index_daily'">
-                <p class="card-title-kpi card-title-dash text-uppercase">{{ kpi.description }} </p>
-                <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>-->
-    <div class="row">
-      <!--GRAPHS-->
-      <div class="col-lg-12 d-flex flex-column">
-        <div class="card card-rounded">
-          <div class="card-body">
-            <div class="d-sm-flex justify-content-between align-items-start">
-              <div>
-                <h4 class="card-title card-title-dash">KPIs usage</h4>
-                <p class="card-subtitle card-subtitle-dash">A bar graph about the usage of the
-                  {{ usage_entries }} most called KPI is shown here.</p>
-              </div>
-            </div>
-            <div>
-              <canvas id="KPI_usage"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
       <!--
-      <div class="col-lg-8 d-flex flex-column">
-        <div class="row flex-grow">
-          <div class="col-12 grid-margin stretch-card">
-            <div class="card card-rounded">
-              <div class="card-body">
-
-                <div class="d-sm-flex justify-content-between align-items-start">
-                  <div>
-                    <h4 class="card-title card-title-dash">Lorem ipsum</h4>
-                    <p class="card-subtitle card-subtitle-dash">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
-                  </div>
-                </div>
-                <div class="d-sm-flex align-items-center mt-1 justify-content-between">
-                  <div class="d-sm-flex align-items-center mt-4 justify-content-between">
-                    <h2 class="me-2 fw-bold">99,999.00</h2><h4 class="me-2">EUR</h4> &lt;!&ndash;<h4 class="text-success">(+1.37%)</h4>&ndash;&gt;</div>
-                  <div class="me-3"><div id="marketing-overview-legend"></div></div>
-                </div>
-
-                <div>
-                  <canvas id="KPI1"></canvas>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row flex-grow">
-        </div>
+      NON CANCELLATE QUESTO COMMENTO GRAZIE
+      <div class="col-lg-12" v-if="this.medical">
+        <p> pappappero </p>
       </div>
-      <div class="col-lg-4 d-flex flex-column">
-        <div class="row flex-grow">
-          <div class="col-12 grid-margin stretch-card">
+      <div class="col-lg-12" v-else>
+        <div class="row">
+          <div class="col-lg-6" v-for="kpi in this.kpis" v-bind:key="kpi.name">
             <div class="card card-rounded">
               <div class="card-body">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                      <h4 class="card-title card-title-dash">Type By Amount</h4>
-                    </div>
-                    <canvas class="my-auto" id="KPI2" height="200"></canvas>
-                    <div id="doughnut-chart-legend" class="mt-5 text-center"></div>
-                  </div>
+                <div class="my-3">
+                  <p  v-if="kpi.name === 'oee'" class="card-title-kpi card-title-dash text-uppercase">{{ kpi.description }} <span class="text-kpi"> (Overall Equipment Effectiveness) </span></p>
+                  <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      -->
-    </div>
-    <!-- TABELLA "NOTIFICHE" -->
-    <div class="row my-5">
-      <div class="col-lg-12">
-        <div class="card card-rounded">
-          <div class="card-body">
-            <h4 class="card-title card-title-dash">Updates</h4>
-            <p class="card-subtitle card-subtitle-dash">Missing KPI calculation will be reported here if
-              present.</p>
-            <template v-for="kpi in kpis" v-bind:key="kpi.name">
-              <p v-if="kpi.counter >= 1 && lastUpdate(kpi.last_update, kpi.frequency) === 0">
-                {{ kpi.name }} last calculation exceeds its calculation frequency.
-              </p>
-              <!--<p v-else-if="kpi.counter >= 1 && lastUpdate(kpi.last_update, kpi.frequency) === 1">
-                TARANTELLE
-              </p>-->
-            </template>
-          </div>
-        </div>
-      </div>
-    </div>
+        <p> trallallero industrial </p>
+      </div>-->
   </div>
 </template>
 
 
 <script>
-import Chart from 'chart.js/auto';
 import axios from "axios";
 import {BASE_URL} from "@/constants/constants";
 
@@ -226,116 +61,7 @@ export default {
   },
   components: {},
   async mounted() {
-
     await this.getKPIs();
-
-    // adapt the usage entries to the number of the kpis, if there are not enough kpis
-    this.usage_entries = Math.min(this.usage_entries, this.kpis.length)
-
-    // GRAPHS
-
-    /* ###################### KPI USAGE GRAPH #######################*/
-    let kpi_usage_dict = {};
-    for (let i of this.kpis) {
-      kpi_usage_dict[i["name"]] = i["counter"]; //+ Math.floor(Math.random()*10)
-    }
-
-    // Sorting the kpis wrt the number of calls
-    let sorted_kpi_usage_array = Object.entries(kpi_usage_dict);
-    sorted_kpi_usage_array.sort((a, b) => b[1] - a[1]);
-
-    // Keeping only the first 'usage_entries' kpis with the most number of calls
-    kpi_usage_dict = Object.fromEntries(sorted_kpi_usage_array.slice(0, this.usage_entries));
-
-    // Building the KPI_Usage graph
-    const usage_graph_ctx = document.getElementById('KPI_usage');
-
-    const usage_graph_data = {
-      labels: Object.keys(kpi_usage_dict),
-      datasets: [{
-        label: 'Number of calls',
-        data: Object.values(kpi_usage_dict),
-        borderWidth: 1
-      }]
-    };
-
-    const usage_graph_config = {
-      type: 'bar',
-      data: usage_graph_data,
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            title: {
-              display: true,
-              text: '# of calls'
-            },
-            min: 0,
-            ticks: {
-              stepSize: 1
-            }
-          }
-        }
-      }
-    };
-
-    new Chart(usage_graph_ctx, usage_graph_config);
-
-    /* ###################### KPI USAGE GRAPH #######################*/
-
-
-    /*
-    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November'];
-    const data_1 = {
-      labels: labels,
-      datasets: [{
-        label: 'Profits',
-        data: [15000, 23432, 25000, 20000, 19000, 23000, 24000,27000, 28000, 30000, 36251],
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1
-      }]
-    };
-
-    const config_1 = {
-      type: 'line',
-      data: data_1,
-      options: {
-        responsive: true,
-      }
-    }
-
-    const ctx_1 = document.getElementById('KPI1');
-
-    new Chart(ctx_1, config_1);
-
-
-    const data_2 = {
-      labels: [
-        'Red',
-        'Blue',
-        'Yellow'
-      ],
-      datasets: [{
-        data: [300, 50, 100],
-        backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)'
-        ],
-        hoverOffset: 4
-      }]
-    };
-    const config_2 = {
-      type: 'doughnut',
-      data: data_2,
-    };
-
-    const ctx_2 = document.getElementById('KPI2');
-
-    new Chart(ctx_2, config_2);
-    */
-
   },
   methods: {
     async getKPIs() {
@@ -347,78 +73,21 @@ export default {
         }
       }).then(response => {
         this.kpis = response.data.data;
-        for (let i = 0; i < this.kpis.length; i++) {
-          if (this.kpis[i].name === 'oee') {
-            this.medical = false;
-          } else {
-            this.medical = true;
-          }
-        }
-        while (this.kpis.length === 0) {
-          this.$store.commit("showSpinner");
-        }
+       /*
+       NON CANCELLATE QUESTO COMMENTO GRAZIE
+       let filteredObjects = this.kpis.filter(item => item.name === "oee");
+        if (filteredObjects.length > 0) {
+          //kpi lato industrial
+          this.medical = false;
+        } else {
+          //kpi lato industrial
+          this.medical = true;
+        }*/
         this.$store.commit("hideSpinner");
       }).catch((error) => {
         console.log(error);
       });
     },
-    lastUpdate(last_update, frequency) {
-      let today = new Date();
-      let dd = String(today.getDate()).padStart(2, '0');
-      let mm = String(today.getMonth() + 1).padStart(2, '0');
-      let yyyy = today.getFullYear();
-      today = dd + '-' + mm + '-' + yyyy;
-      let lastup = this.format(last_update);
-      let lastupDate = new Date(lastup);
-      let todayDate = new Date(today);
-      let frequence;
-      if (frequency === 'daily') {
-        frequence = 86400000;
-        if (todayDate.getTime() - lastupDate.getTime() > frequence) {
-          console.log('fr sup');
-          return 0;
-        } else {
-          console.log('fr not sup');
-          return 1;
-        }
-      } else if (frequency === 'monthly') {
-        let months;
-        months = (todayDate.getFullYear() - lastupDate.getFullYear()) * 12;
-        months -= lastupDate.getMonth();
-        months += todayDate.getMonth();
-        if (frequence > 0) {
-          console.log('fr sup');
-          return 0;
-        } else {
-          console.log('fr not sup');
-          return 1;
-        }
-      } else if (frequency === 'weekly') {
-        let diffInMs = todayDate - lastupDate;
-        frequence = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-        if (frequence > 7) {
-          console.log('fr sup');
-          return 0;
-        } else {
-          console.log('fr not sup');
-          return 1;
-        }
-      }
-
-      if (todayDate.getTime() - lastupDate.getTime() > frequence) {
-        console.log('lastup and today are equal');
-      } else {
-        console.log('lastup is greater than today');
-      }
-
-    },
-    format(value) {
-      let date = new Date(value);
-      let day = date.getDate();
-      let month = date.getMonth();
-      let year = date.getFullYear();
-      return day + '-' + month + '-' + year;
-    }
   }
 }
 
