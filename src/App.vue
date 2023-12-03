@@ -6,7 +6,7 @@
       <div class="col-lg-2">
         <Sidebar/>
       </div>
-      <div class="col-lg-10">
+      <div class="col-lg-10 p-0">
         <router-view :key="$route.path"/>
       </div>
     </div>

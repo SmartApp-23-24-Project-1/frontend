@@ -39,7 +39,7 @@ const routes = [
         component: KbDocs
     },
     {
-        path: '/source',
+        path: '/library',
         name: 'KbSource',
         component: KbSource,
     },
