@@ -5,7 +5,7 @@
   "scripts": {
     "start": "vue-cli-service serve --host localhost",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --mode industrial",
     "lint": "vue-cli-service lint",
     "medical": "vue-cli-service serve --mode medical",
     "industrial": "vue-cli-service serve --mode industrial"
