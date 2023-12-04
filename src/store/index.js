@@ -6,6 +6,8 @@ import actions from '@/services/actions';
 export default new Vuex.Store({
     state: {
         spinner: true,
+        groups: [],
+        kpis: [],
     },
     getters,
     mutations,

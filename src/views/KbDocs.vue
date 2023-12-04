@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row mb-5">
       <div class="col-12">
-        <h1 class="text-center mb-5">Documentation</h1>
+        <h1 class="title mb-5">Documentation</h1>
 
         <p class="text my-4">
           The website is divided into three sections (visibles in the sidebar on the left). Each section has different functionalities.

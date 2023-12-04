@@ -26,7 +26,7 @@
               <label for="kpi-group" class="form-label">Group By</label>
               <select v-model="group_by" id="kpi-group" class="form-select">
                 <option :value="null" disabled selected>Select one</option>
-                <option v-for="group in sources" v-bind:key="group" :value="group"> {{ group }}</option>
+                <option v-for="group in groups" v-bind:key="group" :value="group"> {{ group }}</option>
               </select>
               <div class="row my-4">
                 <div class="col-lg-6">
@@ -96,7 +96,6 @@ export default {
         "%",
       ],
       rd: [],
-      sources: [],
       kpiname: null,
       kpidescription: null,
       taxonomy: null,
@@ -111,6 +110,11 @@ export default {
       /* type1: "on",
       type2: null, */
     }
+  },
+  computed: {
+    groups() {
+      return this.$store.getters.getGroups;
+    },
   },
   mounted() {
     // this.getUnits();
@@ -182,7 +186,7 @@ export default {
           confirmButtonText: 'Ok',
           confirmButtonColor: '#1d41b2',
         });
-        router.push('/source');
+        router.push('/library');
       }).catch(() => {
         Swal.fire({
           title: "Something went wrong. Check data or try later.",
@@ -193,19 +197,6 @@ export default {
         router.push('/add-a-kpi');
       });
     },
-    /*selectType() {
-      if (!this.type1) {
-        this.type1 = 'on';
-        document.getElementById("type1").checked = 'on';
-        this.type2 = null;
-        document.getElementById("type1").type2 = null;
-      } else if (!this.type2) {
-        this.type1 = null;
-        document.getElementById("type1").checked = null;
-        this.type2 = 'on';
-        document.getElementById("type2").checked = 'on';
-      }
-    },*/
     async getRawData() {
       let response = await axios.get(BASE_URL + "raw_data", {
         headers: {
@@ -213,7 +204,6 @@ export default {
           'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
         }
       });
-
       this.rd = response.data["raw_data"];
       return this.rd;
     },
@@ -224,21 +214,9 @@ export default {
           'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
         }
       });
-
       this.kpis = response.data.data;
       return this.kpis;
     },
-    /*async getSources() {
-      await axios.get(BASE_URL + "units", {
-        headers: {
-          withCredentials: 'true',
-          'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
-        }
-      }).then(response => {
-        this.units = response.data["units available for the KPIs"];
-      }).catch(() => {
-      });
-    },*/
     resetFormula() {
       let x = document.getElementById("inputFormula");
       x.value = "";

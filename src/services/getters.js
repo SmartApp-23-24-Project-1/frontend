@@ -1,5 +1,8 @@
 export default {
-    getCategories: state => {
-        return state.categories;
+    getGroups: state => {
+        return state.groups;
+    },
+    getAllKPIs: state => {
+        return state.kpis;
     },
 }

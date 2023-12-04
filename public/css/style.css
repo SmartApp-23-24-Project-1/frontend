@@ -13402,11 +13402,6 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
   border-top: 0;
 }
 
-.card-body {
-  flex: 1 1 auto;
-  padding: 1rem 1rem;
-}
-
 .card-title {
   margin-bottom: 0.5rem;
 }
@@ -22785,15 +22780,7 @@ code {
   background: transparent;
 }
 
-.card .card-body {
-  padding: 20px;
-}
-
-.card .card-body + .card-body {
-  padding-top: 1rem;
-}
-
- .card-title {
+.card-title {
   color: #010101;
   margin-bottom: 1.2rem;
   text-transform: capitalize;

@@ -1,7 +1,7 @@
 <template>
-  <div class="container px-2">
+  <div class="container">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-12 mr-3">
         <p class="title"> Library </p>
         <table style="width: 100%">
           <thead>
@@ -21,7 +21,7 @@
               <p v-for="kpi in kpis" v-bind:key="kpi" class="t-text"> {{ kpi.description }} </p>
             </td>
             <td style="width: 35%">
-              <p v-for="kpi in kpis" v-bind:key="kpi" class="t-text"> {{ formulaListParser(kpi.formula) }} </p>
+             <!-- <p v-for="kpi in kpis" v-bind:key="kpi" class="t-text"> {{ formulaListParser(kpi.formula) }} </p> -->
             </td>
             <td style="width: 15%">
               <section v-for="kpi in kpis" v-bind:key="kpi">
@@ -55,22 +55,18 @@
 </template>
 
 <script>
-import axios from "axios";
-import {BASE_URL} from "@/constants/constants";
-
 export default {
   name: "KbSource",
-  components: {},
-  data() {
-    return {
-      kpis: [],
+  mounted() {
+    this.$store.dispatch("getAllKPIs");
+  },
+  computed: {
+    kpis() {
+      return this.$store.getters.getAllKPIs;
     }
   },
-  mounted() {
-    this.getKPIs();
-  },
   methods: {
-    async getKPIs() {
+    /*async getKPIs() {
       this.$store.commit("showSpinner");
       await axios.get(BASE_URL + "kpis", {
         headers: {
@@ -83,12 +79,12 @@ export default {
       }).catch((error) => {
         console.log(error);
       });
-    },
-    formulaListParser(formula_list) {
+    },*/
+    /*formulaListParser(formula_list) {
       let ret = ""
       formula_list.forEach(item => {ret += item + " "})
       return ret
-    }
+    }*/
   }
 }
 </script>
