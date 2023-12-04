@@ -8,7 +8,9 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "medical": "vue-cli-service serve --mode medical",
-    "industrial": "vue-cli-service serve --mode industrial"
+    "industrial": "vue-cli-service serve --mode industrial",
+    "build-industrial": "vue-cli-service build --mode industrial",
+    "build-medical": "vue-cli-service build --mode medical"
   },
   "dependencies": {
     "axios": "^1.5.1",
