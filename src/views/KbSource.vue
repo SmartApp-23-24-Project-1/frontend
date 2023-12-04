@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-lg-12 mr-3">
+      <div class="col-lg-12 mb-4">
         <p class="title"> Library </p>
-        <table style="width: 100%">
+        <table style="width: 99%">
           <thead>
           <tr>
             <th style="width: 20%">Name</th>
@@ -21,7 +21,7 @@
               <p v-for="kpi in kpis" v-bind:key="kpi" class="t-text"> {{ kpi.description }} </p>
             </td>
             <td style="width: 35%">
-             <!-- <p v-for="kpi in kpis" v-bind:key="kpi" class="t-text"> {{ formulaListParser(kpi.formula) }} </p> -->
+              <p v-for="kpi in kpis" v-bind:key="kpi" class="t-text"> {{ kpi.formula }} </p>
             </td>
             <td style="width: 15%">
               <section v-for="kpi in kpis" v-bind:key="kpi">
