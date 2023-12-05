@@ -118,7 +118,7 @@ export default {
   },
   mounted() {
     // this.getUnits();
-    this.getKPIs().then(kpis => { // brutto, ma l'async sul mounted non va
+    this.getKPIs().then(kpis => {
       this.getRawData().then(rawData => {
         const emptyRows = [["[separator]"], ["[separator]"], ["[separator]"]];
 
@@ -138,6 +138,7 @@ export default {
         fullLayout[2].rows = rawDataKeyboard;
 
         mathVirtualKeyboard.layouts = fullLayout;
+        this.$store.commit("hideSpinner");
       })
     })
   },

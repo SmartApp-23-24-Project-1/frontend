@@ -21,7 +21,7 @@ export default {
   },
   created() {
     this.show();
-    setTimeout(() => this.hide(), 1000);
+    // setTimeout(() => this.hide(), 1000);
   }
 }
 </script>
