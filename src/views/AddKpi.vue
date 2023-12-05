@@ -118,8 +118,7 @@ export default {
   },
   mounted() {
     // this.getUnits();
-    this.getKPIs().then(kpis => {
-      this.getRawData().then(rawData => {
+    Promise.all([this.getKPIs(), this.getRawData()]).then(([kpis, rawData]) => {
         const emptyRows = [["[separator]"], ["[separator]"], ["[separator]"]];
 
         let kpisKeyboard = [kpis.map(x => {
@@ -140,7 +139,6 @@ export default {
         mathVirtualKeyboard.layouts = fullLayout;
         this.$store.commit("hideSpinner");
       })
-    })
   },
   methods: {
     checkForm() {
