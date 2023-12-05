@@ -67,6 +67,7 @@ export default {
   mounted() {
     this.$store.dispatch("getAllKPIs");
     this.$store.dispatch("getGroups");
+    this.$store.commit("hideSpinner");
   },
   methods: {
     getAll() {
