@@ -120,16 +120,34 @@ export default {
     // this.getUnits();
     this.$store.commit("showSpinner");
 
+    function chunk(array, size = 1) {
+        const length = array.length;
+        if (!length || size < 1) {
+            return [];
+        }
+        let index = 0;
+        let resIndex = 0;
+        const result = new Array(Math.ceil(length / size));
+
+        while (index < length) {
+            result[resIndex++] = array.slice(index, (index += size));
+        }
+        return result;
+    }
+
     Promise.all([this.getKPIs(), this.getRawData()]).then(([kpis, rawData]) => {
         const emptyRows = [["[separator]"], ["[separator]"], ["[separator]"]];
 
-        let kpisKeyboard = [kpis.map(x => {
+        let array = kpis.map(x => {
           return {
             label: x.name.replace("_", ""),
             latex: x.name.replace("_", ""),
-            class: "small"
+            class: "small",
+            width: "1.5"
           };
-        }), ...emptyRows];
+        });
+
+        let kpisKeyboard = [...(chunk(array, 4)), ["[separator]"], ["[separator]"]];
         let rawDataKeyboard = [rawData.map(x => {
           return {label: x.replace("_", ""), class: "small"};
         }), ...emptyRows]; // il replace serve a evitare errori di escape  
