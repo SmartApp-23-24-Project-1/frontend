@@ -118,6 +118,8 @@ export default {
   },
   mounted() {
     // this.getUnits();
+    this.$store.commit("showSpinner");
+
     Promise.all([this.getKPIs(), this.getRawData()]).then(([kpis, rawData]) => {
         const emptyRows = [["[separator]"], ["[separator]"], ["[separator]"]];
 
