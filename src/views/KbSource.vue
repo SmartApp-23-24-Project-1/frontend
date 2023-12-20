@@ -3,6 +3,7 @@
     <div class="row">
       <div class="col-lg-12 mb-4">
         <p class="title"> Library </p>
+        <input v-model="kpiName" placeholder="Search KPI..." />
         <table style="width: 99%">
           <thead>
           <tr>
@@ -14,17 +15,18 @@
           </thead>
           <tbody>
           <tr>
+            <!--  NEED TO CHECK IF WORKING, RIGHT NOW THE DB IS DOWN  -->
             <td style="width: 20%">
-              <p v-for="kpi in kpis" v-bind:key="kpi" class="t-text"> {{ kpi.name }} </p>
+              <p v-for="kpi in searchedKPIs" v-bind:key="kpi" class="t-text"> {{ kpi.name }} </p>
             </td>
             <td style="width: 20%">
-              <p v-for="kpi in kpis" v-bind:key="kpi" class="t-text"> {{ kpi.description }} </p>
+              <p v-for="kpi in searchedKPIs" v-bind:key="kpi" class="t-text"> {{ kpi.description }} </p>
             </td>
             <td style="width: 35%">
-              <p v-for="kpi in kpis" v-bind:key="kpi" class="t-text"> {{ kpi.formula }} </p>
+              <p v-for="kpi in searchedKPIs" v-bind:key="kpi" class="t-text"> {{ kpi.formula }} </p>
             </td>
             <td style="width: 15%">
-              <section v-for="kpi in kpis" v-bind:key="kpi">
+              <section v-for="kpi in searchedKPIs" v-bind:key="kpi">
                 <p style="margin: 20px 0">
                   <router-link :to="'/kpi/' + kpi.uid + '/'">
                     <svg xmlns="http://www.w3.org/2000/svg" class="t-icons" viewBox="0 0 512 512">
@@ -55,14 +57,24 @@
 </template>
 
 <script>
+
 export default {
   name: "KbSource",
+  data(){
+    return{
+      kpiName:"",
+    }
+  },
   mounted() {
     this.$store.dispatch("getAllKPIs");
   },
   computed: {
     kpis() {
       return this.$store.getters.getAllKPIs;
+    },
+    searchedKPIs(){
+      let all_kpis = this.$store.getters.getAllKPIs;
+      return all_kpis.filter((all_kpis) => all_kpis.name.toLowerCase().includes(this.kpiName.toLowerCase()))
     }
   },
   methods: {
@@ -85,8 +97,12 @@ export default {
       formula_list.forEach(item => {ret += item + " "})
       return ret
     }*/
+
   }
 }
+
+
+
 </script>
 
 <style scoped>
