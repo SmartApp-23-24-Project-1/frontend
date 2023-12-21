@@ -11,4 +11,10 @@ export default {
     setKPIs(state, kpis) {
         state.kpis = kpis;
     },
+    setKPI(state, kpi) {
+        state.kpi = kpi;
+    },
+    setUnits(state, units) {
+        state.units = units;
+    },
 }

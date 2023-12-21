@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12 d-flex flex-column">
+    <div class="row justify-content-center">
+      <div class="col-lg-12 d-flex flex-column ">
         <p class="title mb-5"> Analytics </p>
         <div class="card card-rounded">
           <div class="card-body">
@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <div class="row my-5">
+    <div class="row my-5 justify-content-center">
       <div class="col-lg-12">
         <div class="card card-rounded">
           <div class="card-body">
@@ -257,19 +257,7 @@ export default {
 </script>
 
 <style scoped>
-.card-title-kpi {
-  font-size: 21px;
-  color: #010101;
-  text-transform: capitalize;
-  font-weight: 600;
-  margin: 0;
-}
-
-.text-kpi {
-  font-size: 15px;
-  color: #010101;
-  font-weight: 550;
-  margin: 0;
-  text-transform: capitalize;
+.card-body {
+  box-shadow: 5px 5px 5px #e1e1e1;
 }
 </style>

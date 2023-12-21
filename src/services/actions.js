@@ -30,4 +30,22 @@ export default {
         });
         commit('setKPIs', response.data.data);
     },
+    async getKPI({commit}, payload) {
+        let response = await axios.get(BASE_URL + 'kpi/' + payload, {
+            headers: {
+                withCredentials: 'true',
+                'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
+            }
+        });
+        commit('setKPI', response.data.data);
+    },
+    async getUnits({commit}) {
+        let response = await axios.get(BASE_URL + 'units', {
+            headers: {
+                withCredentials: 'true',
+                'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
+            }
+        });
+        commit('setUnits', response.data.data.units);
+    },
 }

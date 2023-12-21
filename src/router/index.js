@@ -2,10 +2,10 @@ import {createRouter, createWebHistory} from 'vue-router'
 import Home from '@/views/Home'
 import KbSource from '@/views/KbSource.vue'
 import AddKpi from "@/views/AddKpi";
-import ModifyKpi from "@/views/ModifyKpi";
 import KbDocs from "@/views/KbDocs";
 import InfoKpi from "@/views/InfoKpi";
 import Analytics from "@/views/Analytics";
+import EditKpi from "@/views/EditKpi";
 
 const routes = [
     {
@@ -19,9 +19,9 @@ const routes = [
         component: AddKpi,
     },
     {
-        path: '/edit-kpi',
-        name: 'ModifyKpi',
-        component: ModifyKpi,
+        path: '/edit-kpi/:kpi_id',
+        name: 'EditKpi',
+        component: EditKpi,
     },
     {
         path: '/kpi/:kpi_id',

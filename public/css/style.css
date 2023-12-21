@@ -142,6 +142,7 @@ h1, h2, h3, h4, h5, h6, p, label, thead, tbody, tr, td {
 
 .text {
   font-size: 16px;
+  font-family: "Manrope", sans-serif;
 }
 
 .form {
@@ -184,6 +185,7 @@ h1, h2, h3, h4, h5, h6, p, label, thead, tbody, tr, td {
   background-color: #15318a;
   transition: 0.4s;
 }
+
 
 
 /*
@@ -24767,9 +24769,6 @@ dl li {
   margin-top: 100px;
 }
 
-.modal .modal-dialog .modal-content .modal-header {
-  padding: 25px 26px;
-}
 
 .modal .modal-dialog .modal-content .modal-header .close {
   border: none;
@@ -24782,13 +24781,7 @@ dl li {
   color: #6a6a6a;
 }
 
-.modal .modal-dialog .modal-content .modal-body {
-  padding: 35px 26px;
-}
 
-.modal .modal-dialog .modal-content .modal-footer {
-  padding: 15px 31px;
-}
 
 @media (max-width: 400px) {
   .modal .modal-dialog .modal-content .modal-footer {

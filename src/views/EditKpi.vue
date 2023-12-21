@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <p class="title"> Add a KPI </p>
+        <p class="title"> Edit {{ kpi.name }} </p>
         <template v-if="errors.length">
           <div class="alert alert-danger mt-3" v-for="error in errors" v-bind:key="error">
             {{ error }}
@@ -13,33 +13,33 @@
             <div class="col-lg-8 form mt-3">
               <label for="kpi-name" class="form-label">Name</label>
               <input type="text" v-model="kpiname" class="form-control mb-4" id="kpi-name"
-                     placeholder="Put a name for your KPI">
+                     :placeholder="kpi.name">
               <label for="kpi-description" class="form-label">Description</label>
               <input type="text" v-model="kpidescription" class="form-control mb-4" id="kpi-description"
-                     placeholder="Put a short description for your KPI">
+                     :placeholder="kpi.description">
               <label for="taxonomy" class="form-label">Taxonomy</label>
               <input type="text" v-model="taxonomy" class="form-control mb-4" id="taxonomy"
-                     placeholder="Put taxonomy for your KPI">
+                     :placeholder="kpi.taxonomy">
               <label for="taxonomy" class="form-label">Range</label>
               <input type="text" v-model="range" class="form-control mb-4" id="taxonomy"
-                     placeholder="Describe the ranges in which your KPI value could be">
+                     :placeholder="kpi.range">
               <label for="kpi-group" class="form-label">Group By</label>
               <select v-model="group_by" id="kpi-group" class="form-select">
-                <option :value="null" disabled selected>Select one</option>
+                <option :value="kpi.group_by" disabled selected>{{ kpi.group_by }}</option>
                 <option v-for="group in groups" v-bind:key="group" :value="group"> {{ group }}</option>
               </select>
               <div class="row my-4">
                 <div class="col-lg-6">
                   <label for="kpi-unit" class="form-label">Unit</label>
                   <select v-model="unit" id="kpi-unit" class="form-select">
-                    <option :value="null" disabled selected>Select one</option>
+                    <option :value="kpi.unit" disabled selected>{{ kpi.unit }}</option>
                     <option v-for="unit in units" v-bind:key="unit" :value="unit"> {{ unit }}</option>
                   </select>
                 </div>
                 <div class="col-lg-6">
                   <label for="kpi-frequency" class="form-label">Frequency</label>
                   <select v-model="frequency" id="kpi-frequency" class="form-select">
-                    <option value="null" disabled selected>Select one</option>
+                    <option :value="kpi.frequency" disabled selected> {{ kpi.frequency }}</option>
                     <option value="1 Day">1 Day</option>
                     <option value="1 Week">1 Week</option>
                     <option value="1 Month">1 Month</option>
@@ -55,17 +55,14 @@
                 </div>
                 <div class="col-lg-1 px-0 my-auto">
                   <button class="icon-undo" @click.prevent="resetFormula">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         viewBox="0 0 512 512">
-                      <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                      <path
-                          d="M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2L98.6 96.6c87.6-86.5 228.7-86.2 315.8 1c87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8H48.5z"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                      <path d="M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2L98.6 96.6c87.6-86.5 228.7-86.2 315.8 1c87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8H48.5z"/>
                     </svg>
                   </button>
                 </div>
               </div>
               <div class="d-flex justify-content-center mt-3">
-                <button class="primary-btn" type="submit">ADD</button>
+                <button class="primary-btn" type="submit">EDIT</button>
               </div>
             </div>
           </div>
@@ -88,6 +85,7 @@ export default {
   name: "AddKpi",
   data() {
     return {
+      kpi_id: null,
       kpis: [],
       rd: [],
       kpiname: null,
@@ -104,6 +102,9 @@ export default {
     }
   },
   computed: {
+    kpi() {
+      return this.$store.getters.getKPI;
+    },
     groups() {
       return this.$store.getters.getGroups;
     },
@@ -112,8 +113,9 @@ export default {
     },
   },
   mounted() {
+    this.kpi_id = this.$route.params.kpi_id;
+    this.$store.dispatch("getKPI", this.kpi_id);
     this.$store.dispatch("getUnits");
-
     function chunk(array, size = 1) {
         const length = array.length;
         if (!length || size < 1) {
@@ -131,7 +133,6 @@ export default {
 
     Promise.all([this.getKPIs(), this.getRawData()]).then(([kpis, rawData]) => {
         const emptyRows = [["[separator]"], ["[separator]"], ["[separator]"]];
-
         let array = kpis.map(x => {
           return {
             label: x.name.replace("_", ""),
@@ -140,7 +141,6 @@ export default {
             width: "1.5"
           };
         });
-
         let kpisKeyboard = [...(chunk(array, 4)), ["[separator]"], ["[separator]"]];
         let rawDataKeyboard = [rawData.map(x => {
           return {label: x.replace("_", ""), class: "small"};
@@ -160,10 +160,11 @@ export default {
         this.kpiname,
         this.kpidescription,
         this.frequency,
+        this.taxonomy,
+        this.range,
         this.formula,
         this.unit
       ];
-
       if (fieldsToCheck.some(v => !v)) {
         window.scrollTo(0, 0);
         this.errors.push('Fields are mandatory to fill.');
@@ -174,7 +175,7 @@ export default {
     },
     async addKPI() {
       this.kpis_formula = []; //tmp
-      await axios.post(BASE_URL + "add_kpi", {
+      await axios.put(BASE_URL + "kpi/" + this.kpi_id, {
             "name": this.kpiname,
             "description": this.kpidescription,
             "taxonomy": this.taxonomy,
@@ -193,7 +194,7 @@ export default {
             }
           }).then(() => {
         Swal.fire({
-          title: "KPI added successfully",
+          title: "KPI edited successfully",
           icon: 'success',
           confirmButtonText: 'Ok',
           confirmButtonColor: '#1d41b2',
@@ -206,7 +207,7 @@ export default {
           confirmButtonText: 'Ok',
           confirmButtonColor: '#1d41b2',
         });
-        router.push('/add-a-kpi');
+        router.push('/edit-kpi/' + this.kpi_id + '/');
       });
     },
     async getRawData() {

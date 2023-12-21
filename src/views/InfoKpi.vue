@@ -47,16 +47,21 @@ export default {
   name: "InfoKpi",
   data() {
     return {
-      kpi: [],
+      //kpi: [],
       kpi_id: null,
     }
   },
+  computed: {
+    kpi() {
+      return this.$store.getters.getKPI;
+    },
+  },
   mounted() {
     this.kpi_id = this.$route.params.kpi_id;
-    this.getKPI()
+    this.$store.dispatch("getKPI", this.kpi_id);
   },
   methods: {
-    async getKPI() {
+    /*async getKPI() {
       await axios.get(BASE_URL + 'kpi/' + this.kpi_id, {
         headers: {
           withCredentials: 'true',
@@ -68,7 +73,7 @@ export default {
       }).catch((error) => {
         console.log(error);
       });
-    },
+    },*/
     format(value) {
       let date = new Date(value);
       let day = date.getDate();

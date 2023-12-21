@@ -2,9 +2,9 @@
   <div class="container-fluid content-wrapper" style="padding: 0 65px;">
     <div class="row">
       <div class="col-lg-4 p-0">
-        <select v-model="group_by" class="secondary-btn w-50">
+        <select v-model="group_by" class="secondary-btn w-50" style="box-shadow: 5px 5px 5px #e1e1e1">
           <option :value="''" v-on:click="getAll">All</option>
-          <option v-for="group in groups" v-bind:key="group" :value="group" v-on:click="getKPIGroup(group)"> {{group }}</option>
+          <option v-for="group in groups" v-bind:key="group" :value="group" v-on:click="getKPIGroup(group)"> {{ group }}</option>
         </select>
       </div>
     </div>

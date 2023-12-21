@@ -67,11 +67,12 @@ export default {
   vertical-align: middle;
   display: inline-block;
   /* non mi veniva un modo migliore per allineare un svg */
-  transform: translate(-3px, -1.5px); 
+  transform: translate(-3px, -1.5px);
 }
 
 .dropdown .dropdown-toggle::after {
   display: none;
 }
+
 
 </style>

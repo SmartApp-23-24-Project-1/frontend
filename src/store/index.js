@@ -8,6 +8,8 @@ export default new Vuex.Store({
         spinner: true,
         groups: [],
         kpis: [],
+        kpi: [],
+        units: [],
     },
     getters,
     mutations,
