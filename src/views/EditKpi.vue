@@ -12,7 +12,7 @@
           <div class="row d-flex justify-content-center">
             <div class="col-lg-8 form mt-3">
               <label for="kpi-name" class="form-label">Name</label>
-              <input type="text" v-model="kpiname" class="form-control mb-4" id="kpi-name"
+              <input type="text" disabled v-model="kpiname" class="form-control mb-4" id="kpi-name"
                      :placeholder="kpi.name">
               <label for="kpi-description" class="form-label">Description</label>
               <input type="text" v-model="kpidescription" class="form-control mb-4" id="kpi-description"
@@ -22,7 +22,7 @@
                      :placeholder="kpi.taxonomy">
               <label for="taxonomy" class="form-label">Range</label>
               <input type="text" v-model="range" class="form-control mb-4" id="taxonomy"
-                     :placeholder="kpi.range">
+                     :placeholder="kpi.kpi_range">
               <label for="kpi-group" class="form-label">Group By</label>
               <select v-model="group_by" id="kpi-group" class="form-select">
                 <option :value="kpi.group_by" disabled selected>{{ kpi.group_by }}</option>
@@ -51,7 +51,7 @@
                 <label for="kpi-formula" class="form-label">Formula</label>
                 <div class="col-lg-11">
                   <math-field id="inputFormula" class="w-100 form-control init" v-model="formula"
-                              @input="onInput"></math-field>
+                              @input="onInput"> {{ kpi.formula }} </math-field>
                 </div>
                 <div class="col-lg-1 px-0 my-auto">
                   <button class="icon-undo" @click.prevent="resetFormula">
@@ -66,7 +66,6 @@
               </div>
             </div>
           </div>
-
         </form>
       </div>
     </div>
@@ -82,7 +81,7 @@ import baseKeyboard from './baseKeyboard.json';
 import {MathfieldElement} from 'mathlive';
 
 export default {
-  name: "AddKpi",
+  name: "EditKpi",
   data() {
     return {
       kpi_id: null,
@@ -117,47 +116,43 @@ export default {
     this.$store.dispatch("getKPI", this.kpi_id);
     this.$store.dispatch("getUnits");
     function chunk(array, size = 1) {
-        const length = array.length;
-        if (!length || size < 1) {
-            return [];
-        }
-        let index = 0;
-        let resIndex = 0;
-        const result = new Array(Math.ceil(length / size));
-
-        while (index < length) {
-            result[resIndex++] = array.slice(index, (index += size));
-        }
-        return result;
+      const length = array.length;
+      if (!length || size < 1) {
+        return [];
+      }
+      let index = 0;
+      let resIndex = 0;
+      const result = new Array(Math.ceil(length / size));
+      while (index < length) {
+        result[resIndex++] = array.slice(index, (index += size));
+      }
+      return result;
     }
-
     Promise.all([this.getKPIs(), this.getRawData()]).then(([kpis, rawData]) => {
-        const emptyRows = [["[separator]"], ["[separator]"], ["[separator]"]];
-        let array = kpis.map(x => {
-          return {
-            label: x.name.replace("_", ""),
-            latex: x.name.replace("_", ""),
-            class: "small",
-            width: "1.5"
-          };
-        });
-        let kpisKeyboard = [...(chunk(array, 4)), ["[separator]"], ["[separator]"]];
-        let rawDataKeyboard = [rawData.map(x => {
-          return {label: x.replace("_", ""), class: "small"};
-        }), ...emptyRows]; // il replace serve a evitare errori di escape  
-
-        let fullLayout = baseKeyboard["mathKeyboard"];
-        fullLayout[1].rows = kpisKeyboard;
-        fullLayout[2].rows = rawDataKeyboard;
-
-        mathVirtualKeyboard.layouts = fullLayout;
-      })
+      const emptyRows = [["[separator]"], ["[separator]"], ["[separator]"]];
+      let kpiButtons = kpis.map(x => {
+        return {
+          label: x.name.replace("_", ""),
+          latex: x.name.replace("_", ""),
+          class: "small",
+          width: "1.5"
+        };
+      });
+      let kpisKeyboard = [...(chunk(kpiButtons, 4)), ["[separator]"], ["[separator]"]];
+      let rawDataKeyboard = [rawData.map(x => {
+        return { label: x.replace("_", ""), class: "small" };
+      }), ...emptyRows]; // il replace serve a evitare errori di escape
+      let fullLayout = baseKeyboard["mathKeyboard"];
+      fullLayout[1].rows = kpisKeyboard;
+      fullLayout[2].rows = rawDataKeyboard;
+      mathVirtualKeyboard.layouts = fullLayout;
+      this.$store.commit("hideSpinner");
+    })
   },
   methods: {
     checkForm() {
       this.errors = [];
       let fieldsToCheck = [
-        this.kpiname,
         this.kpidescription,
         this.frequency,
         this.taxonomy,
@@ -176,7 +171,6 @@ export default {
     async addKPI() {
       this.kpis_formula = []; //tmp
       await axios.put(BASE_URL + "kpi/" + this.kpi_id, {
-            "name": this.kpiname,
             "description": this.kpidescription,
             "taxonomy": this.taxonomy,
             "kpi_range": this.range,
@@ -217,8 +211,7 @@ export default {
           'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
         }
       });
-      this.rd = response.data["raw_data"];
-      return this.rd;
+      return response.data.data.raw_data;
     },
     async getKPIs() {
       let response = await axios.get(BASE_URL + "kpis", {

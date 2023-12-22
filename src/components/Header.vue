@@ -2,7 +2,6 @@
   <div class="container-fluid">
     <div class="row navbar">
       <div class="col-lg-2 text-center navbar-brand-wrapper">
-        <!-- TODO: ROUTER-LINK SOSTITUISCE IL TAG <a> -->
         <router-link class="navbar-brand brand-logo" to="/">
           <img src="/images/logo.png" alt="logo"/>
         </router-link>

@@ -68,7 +68,6 @@
               </div>
             </div>
           </div>
-
         </form>
       </div>
     </div>
@@ -113,7 +112,6 @@ export default {
   mounted() {
     this.$store.commit("showSpinner");
     this.$store.dispatch("getUnits");
-
     function chunk(array, size = 1) {
       const length = array.length;
       if (!length || size < 1) {
@@ -122,18 +120,13 @@ export default {
       let index = 0;
       let resIndex = 0;
       const result = new Array(Math.ceil(length / size));
-
       while (index < length) {
         result[resIndex++] = array.slice(index, (index += size));
       }
       return result;
     }
-
     Promise.all([this.getKPIs(), this.getRawData()]).then(([kpis, rawData]) => {
-      console.log(kpis, rawData);
-
       const emptyRows = [["[separator]"], ["[separator]"], ["[separator]"]];
-
       let kpiButtons = kpis.map(x => {
         return {
           label: x.name.replace("_", ""),
@@ -142,19 +135,14 @@ export default {
           width: "1.5"
         };
       });
-
       let kpisKeyboard = [...(chunk(kpiButtons, 4)), ["[separator]"], ["[separator]"]];
-
       let rawDataKeyboard = [rawData.map(x => {
         return { label: x.replace("_", ""), class: "small" };
-      }), ...emptyRows]; // il replace serve a evitare errori di escape  
-
+      }), ...emptyRows]; // il replace serve a evitare errori di escape
       let fullLayout = baseKeyboard["mathKeyboard"];
       fullLayout[1].rows = kpisKeyboard;
       fullLayout[2].rows = rawDataKeyboard;
-
       mathVirtualKeyboard.layouts = fullLayout;
-
       this.$store.commit("hideSpinner");
     })
   },
