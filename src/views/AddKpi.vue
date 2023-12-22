@@ -111,6 +111,7 @@ export default {
     },
   },
   mounted() {
+    this.$store.commit("showSpinner");
     this.$store.dispatch("getUnits");
 
     function chunk(array, size = 1) {
