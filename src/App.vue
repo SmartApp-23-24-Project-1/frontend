@@ -3,10 +3,10 @@
     <Spinner/>
     <Header/>
     <div class="row">
-      <div class="col-lg-2">
+      <div class="col-2 col-md-3 col-xl-2">
         <Sidebar/>
       </div>
-      <div class="col-lg-10 p-0">
+      <div class="col-12 col-md-9 col-xl-10 p-0">
         <router-view :key="$route.path"/>
       </div>
     </div>
@@ -23,9 +23,12 @@ export default {
   name: 'App',
   components: {
     Header, Sidebar, Spinner
-  }
+  },
 }
 </script>
 
 <style>
+html {
+  background-color: #f4f5f7;
+}
 </style>

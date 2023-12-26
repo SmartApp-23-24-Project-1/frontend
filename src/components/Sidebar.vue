@@ -48,14 +48,13 @@
 <script>
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: "Sidebar"
+  name: "Sidebar",
 }
 </script>
 
 <style scoped>
-
 .icon {
-  width: 13%;
+  width: 20px;
   fill: #484848;
   margin-right: 10px;
 }
@@ -63,7 +62,9 @@ export default {
 .menu-link {
   display: block;
   text-decoration: none;
-  padding: 10px 35px 10px 35px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
 }
 
 .menu-title {
@@ -82,7 +83,7 @@ export default {
 }
 
 .active-icon svg {
-  width: 13%;
+  width: 20px;
   fill: #1F3BB3;
   margin-right: 10px
 }
@@ -92,5 +93,8 @@ export default {
   bottom: 10px;
 }
 
+.nav-item:hover {
+  background-color: #fff;
+}
 
 </style>

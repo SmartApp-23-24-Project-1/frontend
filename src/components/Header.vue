@@ -1,23 +1,17 @@
 <template>
   <div class="container-fluid">
-    <div class="row navbar">
-      <div class="col-lg-2 text-center navbar-brand-wrapper">
-        <router-link class="navbar-brand brand-logo" to="/">
-          <img src="/images/logo.png" alt="logo"/>
-        </router-link>
+    <div class="row align-items-center pt-3">
+      <div class="col-6 col-lg-2">
+        <a class="navbar-brand" href="#">
+          <img src="/images/logo.png" alt="logo of website" class="navbar__logo">
+        </a>
       </div>
-      <div class="col-lg-8">
-        <div class="navbar-menu-wrapper">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <h1 class="navbar-nav nav-item welcome-text" v-if="this.$route.name === 'Home'">
-                Welcome, this is your performance summary today.
-              </h1>
-            </li>
-          </ul>
-        </div>
+
+      <div class="col-5 col-md-8 topbar-text">
+        <p class="m-0 text-center" v-if="this.$route.name === 'Home'">Welcome, this is your performance summary today.</p>
       </div>
-      <div class="col-lg-2 user-switch">
+
+      <div class="col-6 col-lg-2 user-switch">
         <div class="dropdown d-flex justify-content-end">
           <button class="primary-btn dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
             <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-person-fill user-switch__icon" viewBox="0 0 16 16">
@@ -54,7 +48,7 @@ export default {
       this.users = fakeUsers.filter(user => user != linkText);
 
       this.currentUser = linkText;
-    }
+    },
   }
 }
 </script>
@@ -73,5 +67,20 @@ export default {
   display: none;
 }
 
+@media screen and (max-width: 990px) {
+  .topbar-text {
+    display: none;
+  }
+}
 
+.topbar-text p {
+  font-size: 1.6rem;
+  color: #888;
+  position: relative;
+  left: 20px;
+}
+
+.navbar__logo {
+  max-width: 180px;
+}
 </style>

@@ -10,7 +10,7 @@
         </template>
         <form @submit.prevent="checkForm()">
           <div class="row d-flex justify-content-center">
-            <div class="col-lg-8 form mt-3">
+            <div class="col-11 col-lg-10 col-xl-8 form mt-3">
               <label for="kpi-name" class="form-label">Name</label>
               <input type="text" v-model="kpiname" class="form-control mb-4" id="kpi-name"
                 placeholder="Put a name for your KPI">
@@ -135,7 +135,7 @@ export default {
           width: "1.5"
         };
       });
-      let kpisKeyboard = [...(chunk(kpiButtons, 4)), ["[separator]"], ["[separator]"]];
+      let kpisKeyboard = [...(chunk(kpiButtons, 4)), ...emptyRows];
       let rawDataKeyboard = [rawData.map(x => {
         return { label: x.replace("_", ""), class: "small" };
       }), ...emptyRows]; // il replace serve a evitare errori di escape
