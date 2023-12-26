@@ -21,7 +21,7 @@
               <input type="text" v-model="taxonomy" class="form-control mb-4" id="taxonomy"
                 placeholder="Put taxonomy for your KPI">
               <label for="taxonomy" class="form-label">Range</label>
-              <input type="text" v-model="range" class="form-control mb-4" id="taxonomy"
+              <input type="text" v-model="range" class="form-control mb-4" id="range"
                 placeholder="Describe the ranges in which your KPI value could be">
               <label for="kpi-group" class="form-label">Group By</label>
               <select v-model="group_by" id="kpi-group" class="form-select">
@@ -235,6 +235,15 @@ export default {
 </script>
 
 <style scoped>
+
+.form {
+  background-color: var(--bg-color);
+}
+
+.form-label {
+  color: var(--fg-color);
+}
+
 .form-check-label {
   font-size: 15px;
   font-style: italic;
@@ -263,6 +272,6 @@ export default {
 
 .icon-undo svg {
   width: 70%;
-  fill: #484848;
+  fill: var(--fg-color);
 }
 </style>

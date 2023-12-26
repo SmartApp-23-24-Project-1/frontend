@@ -258,6 +258,6 @@ export default {
 
 <style scoped>
 .card-body {
-  box-shadow: 5px 5px 5px #e1e1e1;
+  box-shadow: 5px 5px 5px var(--shadow-color);
 }
 </style>

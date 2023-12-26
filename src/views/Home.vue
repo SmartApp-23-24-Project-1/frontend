@@ -2,7 +2,7 @@
   <div class="container-fluid content-wrapper" style="padding: 0 65px;">
     <div class="row">
       <div class="col-lg-4 p-0">
-        <select v-model="group_by" class="secondary-btn w-50" style="box-shadow: 5px 5px 5px #e1e1e1; border-right: 10px solid #494949; cursor: pointer;">
+        <select v-model="group_by" class="secondary-btn w-50" style="box-shadow: 5px 5px 5px var(--shadow-color); border-right: 10px solid #494949; cursor: pointer;">
           <option :value="''" v-on:click="getAll">All</option>
           <option v-for="group in groups" v-bind:key="group" :value="group" v-on:click="getKPIGroup(group)"> {{ group }}</option>
         </select>
@@ -92,7 +92,7 @@ export default {
 }
 
 .card {
-  box-shadow: 5px 5px 5px #d3d3d3;
+  box-shadow: 5px 5px 5px var(--shadow-color);
 }
 
 </style>

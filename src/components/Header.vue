@@ -63,6 +63,10 @@ export default {
   transform: translate(-3px, -1.5px);
 }
 
+.dropdown-toggle {
+  background-color: var(--primary-color);
+}
+
 .dropdown .dropdown-toggle::after {
   display: none;
 }
@@ -75,7 +79,7 @@ export default {
 
 .topbar-text p {
   font-size: 1.6rem;
-  color: #888;
+  color: var(--topbar-text);
   position: relative;
   left: 20px;
 }

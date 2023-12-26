@@ -105,7 +105,11 @@ export default {
 <style scoped>
 .text-doc {
   font-size: 16px;
-  color: #494949;
+  color: var(--fg-color);
+}
+
+h4, td, th, p {
+  color: var(--fg-color);
 }
 
 h4 {

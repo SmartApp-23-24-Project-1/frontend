@@ -55,7 +55,7 @@ export default {
 <style scoped>
 .icon {
   width: 20px;
-  fill: #484848;
+  fill: var(--fg-color);
   margin-right: 10px;
 }
 
@@ -68,7 +68,7 @@ export default {
 }
 
 .menu-title {
-  color: #484848;
+  color: var(--fg-color);
   font-weight: 400;
 }
 
@@ -79,12 +79,12 @@ export default {
 
 .active-icon .menu-title {
   font-weight: 600;
-  color: #1f3bb3;
+  color: var(--primary-color);
 }
 
 .active-icon svg {
   width: 20px;
-  fill: #1F3BB3;
+  fill: var(--primary-color);
   margin-right: 10px
 }
 
@@ -94,7 +94,7 @@ export default {
 }
 
 .nav-item:hover {
-  background-color: #fff;
+  background-color: var(--hover-color);
 }
 
 </style>

@@ -208,13 +208,13 @@ export default {
 table {
   margin-top: 30px;
   background-color: #fff;
-  box-shadow: 5px 5px 5px #e1e1e1;
+  box-shadow: 5px 5px 5px var(--shadow-color);
   border-radius: 13px;
 }
 
 thead th {
   padding: 15px;
-  background-color: #1f3bb3;
+  background-color: var(--primary-color);
   color: #fff;
   font-size: 21px;
   font-weight: 600;
@@ -258,10 +258,23 @@ tbody tr td:not(:first-child) {
   border: none;
   padding: 10px;
   border-radius: 8px;
-  box-shadow: 5px 5px 5px #e1e1e1;
+  box-shadow: 5px 5px 5px var(--shadow-color);
 }
 
 .disabledKPI {
   background-color: #dedede;
 }
+
+tr {
+  background-color: var(--bg-color);
+}
+
+svg, .t-icons {
+  fill: var(--fg-color);
+}
+
+p {
+  color: var(--fg-color);
+}
+
 </style>
