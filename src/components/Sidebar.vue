@@ -62,9 +62,7 @@ export default {
 .menu-link {
   display: block;
   text-decoration: none;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 20px;
+  padding: 10px 20px;
 }
 
 .menu-title {
@@ -88,13 +86,12 @@ export default {
   margin-right: 10px
 }
 
-.nav-docs {
-  position: absolute;
-  bottom: 10px;
-}
-
 .nav-item:hover {
   background-color: var(--hover-color);
+}
+
+.nav-item {
+
 }
 
 </style>

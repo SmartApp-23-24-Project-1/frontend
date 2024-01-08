@@ -121,13 +121,12 @@
           <template v-else>
             <tbody>
             <tr>
-              <td>
+              <td style="background-color: white">
                 <p class="text my-3"> No KPIs here. </p>
               </td>
             </tr>
             </tbody>
           </template>
-
         </table>
       </div>
     </div>
@@ -147,9 +146,12 @@ export default {
       kpiName: "",
     }
   },
+  mounted() {
+    this.$store.dispatch("getKPIs", '', '');
+  },
   computed: {
     searchedKPIs(){
-      let all_kpis = this.$store.getters.getAllKPIs;
+      let all_kpis = this.$store.getters.getKPIs;
       return all_kpis.filter((all_kpis) => all_kpis.name.toLowerCase().includes(this.kpiName.toLowerCase()))
     }
   },

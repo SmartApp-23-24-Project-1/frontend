@@ -11,21 +11,13 @@ export default {
         });
         commit('setGroups', response.data.data.groups);
     },
-    async getAllKPIs({commit}) {
-        let response = await axios.get(BASE_URL + "kpis", {
-            headers: {
-                withCredentials: 'true',
-                'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
-            }
-        });
-        commit('setKPIs', response.data.data);
-    },
     async getKPIs({commit}, payload) {
         let response = await axios.get(BASE_URL + "kpis", {
             headers: {
                 withCredentials: 'true',
                 'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
-                'groupby': payload,
+                'groupby': payload.groupby,
+                'filterbyfreq': payload.filterbyfreq,
             }
         });
         commit('setKPIs', response.data.data);
