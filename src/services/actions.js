@@ -18,6 +18,8 @@ export default {
                 'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
                 'groupby': payload.groupby,
                 'filterbyfreq': payload.filterbyfreq,
+                'filterbyunit': payload.filterbyunit,
+                'filterbydate': payload.filterbydate,
             }
         });
         commit('setKPIs', response.data.data);

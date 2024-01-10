@@ -1,7 +1,17 @@
 <template>
   <div class="container content-wrapper p-0">
     <div class="row">
+      <!--DATA-->
       <div class="col-lg-3 p-0">
+        <VueDatePicker class="w-75" v-model="by_date"
+                       :enable-time-picker="false"
+                       :format="formatDate"
+                       auto-apply
+                       dark
+                       @update:model-value="console.log(by_date.getDate())"
+        ></VueDatePicker>
+      </div>
+      <div class="col-lg-2 p-0">
         <!--GRUPPI-->
         <select v-model="group_by" class="secondary-btn w-75 select-filter">
           <option :value="''" v-on:click="getKPIs()">All</option>
@@ -9,7 +19,7 @@
         </select>
         <!--FREQUENZA-->
       </div>
-      <div class="col-lg-3 p-0">
+      <div class="col-lg-2 p-0">
         <select v-model="by_freq" class="secondary-btn w-75 select-filter">
           <option :value="''" v-on:click="getKPIs()">All</option>
           <option value="1 Day" v-on:click="getKPIs()">1 Day</option>
@@ -18,13 +28,14 @@
           <option value="1 Year" v-on:click="getKPIs()">1 Year</option>
         </select>
       </div>
-      <div class="col-lg-3 p-0">
+      <div class="col-lg-2 p-0">
         <!-- UNITA -->
         <select v-model="by_unit" class="secondary-btn w-75 select-filter">
           <option :value="''" v-on:click="getKPIs()">All</option>
           <option v-for="unit in units" v-bind:key="unit" :value="unit" v-on:click="getKPIs()"> {{ unit }}</option>
         </select>
       </div>
+
     </div>
   </div>
   <div class="row">
@@ -65,15 +76,23 @@
 <script>
 import axios from "axios";
 import {BASE_URL} from "@/constants/constants";
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+
+
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Home",
+
+  components: { VueDatePicker },
+
   data() {
     return {
       group_by: '',
       by_freq: '',
       by_unit: '',
+      by_date: '',
     }
   },
   computed: {
@@ -99,7 +118,17 @@ export default {
         'groupby': this.group_by,
         'filterbyfreq': this.by_freq,
         'filterbyunit': this.by_unit,
+        'filterbydate': this.formatDate(this.by_date)
       });
+    },
+    formatDate(date) {
+
+      if(date === '') return ''
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+
+      return `${day}/${month}/${year}`;
     },
   },
 }
