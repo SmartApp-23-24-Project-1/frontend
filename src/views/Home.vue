@@ -8,7 +8,7 @@
                        :format="formatDate"
                        auto-apply
                        dark
-                       @update:model-value="console.log(by_date.getDate())"
+                       @update:model-value="getKPIs()"
         ></VueDatePicker>
       </div>
       <div class="col-lg-2 p-0">
