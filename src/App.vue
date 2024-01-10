@@ -1,18 +1,20 @@
 <template>
-  <div class="container-fluid p-0 mycontainer">
-    <Spinner/>
+  <div class="container-fluid mycontainer">
+    <Spinner />
     <div class="darkmode">
-      <button class="btn" @click="toggleDarkMode"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"/></svg></button>
-      
+      <button class="btn btn-primary" @click="toggleDarkMode">
+        <i class="bi bi-brightness-high-fill"></i>
+      </button>
+
     </div>
 
-    <Header/>
-    <div class="row">
+    <Header />
+    <div class="row gy-2" style="margin-bottom: 100px;">
       <div class="col-2 col-md-3 col-xl-2">
-        <Sidebar/>
+        <Sidebar />
       </div>
       <div class="col-12 col-md-9 col-xl-10 p-0">
-        <router-view :key="$route.path"/>
+        <router-view :key="$route.path" />
       </div>
     </div>
   </div>
@@ -32,6 +34,12 @@ export default {
   methods: {
     toggleDarkMode() {
       document.documentElement.classList.toggle("dark")
+
+      let tables = document.querySelectorAll(".table")
+
+      tables.forEach(table => {
+        table.classList.toggle("table-dark")
+      })
     }
   }
 }
@@ -41,27 +49,33 @@ export default {
 :root {
   --bg-color: #f4f5f7;
   --primary-color: #1a3eb0;
+  --second-color: #fff;
   --fg-color: #484848;
   --hover-color: #fff;
   --shadow-color: #e1e1e1;
   --topbar-text: #888;
+  --text-placeholder: #aaa;
 }
 
 html {
   background-color: var(--bg-color);
 }
 
-.mycontainer, .sidebar, .container-fluid {
+.mycontainer,
+.sidebar,
+.container-fluid {
   background-color: var(--bg-color);
 }
 
 :root.dark {
   --bg-color: #232323;
   --primary-color: #1a3eb0;
+  --second-color: #373737;
   --fg-color: #efefef;
   --hover-color: #333;
   --shadow-color: #3c3c3c;
   --topbar-text: #ccc;
+  --text-placeholder: #777;
 }
 
 .darkmode {
@@ -76,12 +90,33 @@ html {
   color: #fff;
 }
 
-.darkmode button svg {
-  fill: #fff;
+.darkmode button i.bi {
+  color: #fff;
+  font-size: 20px;
 }
 
-p.title {
+h1.title {
   color: var(--fg-color);
+}
+
+@media screen and (max-width: 770px) {
+  h1.title {
+    margin-top: 40px;
+  }
+
+  .darkmode {
+    bottom: 90px;
+  }
+}
+
+i.bi {
+  color: var(--fg-color);
+}
+
+.darkmode:hover {
+  color: #fff !important;
+  background-color: var(--primary-color) !important;
+  border-radius: 8px;
 }
 
 </style>

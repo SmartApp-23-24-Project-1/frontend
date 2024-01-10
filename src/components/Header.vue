@@ -11,9 +11,21 @@
         <p class="m-0 text-center" v-if="this.$route.name === 'Home'">Welcome, this is your performance summary today.</p>
       </div>
 
-      <div class="col-6 col-lg-2 user-switch">
-        <div class="dropdown d-flex justify-content-end">
-          <button class="primary-btn dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+      <div class="col-6 col-lg-2 d-flex justify-content-end">
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-fill switch-user-icon"></i>
+            <span>{{ currentUser }}</span>
+          </button>
+          <ul class="dropdown-menu">
+            <li v-for="(user, index) in users" :key="index">
+              <router-link to="" class="dropdown-item" @click="switchUser($event)">{{ user }}</router-link>
+            </li>
+          </ul>
+        </div>
+
+        <!-- <div class="dropdown d-flex justify-content-end">
+          <button class="btn primary-btn dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">
             <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-person-fill user-switch__icon" viewBox="0 0 16 16">
               <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
             </svg> 
@@ -24,7 +36,7 @@
               <router-link to="" class="dropdown-item" @click="switchUser($event)">{{ user }}</router-link>
             </li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -54,21 +66,30 @@ export default {
 </script>
 
 <style scoped>
-.user-switch__icon {
-  fill: #eee;
-  width: 25px;
-  vertical-align: middle;
-  display: inline-block;
-  /* non mi veniva un modo migliore per allineare un svg */
-  transform: translate(-3px, -1.5px);
+
+.dropdown .btn::after {
+  content: none;
 }
 
 .dropdown-toggle {
   background-color: var(--primary-color);
+  border: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 5px;
 }
 
-.dropdown .dropdown-toggle::after {
-  display: none;
+.switch-user-icon {
+  font-size: 20px;
+}
+
+.dropdown-menu {
+  background-color: var(--second-color);
+}
+
+.dropdown-item {
+  color: var(--fg-color);
 }
 
 @media screen and (max-width: 990px) {
@@ -87,4 +108,9 @@ export default {
 .navbar__logo {
   max-width: 180px;
 }
+
+i.bi {
+  color: #fff;
+}
+
 </style>

@@ -3,19 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "vue-cli-service serve --host localhost",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "medical": "vue-cli-service serve --mode medical",
-    "industrial": "vue-cli-service serve --mode industrial",
     "build-industrial": "vue-cli-service build --mode industrial",
-    "build-medical": "vue-cli-service build --mode medical"
+    "build-medical": "vue-cli-service build --mode medical",
+    "industrial": "vue-cli-service serve --mode industrial",
+    "medical": "vue-cli-service serve --mode medical",
+    "start": "vue-cli-service serve --host localhost"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "@vuepic/vue-datepicker": "^7.4.1",
     "axios": "^1.5.1",
-    "bootstrap-vue": "^2.23.1",
+    "bootstrap": "^5.3.2",
+    "bootstrap-icons": "^1.11.3",
     "chart.js": "^4.4.0",
     "core-js": "^3.8.3",
     "cors": "^2.8.5",
@@ -34,7 +36,10 @@
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3"
+    "eslint-plugin-vue": "^8.0.3",
+    "sass": "^1.26.11",
+    "sass-loader": "^10.0.2",
+    "vue-cli-plugin-bootstrap-vue": "~0.8.2"
   },
   "eslintConfig": {
     "root": true,

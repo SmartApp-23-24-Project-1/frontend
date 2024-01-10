@@ -33,6 +33,9 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 9999;
+
+  left: -10px;
+  width: calc(100% + 10px);
 }
 
 .loader {
@@ -40,8 +43,8 @@ export default {
   top: 50%;
   left: 50%;
   margin: -25px 0 0 -25px;
-  border: 8px solid #f3f3f3; /* Light grey */
-  border-top: 8px solid #4463a1; /* Blue */
+  border: 8px solid var(--primary-color); /* Light grey */
+  border-top: 8px solid #fff; /* Blue */
   border-radius: 50%;
   width: 50px;
   height: 50px;

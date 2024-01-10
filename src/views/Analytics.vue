@@ -2,8 +2,8 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-12 d-flex flex-column ">
-        <p class="title mb-5"> Analytics </p>
-        <div class="card card-rounded">
+        <h1 class="title mb-4"> Analytics </h1>
+        <div class="card card-rounded mx-2">
           <div class="card-body">
             <div class="d-sm-flex justify-content-between align-items-start">
               <div>
@@ -21,7 +21,7 @@
     </div>
     <div class="row my-5 justify-content-center">
       <div class="col-lg-12">
-        <div class="card card-rounded">
+        <div class="card card-rounded mx-2">
           <div class="card-body">
             <h4 class="card-title card-title-dash">Updates</h4>
             <p class="card-subtitle card-subtitle-dash">Missing KPI calculation will be reported here if
@@ -57,7 +57,6 @@ export default {
   },
   components: {},
   async mounted() {
-
     await this.getKPIs();
 
     // adapt the usage entries to the number of the kpis, if there are not enough kpis
@@ -260,4 +259,12 @@ export default {
 .card-body {
   box-shadow: 5px 5px 5px var(--shadow-color);
 }
+
+.card {
+  box-shadow: 5px 5px 5px var(--shadow-color);
+  background-color: var(--second-color);
+  color: var(--fg-color);
+  border: 0;
+}
+
 </style>

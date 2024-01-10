@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <p class="title"> Add a KPI </p>
+        <h1 class="title mb-4 text-center"> Add a KPI </h1>
         <template v-if="errors.length">
           <div class="alert alert-danger mt-3" v-for="error in errors" v-bind:key="error">
             {{ error }}
@@ -25,21 +25,21 @@
                 placeholder="Describe the ranges in which your KPI value could be">
               <label for="kpi-group" class="form-label">Group By</label>
               <select v-model="group_by" id="kpi-group" class="form-select">
-                <option :value="null" disabled selected>Select one</option>
+                <option :value="null" disabled selected>Click to select one</option>
                 <option v-for="group in groups" v-bind:key="group" :value="group"> {{ group }}</option>
               </select>
-              <div class="row my-4">
+              <div class="row my-4 gy-2">
                 <div class="col-lg-6">
                   <label for="kpi-unit" class="form-label">Unit</label>
                   <select v-model="unit" id="kpi-unit" class="form-select">
-                    <option :value="null" disabled selected>Select one</option>
+                    <option :value="null" disabled selected>Click to select one</option>
                     <option v-for="unit in units" v-bind:key="unit" :value="unit"> {{ unit }}</option>
                   </select>
                 </div>
                 <div class="col-lg-6">
                   <label for="kpi-frequency" class="form-label">Frequency</label>
                   <select v-model="frequency" id="kpi-frequency" class="form-select">
-                    <option value="null" disabled selected>Select one</option>
+                    <option value="null" disabled selected>Click to select one</option>
                     <option value="1 Day">1 Day</option>
                     <option value="1 Week">1 Week</option>
                     <option value="1 Month">1 Month</option>
@@ -55,16 +55,12 @@
                 </div>
                 <div class="col-lg-1 px-0 my-auto">
                   <button class="icon-undo" @click.prevent="resetFormula">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                      <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                      <path
-                        d="M48.5 224H40c-13.3 0-24-10.7-24-24V72c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2L98.6 96.6c87.6-86.5 228.7-86.2 315.8 1c87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8H48.5z" />
-                    </svg>
+                    <i class="bi bi-arrow-clockwise"></i>
                   </button>
                 </div>
               </div>
               <div class="d-flex justify-content-center mt-3">
-                <button class="primary-btn" type="submit">ADD</button>
+                <button class="btn btn-primary" style="background-color: var(--primary-color);" type="submit">ADD</button>
               </div>
             </div>
           </div>
@@ -244,6 +240,16 @@ export default {
   color: var(--fg-color);
 }
 
+.form-control, .form-control:focus, .form-select {
+  background: var(--second-color);
+    color: var(--fg-color);
+    border: 0;
+}
+
+.form-control::placeholder {
+  color: var(--text-placeholder);
+}
+
 .form-check-label {
   font-size: 15px;
   font-style: italic;
@@ -270,8 +276,8 @@ export default {
   border: none
 }
 
-.icon-undo svg {
-  width: 70%;
-  fill: var(--fg-color);
+.icon-undo i.bi {
+  font-size: 30px;
+  color: var(--fg-color);
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
-  <div class="container content-wrapper p-0">
-    <div class="row">
+  <div class="container content-wrapper mt-5">
+    <div class="row gy-4 mb-2">
       <!--DATA-->
-      <div class="col-lg-3 p-0">
-        <VueDatePicker class="w-75" v-model="by_date"
+      <div class="col-12 col-lg-3">
+        <VueDatePicker v-model="by_date"
                        :enable-time-picker="false"
                        :format="formatDate"
                        auto-apply
@@ -11,16 +11,18 @@
                        @update:model-value="getKPIs()"
         ></VueDatePicker>
       </div>
-      <div class="col-lg-2 p-0">
+      
+      <div class="col-6 col-md-4 col-lg-3 col-xl-2">
         <!--GRUPPI-->
-        <select v-model="group_by" class="secondary-btn w-75 select-filter">
+        <select v-model="group_by" class="form-select select-filter">
           <option :value="''" v-on:click="getKPIs()">All</option>
           <option v-for="group in groups" v-bind:key="group" :value="group" v-on:click="getKPIs()"> {{ group }}</option>
         </select>
         <!--FREQUENZA-->
       </div>
-      <div class="col-lg-2 p-0">
-        <select v-model="by_freq" class="secondary-btn w-75 select-filter">
+
+      <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+        <select v-model="by_freq" class="form-select select-filter">
           <option :value="''" v-on:click="getKPIs()">All</option>
           <option value="1 Day" v-on:click="getKPIs()">1 Day</option>
           <option value="1 Week" v-on:click="getKPIs()">1 Week</option>
@@ -28,28 +30,31 @@
           <option value="1 Year" v-on:click="getKPIs()">1 Year</option>
         </select>
       </div>
-      <div class="col-lg-2 p-0">
+  
+      <div class="col-6 col-md-4 col-lg-3 col-xl-2" >
         <!-- UNITA -->
-        <select v-model="by_unit" class="secondary-btn w-75 select-filter">
+        <select v-model="by_unit" class="form-select select-filter">
           <option :value="''" v-on:click="getKPIs()">All</option>
           <option v-for="unit in units" v-bind:key="unit" :value="unit" v-on:click="getKPIs()"> {{ unit }}</option>
         </select>
       </div>
 
     </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-4 p-0" v-for="kpi in kpis" v-bind:key="kpi.name">
-      <div class="card card-rounded my-3" style="width: 90%">
-        <div class="card-body">
-          <div class="my-3">
-            <p class="card-title-kpi card-title-dash">{{ kpi.value }}{{ kpi.unit }}</p>
-            <p class="rate-percentage">{{ kpi.description }} </p>
+
+    <div class="row gy-4 mt-4">
+      <div class="col-md-6 col-lg-4 col-xxl-3" v-for="kpi in kpis" v-bind:key="kpi.name">
+        <div class="card card-rounded">
+          <div class="card-body">
+            <div class="my-3">
+              <p class="card-title-kpi card-title-dash">{{ kpi.value }}{{ kpi.unit }}</p>
+              <p class="rate-percentage">{{ kpi.description }} </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  
   <!--
   NON CANCELLATE QUESTO COMMENTO GRAZIE
   <div class="col-lg-12" v-if="this.medical">
@@ -139,7 +144,7 @@ export default {
 <style scoped>
 .card-title-kpi {
   font-size: 21px;
-  color: #010101;
+  color: var(--fg-color);
   text-transform: capitalize;
   font-weight: 600;
   margin: 0;
@@ -147,12 +152,21 @@ export default {
 
 .card {
   box-shadow: 5px 5px 5px var(--shadow-color);
+  background-color: var(--second-color);
+  border: 0;
+}
+
+.rate-percentage {
+  color: var(--fg-color);
 }
 
 .select-filter {
   box-shadow: 5px 5px 5px var(--shadow-color);
-  border-right: 10px solid #494949;
+  border: 0;
   cursor: pointer;
+  font-size: 18px;
+  background-color: var(--second-color);
+  color: var(--fg-color);
 }
 
 </style>

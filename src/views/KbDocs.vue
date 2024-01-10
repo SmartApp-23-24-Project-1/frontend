@@ -2,7 +2,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <p class="title mb-5">Documentation</p>
+        <h1 class="title mb-4">Documentation</h1>
+
         <p class="text-doc">
           The website is divided into 4 sections (visible in the sidebar on the left). <br> Each section has different functionalities.
           Moreover, in the top right corner there is a button to switch current user.
@@ -99,6 +100,9 @@
 <script>
 export default {
   name: "KbDocs",
+  mounted() {
+    this.$store.commit("hideSpinner")
+  }
 }
 </script>
 
@@ -114,5 +118,6 @@ h4, td, th, p {
 
 h4 {
   font-weight: bolder;
+  margin-top: 40px;
 }
 </style>
