@@ -87,7 +87,6 @@ export default {
       kpi_id: null,
       kpis: [],
       rd: [],
-      kpiname: null,
       kpidescription: null,
       taxonomy: null,
       range: null,
@@ -178,6 +177,7 @@ export default {
             "unit": this.unit,
             "frequency": this.frequency,
             "formula": this.formula,
+            "enabled": this.kpi.enabled,
             "kpis": this.kpis_formula,
             "raw_data": this.rd
           },
