@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="row" style="background: var(--bg-color);">
       <div class="col-lg-12">
-        <p class="title"> Info about {{ kpi.name }} </p>
-        <div class="row d-flex justify-content-center">
-          <div class="col-lg-8 form mt-3">
+        <p class="title"  style="color: var(--fg-color);"> Info about {{ kpi.name }} </p>
+        <div class="row d-flex justify-content-center px-3">
+          <div class="col-lg-8 form mt-3" style="background: var(--bg-color); border: 1px solid var(--border-color);">
             <div class="row">
               <div class="col-lg-6">
                 <p class="form-label my-4">Name: <span class="value"> {{ kpi.name == null ? "not defined" : kpi.name}}</span></p>
@@ -92,12 +92,16 @@ export default {
   font-weight: 300;
 }
 
+.form {
+  padding: 20px 30px !important;
+}
+
 .form-label {
   font-weight: 600;
 }
 
 .form {
-  box-shadow: 5px 5px 5px #d3d3d3;
+  box-shadow: 5px 5px 5px var(--shadow-color);
 }
 
 </style>

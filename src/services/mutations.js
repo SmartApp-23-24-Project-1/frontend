@@ -17,4 +17,7 @@ export default {
     setUnits(state, units) {
         state.units = units;
     },
+    toggleDarkMode(state) {
+        state.darkMode = !state.darkMode
+    },
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-12" style="background-color: var(--bg-color);">
         <h1 class="title text-center mb-4">Documentation</h1>
 
         <p class="text-doc">
@@ -46,7 +46,7 @@
             Each KPI has different attributes to be specified, let's see all of them in detail:
           </p>
           <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover" :class="{ 'table-dark': darkMode }">
               <thead>
               <tr>
                 <th scope="col">Attribute</th>
@@ -109,6 +109,11 @@ export default {
   name: "KbDocs",
   mounted() {
     this.$store.commit("hideSpinner")
+  },
+  computed: {
+    darkMode() {
+      return this.$store.state.darkMode
+    }
   }
 }
 </script>

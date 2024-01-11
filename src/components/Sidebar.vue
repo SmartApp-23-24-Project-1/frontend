@@ -1,5 +1,5 @@
 <template>
-  <nav class="sidebar mt-3 ms-2" id="sidebar">
+  <nav class="sidebar mt-3 ms-md-2 ms-0" id="sidebar">
         <router-link to="/" class="menu-link" v-bind:class="{'active-icon' : this.$route.name === 'Home'}">
           <i class="bi bi-house-fill"></i>
           <span class="menu-title"> Overview </span>
@@ -79,6 +79,9 @@ a.active-icon:hover {
       display: flex;
       z-index: 100;
       justify-content: center;
+
+      min-height: 75px;
+      height: 75px;
   }
 
   .menu-link {
@@ -95,17 +98,21 @@ a.active-icon:hover {
 }
 
 @media screen and (max-width: 450px) {
+  .sidebar {
+    min-height: 65px;
+    height: 65px;
+  }
 
   .menu-link {
       padding: 10px 5px;
   }
 
   .menu-link i.bi {
-    font-size: 22px;
+    font-size: 21px;
   }
 
   .menu-title {
-      font-size: 11px;
+      font-size: 10px;
   }
 }
 

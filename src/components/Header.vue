@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row align-items-center pt-3">
-      <div class="col-6 col-lg-2">
+      <div class="col-5 col-md-6 col-lg-2">
         <a class="navbar-brand" href="#">
           <img src="/images/logo.png" alt="logo of website" class="navbar__logo">
         </a>
@@ -11,7 +11,7 @@
         <p class="m-0 text-center" v-if="this.$route.name === 'Home'">Welcome, this is your performance summary today.</p>
       </div>
 
-      <div class="col-6 col-lg-2 d-flex justify-content-end">
+      <div class="col-7 col-md-6 col-lg-2 d-flex justify-content-end">
         <div class="dropdown">
           <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-person-fill switch-user-icon"></i>
@@ -92,12 +92,6 @@ export default {
   color: var(--fg-color);
 }
 
-@media screen and (max-width: 990px) {
-  .topbar-text {
-    display: none;
-  }
-}
-
 .topbar-text p {
   font-size: 1.6rem;
   color: var(--topbar-text);
@@ -106,7 +100,18 @@ export default {
 }
 
 .navbar__logo {
-  max-width: 180px;
+  width: 180px;
+}
+
+@media screen and (max-width: 990px) {
+  .topbar-text {
+    display: none;
+  }
+
+  .navbar__logo {
+    max-width: 150px;
+    width: 100%;
+  }
 }
 
 i.bi {
