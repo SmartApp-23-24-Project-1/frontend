@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-12" style="background-color: var(--bg-color);">
         <h1 class="title mb-4 text-center"> Add a KPI </h1>
         <template v-if="errors.length">
           <div class="alert alert-danger mt-3" v-for="error in errors" v-bind:key="error">
@@ -10,7 +10,7 @@
         </template>
         <form @submit.prevent="checkForm()">
           <div class="row d-flex justify-content-center">
-            <div class="col-11 col-lg-10 col-xl-8 form mt-3">
+            <div class="col-11 col-lg-10 col-xl-8 form mt-3 px-0 px-md-5" style="max-width: 740px;">
               <label for="kpi-name" class="form-label">Name</label>
               <input type="text" v-model="kpiname" class="form-control mb-4" id="kpi-name"
                 placeholder="Put a name for your KPI">
@@ -240,11 +240,7 @@ export default {
   color: var(--fg-color);
 }
 
-.form-control, .form-control:focus, .form-select {
-  background: var(--second-color);
-    color: var(--fg-color);
-    border: 0;
-}
+
 
 .form-control::placeholder {
   color: var(--text-placeholder);

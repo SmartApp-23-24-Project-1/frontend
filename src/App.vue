@@ -33,11 +33,9 @@ export default {
     toggleDarkMode() {
       document.documentElement.classList.toggle("dark")
 
-      let tables = document.querySelectorAll(".table")
+      this.$store.commit('toggleDarkMode')
 
-      tables.forEach(table => {
-        table.classList.toggle("table-dark")
-      })
+      
     }
   }
 }
@@ -53,16 +51,7 @@ export default {
   --shadow-color: #e1e1e1;
   --topbar-text: #888;
   --text-placeholder: #aaa;
-}
-
-html {
-  background-color: var(--bg-color);
-}
-
-.mycontainer,
-.sidebar,
-.container-fluid {
-  background-color: var(--bg-color);
+  --border-color: #ccc;
 }
 
 :root.dark {
@@ -74,6 +63,17 @@ html {
   --shadow-color: #3c3c3c;
   --topbar-text: #ccc;
   --text-placeholder: #777;
+  --border-color: #777;
+}
+
+html {
+  background-color: var(--bg-color);
+}
+
+.mycontainer,
+.sidebar,
+.container-fluid {
+  background-color: var(--bg-color);
 }
 
 .darkmode {
@@ -115,6 +115,16 @@ i.bi {
   color: #fff !important;
   background-color: var(--primary-color) !important;
   border-radius: 8px;
+}
+
+.form-label {
+  color: var(--fg-color);
+}
+
+.form-control, .form-control:focus, .form-select {
+  background: var(--second-color) !important;
+  border-color: var(--border-color) !important;
+  color: var(--fg-color) !important;
 }
 
 </style>

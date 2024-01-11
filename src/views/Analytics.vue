@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="background-color: var(--bg-color);">
     <div class="row justify-content-center">
       <div class="col-lg-12 d-flex flex-column ">
         <h1 class="title text-center mb-4"> Analytics </h1>
@@ -249,6 +249,11 @@ export default {
 </script>
 
 <style scoped>
+
+.card-title {
+  color: var(--fg-color);
+}
+
 .card-body {
   box-shadow: 5px 5px 5px var(--shadow-color);
 }
