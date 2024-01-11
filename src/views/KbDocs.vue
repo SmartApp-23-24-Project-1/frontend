@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="title mb-4">Documentation</h1>
+        <h1 class="title text-center mb-4">Documentation</h1>
 
         <p class="text-doc">
           The website is divided into 4 sections (visible in the sidebar on the left). <br> Each section has different functionalities.
@@ -27,8 +27,15 @@
         <div class="my-4">
           <h4>3. Library</h4>
           <p class="text-doc">
-            In this page there is a list of all KPIs, along with their respective definitions and formulas.
-            For each KPI there is the possibility to see more information about.
+            In this page there is a list of all KPIs, along with their respective definitions and formulas.  <br>
+            For each KPI there is the possibility to perform different actions:  <br>
+            • See information about KPI;  <br>
+            • Edit the KPI;  <br>
+            • Delete KPI (!this action leads to delete all KPIs that employ it in their formula);  <br>
+            • Enable/Disable KPI (!the 'Play' icon means KPI is active, while 'Pause' icon means KPI is not active. The
+            difference is underlined by their different color.)  <br>
+            <br>
+            Furthermore, it is not possible to edit or delete default KPIs.
           </p>
         </div>
 
@@ -86,7 +93,7 @@
               <tr>
                 <td>Group By</td>
                 <td>The source of the KPI we're defining</td>
-                <td>None, Machine1, ...</td>
+                <td>All, Average</td>
               </tr>
               </tbody>
             </table>

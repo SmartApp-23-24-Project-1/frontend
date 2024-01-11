@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-12 d-flex flex-column ">
-        <h1 class="title mb-4"> Analytics </h1>
+        <h1 class="title text-center mb-4"> Analytics </h1>
         <div class="card card-rounded mx-2">
           <div class="card-body">
             <div class="d-sm-flex justify-content-between align-items-start">
@@ -27,9 +27,11 @@
             <p class="card-subtitle card-subtitle-dash">Missing KPI calculation will be reported here if
               present.</p>
             <template v-for="kpi in kpis" v-bind:key="kpi.name">
+              <template v-if="kpi.enabled">
               <p v-if="kpi.counter >= 1 && lastUpdate(kpi.last_update, kpi.frequency) === 0">
                 {{ kpi.name }} last calculation exceeds its calculation frequency.
               </p>
+              </template>
               <!--<p v-else-if="kpi.counter >= 1 && lastUpdate(kpi.last_update, kpi.frequency) === 1">
                 TARANTELLE
               </p>-->
@@ -177,16 +179,7 @@ export default {
         }
       }).then(response => {
         this.kpis = response.data.data;
-        for (let i = 0; i < this.kpis.length; i++) {
-          if (this.kpis[i].name === 'oee') {
-            this.medical = false;
-          } else {
-            this.medical = true;
-          }
-        }
-        while (this.kpis.length === 0) {
-          this.$store.commit("showSpinner");
-        }
+        this.kpis = this.kpis.filter(kpi => kpi.enabled === true);
         this.$store.commit("hideSpinner");
       }).catch((error) => {
         console.log(error);

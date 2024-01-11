@@ -12,17 +12,28 @@ export default {
         commit('setGroups', response.data.data.groups);
     },
     async getKPIs({commit}, payload) {
-        let response = await axios.get(BASE_URL + "kpis", {
-            headers: {
-                withCredentials: 'true',
-                'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
-                'groupby': payload.groupby,
-                'filterbyfreq': payload.filterbyfreq,
-                'filterbyunit': payload.filterbyunit,
-                'filterbydate': payload.filterbydate,
-            }
-        });
-        commit('setKPIs', response.data.data);
+        if (payload === null) {
+            let response = await axios.get(BASE_URL + "kpis", {
+                headers: {
+                    withCredentials: 'true',
+                    'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
+                }
+            });
+            commit('setKPIs', response.data.data);
+        } else {
+            let response = await axios.get(BASE_URL + "kpis", {
+                headers: {
+                    withCredentials: 'true',
+                    'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
+                    'groupby': payload.groupby,
+                    'filterbyfreq': payload.filterbyfreq,
+                    'filterbyunit': payload.filterbyunit,
+                    'filterbydate': payload.filterbydate,
+                }
+            });
+            commit('setKPIs', response.data.data);
+        }
+        commit("hideSpinner");
     },
     async getKPI({commit}, payload) {
         let response = await axios.get(BASE_URL + 'kpi/' + payload, {

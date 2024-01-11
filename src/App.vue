@@ -5,11 +5,9 @@
       <button class="btn btn-primary" @click="toggleDarkMode">
         <i class="bi bi-brightness-high-fill"></i>
       </button>
-
     </div>
-
     <Header />
-    <div class="row gy-2" style="margin-bottom: 100px;">
+    <div class="row gy-2" style="padding-bottom: 100px;">
       <div class="col-2 col-md-3 col-xl-2">
         <Sidebar />
       </div>

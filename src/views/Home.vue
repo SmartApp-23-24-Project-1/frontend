@@ -15,66 +15,49 @@
       <div class="col-6 col-md-4 col-lg-3 col-xl-2">
         <!--GRUPPI-->
         <select v-model="group_by" class="form-select select-filter">
-          <option :value="''" v-on:click="getKPIs()">All</option>
+          <option :value="null" v-on:click="getKPIs()">All</option>
           <option v-for="group in groups" v-bind:key="group" :value="group" v-on:click="getKPIs()"> {{ group }}</option>
         </select>
         <!--FREQUENZA-->
       </div>
-
       <div class="col-6 col-md-4 col-lg-3 col-xl-2">
         <select v-model="by_freq" class="form-select select-filter">
-          <option :value="''" v-on:click="getKPIs()">All</option>
+          <option :value="null" v-on:click="getKPIs()">All</option>
           <option value="1 Day" v-on:click="getKPIs()">1 Day</option>
           <option value="1 Week" v-on:click="getKPIs()">1 Week</option>
           <option value="1 Month" v-on:click="getKPIs()">1 Month</option>
           <option value="1 Year" v-on:click="getKPIs()">1 Year</option>
         </select>
       </div>
-  
       <div class="col-6 col-md-4 col-lg-3 col-xl-2" >
         <!-- UNITA -->
         <select v-model="by_unit" class="form-select select-filter">
-          <option :value="''" v-on:click="getKPIs()">All</option>
+          <option :value="null" v-on:click="getKPIs()">All</option>
           <option v-for="unit in units" v-bind:key="unit" :value="unit" v-on:click="getKPIs()"> {{ unit }}</option>
         </select>
       </div>
-
+      <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+        <svg style="cursor:pointer" v-on:click="resetFilters()" xmlns="http://www.w3.org/2000/svg" height="2.5em" fill="#212121" viewBox="0 0 384 512">
+          <path
+              d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+        </svg>
+      </div>
     </div>
-
     <div class="row gy-4 mt-4">
-      <div class="col-md-6 col-lg-4 col-xxl-3" v-for="kpi in kpis" v-bind:key="kpi.name">
-        <div class="card card-rounded">
-          <div class="card-body">
-            <div class="my-3">
-              <p class="card-title-kpi card-title-dash">{{ kpi.value }}{{ kpi.unit }}</p>
-              <p class="rate-percentage">{{ kpi.description }} </p>
+      <template v-for="kpi in kpis">
+        <div class="col-md-6 col-lg-4 col-xxl-3" v-if="kpi.enabled" v-bind:key="kpi.name">
+          <div class="card card-rounded">
+            <div class="card-body">
+              <div class="my-3">
+                <p class="card-title-kpi card-title-dash">{{ kpi.value }}{{ kpi.unit }}</p>
+                <p class="rate-percentage">{{ kpi.description }} </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </template>
     </div>
   </div>
-  
-  <!--
-  NON CANCELLATE QUESTO COMMENTO GRAZIE
-  <div class="col-lg-12" v-if="this.medical">
-    <p> pappappero </p>
-  </div>
-  <div class="col-lg-12" v-else>
-    <div class="row">
-      <div class="col-lg-6" v-for="kpi in this.kpis" v-bind:key="kpi.name">
-        <div class="card card-rounded">
-          <div class="card-body">
-            <div class="my-3">
-              <p  v-if="kpi.name === 'oee'" class="card-title-kpi card-title-dash text-uppercase">{{ kpi.description }} <span class="text-kpi"> (Overall Equipment Effectiveness) </span></p>
-              <h3 class="rate-percentage">{{ kpi.value }}{{ kpi.unit }}</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p> trallallero industrial </p>
-  </div>-->
 </template>
 
 
@@ -84,8 +67,6 @@ import {BASE_URL} from "@/constants/constants";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
-
-
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Home",
@@ -94,10 +75,10 @@ export default {
 
   data() {
     return {
-      group_by: '',
-      by_freq: '',
-      by_unit: '',
-      by_date: '',
+      group_by: null,
+      by_freq: null,
+      by_unit: null,
+      by_date: null,
     }
   },
   computed: {
@@ -114,7 +95,7 @@ export default {
   mounted() {
     this.$store.dispatch("getUnits");
     this.$store.dispatch("getGroups");
-    this.$store.dispatch("getKPIs", this.group_by, this.by_freq, this.by_unit);
+    this.$store.dispatch("getKPIs", this.group_by, this.by_freq, this.by_unit, this.formatDate(this.by_date));
     this.$store.commit("hideSpinner");
   },
   methods: {
@@ -127,14 +108,24 @@ export default {
       });
     },
     formatDate(date) {
-
-      if(date === '') return ''
+      if(date === null) return null
       const day = date.getDate();
       const month = date.getMonth() + 1;
       const year = date.getFullYear();
-
       return `${day}/${month}/${year}`;
     },
+    resetFilters() {
+      this.group_by = null;
+      this.by_freq = null;
+      this.by_unit = null;
+      this.by_date = null;
+      this.$store.dispatch("getKPIs", {
+        'groupby': null,
+        'filterbyfreq': null,
+        'filterbyunit': null,
+        'filterbydate': null
+      });
+    }
   },
 }
 

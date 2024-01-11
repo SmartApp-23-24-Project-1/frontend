@@ -99,4 +99,5 @@ export default {
 .form {
   box-shadow: 5px 5px 5px #d3d3d3;
 }
+
 </style>

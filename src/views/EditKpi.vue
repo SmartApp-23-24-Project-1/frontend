@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <p class="title"> Edit {{ kpi.name }} </p>
+        <p class="title text-center mb-4"> Edit {{ kpi.name }} </p>
         <template v-if="errors.length">
           <div class="alert alert-danger mt-3" v-for="error in errors" v-bind:key="error">
             {{ error }}
