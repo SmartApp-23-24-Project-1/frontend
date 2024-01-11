@@ -12,7 +12,7 @@
           <div class="row d-flex justify-content-center">
             <div class="col-lg-8 form mt-3" style="background: var(--bg-color);">
               <label for="kpi-name" class="form-label">Name</label>
-              <input type="text" disabled v-model="kpiname" class="form-control mb-4" id="kpi-name"
+              <input type="text" disabled class="form-control mb-4" id="kpi-name"
                      :placeholder="kpi.name">
               <label for="kpi-description" class="form-label">Description</label>
               <input type="text" v-model="kpidescription" class="form-control mb-4" id="kpi-description"

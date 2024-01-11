@@ -59,7 +59,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="secondary-btn" data-bs-dismiss="modal">No </button>
-                          <button type="button" v-on:click="deleteKPI(kpi.uid)" class="primary-btn"> Yes, delete KPI</button>
+                          <button type="button" v-on:click="deleteKPI(kpi.uid)" data-bs-dismiss="modal" class="primary-btn"> Yes, delete KPI</button>
                         </div>
                       </div>
                     </div>
@@ -82,7 +82,7 @@
                         <div class="modal-footer">
                           <button type="button" class="secondary-btn" data-bs-dismiss="modal"> No </button>
                           <button type="button" v-if="kpi.enabled" v-on:click="calculationKPI(kpi.uid)" class="primary-btn"> Yes, disable KPI </button>
-                          <button type="button" v-else v-on:click="calculationKPI(kpi.uid)" class="primary-btn"> Yes, enable KPI</button>
+                          <button type="button" v-else v-on:click="calculationKPI(kpi.uid)" data-bs-dismiss="modal" class="primary-btn"> Yes, enable KPI</button>
                         </div>
                       </div>
                     </div>
@@ -100,7 +100,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="secondary-btn" data-bs-dismiss="modal"> No </button>
-                          <button type="button" v-on:click="calculationKPI(kpi.uid)" class="primary-btn"> Yes, enable KPI</button>
+                          <button type="button" v-on:click="calculationKPI(kpi.uid)" data-bs-dismiss="modal" class="primary-btn"> Yes, enable KPI</button>
                         </div>
                       </div>
                     </div>
@@ -161,6 +161,8 @@ export default {
           icon: 'success',
           confirmButtonText: 'Ok',
           confirmButtonColor: '#1d41b2',
+        }).then(()=> {
+          window.location.reload();
         });
       }).catch(() => {
         Swal.fire({
@@ -168,6 +170,8 @@ export default {
           icon: 'error',
           confirmButtonText: 'Ok',
           confirmButtonColor: '#1d41b2',
+        }).then(()=> {
+          window.location.reload();
         });
       });
     },
