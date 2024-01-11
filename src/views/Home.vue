@@ -37,7 +37,7 @@
         </select>
       </div>
       <div class="col-6 col-md-4 col-lg-1 d-flex align-content-center">
-        <i class="bi bi-x-lg"></i>
+        <i class="bi bi-x-lg" @click="resetFilters()"></i>
       </div>
     </div>
     <div class="row gy-4 mt-4">
