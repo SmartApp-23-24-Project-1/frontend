@@ -10,7 +10,7 @@
         </template>
         <form @submit.prevent="checkForm()">
           <div class="row d-flex justify-content-center">
-            <div class="col-11 col-lg-10 col-xl-8 form mt-3 px-0 px-md-5" style="max-width: 740px;">
+            <div class="col-lg-8 form">
               <label for="kpi-name" class="form-label">Name</label>
               <input type="text" v-model="kpiname" class="form-control mb-4" id="kpi-name"
                 placeholder="Put a name for your KPI">
@@ -20,15 +20,15 @@
               <label for="taxonomy" class="form-label">Taxonomy</label>
               <input type="text" v-model="taxonomy" class="form-control mb-4" id="taxonomy"
                 placeholder="Put taxonomy for your KPI">
-              <label for="taxonomy" class="form-label">Range</label>
+              <label for="range" class="form-label">Range</label>
               <input type="text" v-model="range" class="form-control mb-4" id="range"
                 placeholder="Describe the ranges in which your KPI value could be">
               <label for="kpi-group" class="form-label">Group By</label>
               <select v-model="group_by" id="kpi-group" class="form-select">
-                <option :value="null" disabled selected>Click to select one</option>
+                <option :value="null"  disabled selected>Click to select one</option>
                 <option v-for="group in groups" v-bind:key="group" :value="group"> {{ group }}</option>
               </select>
-              <div class="row my-4 gy-2">
+              <div class="row my-4">
                 <div class="col-lg-6">
                   <label for="kpi-unit" class="form-label">Unit</label>
                   <select v-model="unit" id="kpi-unit" class="form-select">
@@ -60,7 +60,7 @@
                 </div>
               </div>
               <div class="d-flex justify-content-center mt-3">
-                <button class="btn btn-primary" style="background-color: var(--primary-color);" type="submit">ADD</button>
+                <button class="btn primary-btn" style="background-color: var(--primary-color);" type="submit">ADD</button>
               </div>
             </div>
           </div>
@@ -233,17 +233,12 @@ export default {
 <style scoped>
 
 .form {
-  background-color: var(--bg-color);
+  background-color: var(--form-color) !important;
+  box-shadow: 5px 5px 5px var(--shadow-color);
 }
 
-.form-label {
-  color: var(--fg-color);
-}
-
-
-
-.form-control::placeholder {
-  color: var(--text-placeholder);
+.form-control::placeholder, .form-select {
+  color: var(--text-placeholder) !important;
 }
 
 .form-check-label {
@@ -254,10 +249,6 @@ export default {
 .notes {
   font-size: 11px;
   color: #b2b2b2;
-}
-
-.form-select {
-  color: #6c757d;
 }
 
 .init {
@@ -276,4 +267,14 @@ export default {
   font-size: 30px;
   color: var(--fg-color);
 }
+
+.form {
+  background-color: var(--bg-color);
+}
+
+.form-label {
+  color: var(--fg-color);
+}
+
+
 </style>

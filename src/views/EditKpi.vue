@@ -15,30 +15,30 @@
               <input type="text" disabled class="form-control mb-4" id="kpi-name"
                      :placeholder="kpi.name">
               <label for="kpi-description" class="form-label">Description</label>
-              <input type="text" v-model="kpidescription" class="form-control mb-4" id="kpi-description"
+              <input type="text" v-model="kpi.description" class="form-control mb-4" id="kpi-description"
                      :placeholder="kpi.description">
               <label for="taxonomy" class="form-label">Taxonomy</label>
-              <input type="text" v-model="taxonomy" class="form-control mb-4" id="taxonomy"
+              <input type="text" v-model="kpi.taxonomy" class="form-control mb-4" id="taxonomy"
                      :placeholder="kpi.taxonomy">
-              <label for="taxonomy" class="form-label">Range</label>
-              <input type="text" v-model="range" class="form-control mb-4" id="taxonomy"
+              <label for="range" class="form-label">Range</label>
+              <input type="text" v-model="kpi.kpi_range" class="form-control mb-4" id="range"
                      :placeholder="kpi.kpi_range">
               <label for="kpi-group" class="form-label">Group By</label>
-              <select v-model="group_by" id="kpi-group" class="form-select">
+              <select v-model="kpi.group_by" id="kpi-group" class="form-select">
                 <option :value="kpi.group_by" disabled selected>{{ kpi.group_by }}</option>
                 <option v-for="group in groups" v-bind:key="group" :value="group"> {{ group }}</option>
               </select>
               <div class="row my-4">
                 <div class="col-lg-6">
                   <label for="kpi-unit" class="form-label">Unit</label>
-                  <select v-model="unit" id="kpi-unit" class="form-select">
+                  <select v-model="kpi.unit" id="kpi-unit" class="form-select">
                     <option :value="kpi.unit" disabled selected>{{ kpi.unit }}</option>
                     <option v-for="unit in units" v-bind:key="unit" :value="unit"> {{ unit }}</option>
                   </select>
                 </div>
                 <div class="col-lg-6">
                   <label for="kpi-frequency" class="form-label">Frequency</label>
-                  <select v-model="frequency" id="kpi-frequency" class="form-select">
+                  <select v-model="kpi.frequency" id="kpi-frequency" class="form-select">
                     <option :value="kpi.frequency" disabled selected> {{ kpi.frequency }}</option>
                     <option value="1 Day">1 Day</option>
                     <option value="1 Week">1 Week</option>
@@ -85,13 +85,14 @@ export default {
       kpi_id: null,
       kpis: [],
       rd: [],
-      kpidescription: null,
-      taxonomy: null,
-      range: null,
-      group_by: null,
-      unit: null,
-      frequency: null,
-      formula: "",
+      /*kpidescription: '',
+      taxonomy: '',
+      range: '',
+      group_by: '',
+      unit: '',
+      frequency: '',
+      formula: "",*/
+
       kpis_formula: [],
       rd_formula: [],
       errors: []
@@ -234,18 +235,14 @@ export default {
 </script>
 
 <style scoped>
-.form-check-label {
-  font-size: 15px;
-  font-style: italic;
+
+.form {
+  background-color: var(--form-color) !important;
+  box-shadow: 5px 5px 5px var(--shadow-color);
 }
 
-.notes {
-  font-size: 11px;
-  color: #b2b2b2;
-}
-
-.form-select {
-  color: #6c757d;
+.form-control::placeholder {
+  color: var(--text-placeholder) !important;
 }
 
 .init {
@@ -260,18 +257,9 @@ export default {
   border: none
 }
 
-.icon-undo {
-  width: 50px;
-  height: 50px;
-  background-color: transparent;
-  border: none
-}
-
-.form-control::placeholder {
-  color: var(--text-placeholder);
-}
-
 .icon-undo i.bi {
   font-size: 30px;
 }
 </style>
+
+

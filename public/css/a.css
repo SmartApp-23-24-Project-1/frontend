@@ -175,7 +175,7 @@ h1, h2, h3, h4, h5, h6, p, label, thead, tbody, tr, td {
 .primary-btn {
   background-color: #1a3eb0;
   border: none;
-  color: white;
+  color: white !important;
   font-weight: 500;
   padding: 10px 25px;
   border-radius: 11px;
@@ -8721,6 +8721,7 @@ END CUSTOM
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 :root {
+  --form-color: #fff;
   --bs-blue: #5E50F9;
   --bs-indigo: #6610f2;
   --bs-purple: #6a008a;

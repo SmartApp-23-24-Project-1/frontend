@@ -1,17 +1,17 @@
 <template>
-  <div class="container-fluid mycontainer">
-    <Spinner />
+  <div class="container-fluid">
+    <Spinner/>
     <div class="darkmode">
       <button class="btn btn-primary" @click="toggleDarkMode">
         <i class="bi bi-brightness-high-fill"></i>
       </button>
     </div>
     <Header />
-    <div class="row gy-2" style="padding-bottom: 100px;">
-      <div class="col-2 col-md-3 col-xl-2">
-        <Sidebar />
+    <div class="row" style="padding-bottom: 100px;">
+      <div class="col-2 col-md-3 col-lg-2">
+        <Sidebar/>
       </div>
-      <div class="col-12 col-md-9 col-xl-10 p-0">
+      <div class="col-12 col-md-9 col-lg-10 p-0">
         <router-view :key="$route.path" />
       </div>
     </div>
@@ -46,6 +46,7 @@ export default {
   --bg-color: #f4f5f7;
   --primary-color: #1a3eb0;
   --second-color: #fff;
+  --third-color: #dedede;
   --fg-color: #484848;
   --hover-color: #fff;
   --shadow-color: #e1e1e1;
@@ -58,7 +59,9 @@ export default {
   --bg-color: #232323;
   --primary-color: #1a3eb0;
   --second-color: #373737;
+  --third-color: #595959;
   --fg-color: #efefef;
+  --form-color: #373737;
   --hover-color: #333;
   --shadow-color: #3c3c3c;
   --topbar-text: #ccc;
@@ -70,7 +73,7 @@ html {
   background-color: var(--bg-color);
 }
 
-.mycontainer,
+
 .sidebar,
 .container-fluid {
   background-color: var(--bg-color);
@@ -86,6 +89,10 @@ html {
 .darkmode button {
   background-color: var(--primary-color);
   color: #fff;
+}
+
+.darkmode button:hover {
+  background-color: #15318a !important;
 }
 
 .darkmode button i.bi {

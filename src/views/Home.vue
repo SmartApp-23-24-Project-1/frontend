@@ -1,43 +1,40 @@
 <template>
   <div class="container content-wrapper mt-5" style="background-color: var(--bg-color);">
-    <div class="row gy-4 mb-2">
+    <div class="row d-flex justify-content-center mb-2">
       <!--DATA-->
-      <div class="col-12 col-lg-3 col-xl-3">
-        <VueDatePicker v-model="by_date"
-                       :enable-time-picker="false"
-                       :format="formatDate"
-                       auto-apply
-                       :dark="darkMode"
-                       @update:model-value="getKPIs()"
-        ></VueDatePicker>
+      <div class="col-12 col-lg-3">
+        <VueDatePicker v-model="by_date" :enable-time-picker="false" :format="formatDate" auto-apply :dark="darkMode"
+                       @update:model-value="getKPIs()"></VueDatePicker>
       </div>
-      
-      <div class="col-6 col-md-4 col-lg-2 col-xl-2">
+      <div class="col-6 col-md-4 col-lg-2">
         <!--GRUPPI-->
         <select v-model="group_by" class="form-select select-filter">
-          <option :value="null" v-on:click="getKPIs()">All</option>
+          <option :value="null" v-on:click="getKPIs()">All groups</option>
           <option v-for="group in groups" v-bind:key="group" :value="group" v-on:click="getKPIs()"> {{ group }}</option>
         </select>
         <!--FREQUENZA-->
       </div>
-      <div class="col-6 col-md-4 col-lg-2 col-xl-2">
+      <div class="col-6 col-md-4 col-lg-2">
         <select v-model="by_freq" class="form-select select-filter">
-          <option :value="null" v-on:click="getKPIs()">All</option>
+          <option :value="null" v-on:click="getKPIs()">All freqs</option>
           <option value="1 Day" v-on:click="getKPIs()">1 Day</option>
           <option value="1 Week" v-on:click="getKPIs()">1 Week</option>
           <option value="1 Month" v-on:click="getKPIs()">1 Month</option>
           <option value="1 Year" v-on:click="getKPIs()">1 Year</option>
         </select>
       </div>
-      <div class="col-6 col-md-4 col-lg-3 col-xl-2" >
+      <div class="col-6 col-md-4 col-lg-2">
         <!-- UNITA -->
         <select v-model="by_unit" class="form-select select-filter">
-          <option :value="null" v-on:click="getKPIs()">All</option>
+          <option :value="null" v-on:click="getKPIs()">All units</option>
           <option v-for="unit in units" v-bind:key="unit" :value="unit" v-on:click="getKPIs()"> {{ unit }}</option>
         </select>
       </div>
       <div class="col-6 col-md-4 col-lg-1 d-flex align-content-center">
-        <i class="bi bi-x-lg" @click="resetFilters()"></i>
+        <svg style="cursor:pointer" v-on:click="resetFilters()" xmlns="http://www.w3.org/2000/svg" height="2.5em" fill="#484848" viewBox="0 0 384 512">
+          <path
+              d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+        </svg>
       </div>
     </div>
     <div class="row gy-4 mt-4">
@@ -164,5 +161,25 @@ i.bi {
   font-size: 24px;
   cursor: pointer;
 }
+
+/*
+BREAKPOINT DI BOOTSTRAP :)
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+// X-Large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
+
+// XX-Large devices (larger desktops, 1400px and up)
+@media (min-width: 1400px) { ... }
+
+ */
 
 </style>

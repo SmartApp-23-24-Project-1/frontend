@@ -1,20 +1,19 @@
 <template>
   <div class="container-fluid">
-    <div class="row align-items-center pt-3">
-      <div class="col-5 col-md-6 col-lg-2">
-        <a class="navbar-brand" href="#">
-          <img src="/images/logo.png" alt="logo of website" class="navbar__logo">
-        </a>
+    <div class="row align-items-center p-3">
+      <div class="col-lg-2 col-md-6 col-6 p-0">
+        <router-link to="/" class="navbar-brand">
+          <img src="/images/logo.png" alt="logo" class="navbar__logo">
+        </router-link>
       </div>
-
-      <div class="col-5 col-md-8 topbar-text">
-        <p class="m-0 text-center" v-if="this.$route.name === 'Home'">Welcome, this is your performance summary today.</p>
+      <div class="col-6 col-md-8 topbar-text">
+        <p class="m-0 text-center" v-if="this.$route.name === 'Home'">
+          Welcome, this is your performance summary today.</p>
       </div>
-
-      <div class="col-7 col-md-6 col-lg-2 d-flex justify-content-end">
+      <div class="col-lg-2 col-md-6 col-6 d-flex justify-content-end">
         <div class="dropdown">
           <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-person-fill switch-user-icon"></i>
+            <i class="bi-person-fill switch-user-icon"></i>
             <span>{{ currentUser }}</span>
           </button>
           <ul class="dropdown-menu">
@@ -78,6 +77,10 @@ export default {
   justify-content: space-between;
   align-items: center;
   column-gap: 5px;
+}
+
+.dropdown :hover {
+  background-color: #15318a !important;
 }
 
 .switch-user-icon {
