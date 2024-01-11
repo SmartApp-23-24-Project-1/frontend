@@ -176,7 +176,7 @@ export default {
       });
     },
     async calculationKPI(id) {
-      await axios.put(BASE_URL + 'toggle_kpi/' + id + '/', {
+      await axios.put(BASE_URL + 'toggle_kpi/' + id + '/', {}, {
         headers: {
           withCredentials: 'true',
           'Authorization': 'Basic ' + btoa('smartapp' + ':' + 'api'),
@@ -187,6 +187,8 @@ export default {
           icon: 'success',
           confirmButtonText: 'Ok',
           confirmButtonColor: '#1d41b2',
+        }).then(()=> {
+          window.location.reload();
         });
       }).catch(() => {
         Swal.fire({
@@ -194,6 +196,8 @@ export default {
           icon: 'error',
           confirmButtonText: 'Ok',
           confirmButtonColor: '#1d41b2',
+        }).then(()=> {
+          window.location.reload();
         });
       });
     }
