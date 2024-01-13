@@ -254,10 +254,6 @@ export default {
   color: var(--fg-color);
 }
 
-.card-body {
-  box-shadow: 5px 5px 5px var(--shadow-color);
-}
-
 .card {
   box-shadow: 5px 5px 5px var(--shadow-color);
   background-color: var(--second-color);

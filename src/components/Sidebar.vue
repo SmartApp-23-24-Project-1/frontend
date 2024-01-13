@@ -93,51 +93,6 @@ a.active-icon:hover {
   background-color: #fff;
 }
 
-@media screen and (max-width: 770px) {
-  .sidebar { 
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      left: 0;
-      display: flex;
-      z-index: 100;
-      justify-content: center;
-      min-height: 75px;
-      height: 75px;
-  }
-
-  .menu-link {
-      flex: 1 1 70px;
-      flex-direction: column;
-      justify-content: center;
-      padding: 10px;
-  }
-
-  .menu-title {
-      display: block;
-      font-size: 13px;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .sidebar {
-    min-height: 65px;
-    height: 65px;
-  }
-
-  .menu-link {
-      padding: 10px 5px;
-  }
-
-  .menu-link i.bi {
-    font-size: 21px;
-  }
-
-  .menu-title {
-      font-size: 10px;
-  }
-}
-
 .icon {
   width: 20px;
   fill: var(--fg-color);
@@ -159,6 +114,59 @@ a.active-icon:hover {
   width: 20px;
   fill: var(--primary-color);
   margin-right: 10px
+}
+
+@media screen and (max-width: 770px) {
+  .sidebar { 
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      left: 0;
+      z-index: 100;
+      height: 80px;
+      min-height: 80px;
+  }
+
+  .nav {
+    display: flex;
+    column-gap: 10px;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    margin-bottom: 0;
+    height: 100%;
+  }
+
+  .nav li {
+    flex: 1 1 75px;
+  }
+
+  .menu-link {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    row-gap: 4px;
+  }
+
+  .menu-title {
+    font-size: 14px;
+  }
+
+  .icon, .active-icon svg {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .sidebar { 
+      height: 70px;
+      min-height: 70px;
+  }
+
+  .menu-title {
+    font-size: 10px;
+  }
 }
 
 </style>

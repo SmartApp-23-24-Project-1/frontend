@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
-    <div class="row align-items-center p-3">
-      <div class="col-lg-2 col-md-6 col-6 p-0">
+    <div class="row align-items-center px-md-3 px-0 py-3">
+      <div class="col-lg-2 col-md-6 col-5 p-0">
         <router-link to="/" class="navbar-brand">
           <img src="/images/logo.png" alt="logo" class="navbar__logo">
         </router-link>
@@ -10,7 +10,7 @@
         <p class="m-0 text-center" v-if="this.$route.name === 'Home'">
           Welcome, this is your performance summary today.</p>
       </div>
-      <div class="col-lg-2 col-md-6 col-6 d-flex justify-content-end">
+      <div class="col-lg-2 col-md-6 col-7 d-flex justify-content-end">
         <div class="dropdown">
           <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi-person-fill switch-user-icon"></i>
@@ -79,9 +79,6 @@ export default {
   column-gap: 5px;
 }
 
-.dropdown :hover {
-  background-color: #15318a !important;
-}
 
 .switch-user-icon {
   font-size: 20px;

@@ -4,7 +4,8 @@
       <div class="col-lg-12 col-12 px-4">
         <p class="title mb-4"> Library </p>
         <input class="search-kpi" v-model="kpiName" placeholder="Search KPI..." />
-          <table class="w-100">
+          <div class="table-responsive table-container mt-5">
+            <table class="w-100">
           <thead>
           <tr>
             <th style="width: 15%">Name</th>
@@ -26,8 +27,8 @@
                 <p v-bind:key="kpi" class="t-text"> {{ kpi.formula }} </p>
               </td>
               <td style="width: 15%">
-                <section v-bind:key="kpi">
-                  <p style="margin: 20px 0" class="actions">
+                <section v-bind:key="kpi" class="mt-3">
+                  <p class="actions">
                     <router-link :to="'/kpi/' + kpi.uid + '/'">
                       <svg xmlns="http://www.w3.org/2000/svg" class="t-icons" viewBox="0 0 512 512">
                         <path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm169.8-90.7c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24V250.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1H222.6c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/>
@@ -44,13 +45,15 @@
                       </svg>
                     </button>
                     <button v-if="kpi.enabled" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="background-color: transparent; border: none; padding: 0;">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="t-icons" viewBox="0 0 384 512">
-                        <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/>
+                      
+
+                      <svg xmlns="http://www.w3.org/2000/svg" class="t-icons" viewBox="0 0 320 512">
+                        <path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/>
                       </svg>
                     </button>
                     <button v-else type="button" data-bs-toggle="modal" data-bs-target="#exampleModal3" style="background-color: transparent; border: none; padding: 0;">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="t-icons" viewBox="0 0 320 512">
-                        <path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="t-icons" viewBox="0 0 384 512">
+                        <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/>
                       </svg>
                     </button>
                   </p>
@@ -121,13 +124,14 @@
           <template v-else>
             <tbody>
             <tr>
-              <td style="background-color: white">
+              <td>
                 <p class="text my-3"> No KPIs here. </p>
               </td>
             </tr>
             </tbody>
           </template>
         </table>
+          </div>
       </div>
     </div>
   </div>
@@ -230,9 +234,12 @@ export default {
   font-size: 25px;
 }
 
+.table-container {
+  box-shadow: 5px 5px 5px var(--shadow-color);
+  border-radius: 13px;
+}
+
 table {
-  margin-top: 30px;
-  background-color: #fff;
   box-shadow: 5px 5px 5px var(--shadow-color);
   border-radius: 13px;
 }

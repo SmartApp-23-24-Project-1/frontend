@@ -237,7 +237,11 @@ export default {
   box-shadow: 5px 5px 5px var(--shadow-color);
 }
 
-.form-control::placeholder, .form-select {
+.form-select {
+  color: var(--fg-color);
+}
+
+.form-control::placeholder {
   color: var(--text-placeholder) !important;
 }
 
@@ -274,6 +278,12 @@ export default {
 
 .form-label {
   color: var(--fg-color);
+}
+
+@media screen and (max-width: 770px) {
+  .form {
+    padding: 40px 30px !important;
+  }
 }
 
 
