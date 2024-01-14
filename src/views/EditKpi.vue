@@ -151,14 +151,15 @@ export default {
     checkForm() {
       this.errors = [];
       let fieldsToCheck = [
-        this.kpidescription,
-        this.frequency,
-        this.taxonomy,
-        this.range,
-        this.formula,
-        this.unit
+        this.kpi.description,
+        this.kpi.frequency,
+        this.kpi.taxonomy,
+        this.kpi.kpi_range,
+        this.kpi.formula,
+        this.kpi.unit
       ];
-      if (fieldsToCheck.some(v => !v)) {
+      if (!this.kpi.description || !this.kpi.frequency || !this.kpi.taxonomy || !this.kpi.kpi_range
+        || !this.kpi.formula || !this.kpi.unit ) {
         window.scrollTo(0, 0);
         this.errors.push('Fields are mandatory to fill.');
       }
@@ -169,16 +170,16 @@ export default {
     async addKPI() {
       this.kpis_formula = []; //tmp
       await axios.put(BASE_URL + "kpi/" + this.kpi_id, {
-            "description": this.kpidescription,
-            "taxonomy": this.taxonomy,
-            "kpi_range": this.range,
-            "group_by": this.group_by,
-            "unit": this.unit,
-            "frequency": this.frequency,
-            "formula": this.formula,
+            "description": this.kpi.description,
+            "taxonomy": this.kpi.taxonomy,
+            "kpi_range": this.kpi.kpi_range,
+            "group_by": this.kpi.group_by,
+            "unit": this.kpi.unit,
+            "frequency": this.kpi.frequency,
+            "formula": this.kpi.formula,
             "enabled": this.kpi.enabled,
-            "kpis": this.kpis_formula,
-            "raw_data": this.rd
+            "kpis": this.kpi.kpis,
+            "raw_data": this.kpi.raw_data
           },
           {
             headers: {

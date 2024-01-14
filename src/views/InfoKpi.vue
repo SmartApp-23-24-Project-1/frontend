@@ -21,7 +21,7 @@
               <div class="col-lg-12 pt-0">
                 <p class="form-label mb-4">Description: <span class="value"> {{ kpi.description == null ? "not defined" : kpi.description }}</span></p>
                 <p class="form-label my-4">Taxonomy: <span class="value"> {{ kpi.taxonomy == null ? "not defined" : kpi.taxonomy }}</span></p>
-                <p class="form-label my-4">Range: <span class="value"> {{ kpi.range == null ? "not defined" : kpi.range}}</span></p>
+                <p class="form-label my-4">Range: <span class="value"> {{ kpi.kpi_range == null ? "not defined" : kpi.kpi_range}}</span></p>
               </div>
             </div>
             <div class="text-end">

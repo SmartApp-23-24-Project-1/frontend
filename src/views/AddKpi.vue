@@ -106,6 +106,7 @@ export default {
     },
   },
   mounted() {
+    this.$store.dispatch("getGroups");
     this.$store.commit("showSpinner");
     this.$store.dispatch("getUnits");
     function chunk(array, size = 1) {
