@@ -14,7 +14,13 @@
               </div>
               <div class="col-lg-6">
                 <p class="form-label my-4">Value: <span class="value"> {{ kpi.value == null ? "not defined" : kpi.value }} {{ kpi.unit == null ? ' ' : kpi.unit}} </span></p>
-                <p class="form-label my-4">Formula: <span class="value"> {{ kpi.formula == null ? "not defined" : kpi.formula }} </span></p>
+                <p class="form-label my-4">Formula: <span class="value">
+                  <math-field read-only style="display:inline-block" v-if="kpi.formula != null">
+                    {{ kpi.formula }}
+                  </math-field>
+                   
+                  <template v-if="kpi.formula == null">not defined</template>
+                  </span></p>
                 <p class="form-label my-4">Last Update: <span class="value"> {{ format(kpi.last_update) }}</span></p>
                 <p class="form-label my-4">Creation date: <span class="value"> {{ format(kpi.creation_date) }}</span></p>
               </div>
@@ -87,6 +93,13 @@ export default {
 </script>
 
 <style scoped>
+math-field {
+  border: 0;
+}
+
+math-field::part(menu-toggle) {
+  display: none;
+}
 .value {
   font-size: 15px;
   font-weight: 300;
