@@ -6,35 +6,40 @@
         <VueDatePicker v-model="by_date" :enable-time-picker="false" :format="formatDate" auto-apply :dark="darkMode"
                        @update:model-value="getKPIs()"></VueDatePicker>
       </div>
-      <div class="col-6 col-md-4 col-lg-2">
+      <div class="col-6 col-md-4 col-lg-3">
         <!--GRUPPI-->
-        <select v-model="group_by" class="form-select select-filter">
-          <option :value="null" v-on:click="getKPIs()">All groups</option>
+        <select v-model="group_by" class="filter-select">
+          <option :value="null" v-on:click="getKPIs()">Granularity</option>
           <option v-for="group in groups" v-bind:key="group" :value="group" v-on:click="getKPIs()"> {{ group }}</option>
         </select>
         <!--FREQUENZA-->
       </div>
-      <div class="col-6 col-md-4 col-lg-2">
-        <select v-model="by_freq" class="form-select select-filter">
-          <option :value="null" v-on:click="getKPIs()">All freqs</option>
+      <div class="col-6 col-md-4 col-lg-3">
+        <select v-model="by_freq" class="filter-select">
+          <option :value="null" v-on:click="getKPIs()">Frequencies</option>
           <option value="1 Day" v-on:click="getKPIs()">1 Day</option>
           <option value="1 Week" v-on:click="getKPIs()">1 Week</option>
           <option value="1 Month" v-on:click="getKPIs()">1 Month</option>
           <option value="1 Year" v-on:click="getKPIs()">1 Year</option>
         </select>
       </div>
-      <div class="col-6 col-md-4 col-lg-2">
+      <div class="col-6 col-md-4 col-lg-3">
         <!-- UNITA -->
-        <select v-model="by_unit" class="form-select select-filter">
-          <option :value="null" v-on:click="getKPIs()">All units</option>
+        <select v-model="by_unit" class="filter-select">
+          <option style="color: var()" :value="null" v-on:click="getKPIs()">Units</option>
           <option v-for="unit in units" v-bind:key="unit" :value="unit" v-on:click="getKPIs()"> {{ unit }}</option>
         </select>
       </div>
-      <div class="col-6 col-md-12 col-lg-1 d-flex align-content-center">
+      <!--<div class="col-6 col-md-12 col-lg-1">
         <svg style="cursor:pointer" v-on:click="resetFilters()" xmlns="http://www.w3.org/2000/svg" height="2.5em" fill="#484848" viewBox="0 0 384 512">
           <path
               d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
         </svg>
+      </div>-->
+    </div>
+    <div class="row" v-if="this.by_date !== null || this.by_freq !== null || this.by_unit !== null || this.group_by !== null">
+      <div class="col-lg-12">
+        <button class="secondary-btn" v-on:click="resetFilters()"> Ripristina </button>
       </div>
     </div>
     <div class="row gy-4 mt-4">
@@ -148,7 +153,24 @@ export default {
   color: var(--fg-color);
 }
 
-.select-filter {
+.filter-select {
+  width: 100%;
+  height: 100%;
+  color: var(--filtert-color);
+  padding: 0 10px;
+  background-color: var(--filterba-color);
+  border: 1px solid var(--filterb-color);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filter-select:hover {
+  border-color: darkgray;
+  transition: 0.5s;
+}
+
+
+/*.select-filter {
   box-shadow: 5px 5px 5px var(--shadow-color);
   border: 0;
   cursor: pointer;
@@ -162,7 +184,7 @@ i.bi {
   cursor: pointer;
 }
 
-/*
+
 BREAKPOINT DI BOOTSTRAP :)
 
 // Small devices (landscape phones, 576px and up)

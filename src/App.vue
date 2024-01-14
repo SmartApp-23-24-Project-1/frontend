@@ -53,6 +53,9 @@ export default {
   --topbar-text: #888;
   --text-placeholder: #aaa;
   --border-color: #ccc;
+  --filterb-color: #ddd;
+  --filterba-color: #fff;
+  --filtert-color: #959595;
 }
 
 :root.dark {
@@ -67,6 +70,9 @@ export default {
   --topbar-text: #ccc;
   --text-placeholder: #777;
   --border-color: #777;
+  --filterb-color: #2d2d2d;
+  --filterba-color: #212121;
+  --filtert-color: #959595;
 }
 
 html {
