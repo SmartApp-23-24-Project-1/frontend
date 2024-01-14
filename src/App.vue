@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <Spinner/>
+    <Spinner />
     <div class="darkmode">
       <button class="btn btn-primary" @click="toggleDarkMode">
         <i class="bi bi-brightness-high-fill"></i>
@@ -9,7 +9,7 @@
     <Header />
     <div class="row" style="padding-bottom: 100px;">
       <div class="col-2 col-md-3 col-lg-2">
-        <Sidebar/>
+        <Sidebar />
       </div>
       <div class="col-12 col-md-9 col-lg-10 p-0">
         <router-view :key="$route.path" />
@@ -29,13 +29,23 @@ export default {
   components: {
     Header, Sidebar, Spinner
   },
+  mounted() {
+    if (localStorage.getItem("darkMode") != null) {
+      document.documentElement.classList.toggle("dark")
+    }
+  },
   methods: {
     toggleDarkMode() {
+      if (localStorage.getItem("darkMode") == null) {
+        localStorage.setItem("darkMode", "yes")
+      } else {
+        localStorage.clear()
+      }
+
+      
       document.documentElement.classList.toggle("dark")
 
       this.$store.commit('toggleDarkMode')
-
-      
     }
   }
 }
@@ -134,11 +144,11 @@ i.bi {
   color: var(--fg-color);
 }
 
-.form-control, .form-control:focus, .form-select {
+.form-control,
+.form-control:focus,
+.form-select {
   background: var(--second-color) !important;
   border-color: var(--border-color) !important;
   color: var(--fg-color) !important;
 }
-
-
 </style>
