@@ -32,6 +32,7 @@ export default {
   mounted() {
     if (localStorage.getItem("darkMode") != null) {
       document.documentElement.classList.toggle("dark")
+      this.$store.commit('toggleDarkMode')
     }
   },
   methods: {

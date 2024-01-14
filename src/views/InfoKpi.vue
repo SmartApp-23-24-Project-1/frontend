@@ -95,6 +95,8 @@ export default {
 <style scoped>
 math-field {
   border: 0;
+  color: var(--fg-color);
+  background-color: var(--bg-color);
 }
 
 math-field::part(menu-toggle) {
