@@ -32,8 +32,7 @@
             • See information about KPI;  <br>
             • Edit the KPI;  <br>
             • Delete KPI (!this action leads to delete all KPIs that employ it in their formula);  <br>
-            • Enable/Disable KPI (!the 'Play' icon means KPI is active, while 'Pause' icon means KPI is not active. The
-            difference is underlined by their different color.)  <br>
+            • Enable/Disable KPI   <br>
             <br>
             Furthermore, it is not possible to edit or delete default KPIs.
           </p>
