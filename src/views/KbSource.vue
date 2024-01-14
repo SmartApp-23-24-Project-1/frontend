@@ -24,7 +24,11 @@
                 <p class="t-text"> {{ kpi.description }} </p>
               </td>
               <td style="width: 35%">
-                <p class="t-text"> {{ kpi.formula }} </p>
+                <p class="t-text"> 
+                  <math-field read-only style="display:inline-block">
+                    {{ kpi.formula }}
+                  </math-field>  
+                </p>
               </td>
               <td style="width: 15%">
                 <section class="mt-3">
@@ -223,6 +227,13 @@ export default {
 </script>
 
 <style scoped>
+math-field {
+  border: 0;
+}
+
+math-field::part(menu-toggle) {
+  display: none;
+}
 
 .actions {
   display: flex;
