@@ -90,9 +90,9 @@
                 <td>1-10</td>
               </tr>
               <tr>
-                <td>Group By</td>
+                <td>Granularity</td>
                 <td>The source of the KPI we're defining</td>
-                <td>All, Average</td>
+                <td>All, Machine, ...</td>
               </tr>
               </tbody>
             </table>

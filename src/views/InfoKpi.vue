@@ -10,7 +10,7 @@
                 <p class="form-label my-4">Name: <span class="value"> {{ kpi.name == null ? "not defined" : kpi.name}}</span></p>
                 <p class="form-label my-4">Frequency: <span class="value"> {{ kpi.frequency == null ? "not defined" : kpi.frequency}}</span></p>
                 <p class="form-label my-4">Counter: <span class="value"> {{ kpi.counter == null ? "not defined" : kpi.counter}}</span></p>
-                <p class="form-label my-4">Group By: <span class="value"> {{ kpi.group_by == null ? "not defined" : kpi.group_by}}</span></p>
+                <p class="form-label my-4">Granularity: <span class="value"> {{ kpi.group_by == null ? "not defined" : kpi.group_by}}</span></p>
               </div>
               <div class="col-lg-6">
                 <p class="form-label my-4">Value: <span class="value"> {{ kpi.value == null ? "not defined" : kpi.value }} {{ kpi.unit == null ? ' ' : kpi.unit}} </span></p>

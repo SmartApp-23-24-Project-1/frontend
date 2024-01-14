@@ -23,7 +23,7 @@
               <label for="range" class="form-label">Range</label>
               <input type="text" v-model="kpi.kpi_range" class="form-control mb-4" id="range"
                      :placeholder="kpi.kpi_range">
-              <label for="kpi-group" class="form-label">Group By</label>
+              <label for="kpi-group" class="form-label">Granularity</label>
               <select v-model="kpi.group_by" id="kpi-group" class="form-select">
                 <option :value="kpi.group_by" disabled selected>{{ kpi.group_by }}</option>
                 <option v-for="group in groups" v-bind:key="group" :value="group"> {{ group }}</option>
